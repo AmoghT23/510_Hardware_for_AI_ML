@@ -9,7 +9,7 @@ from torchinfo import summary
 
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = torchvision.models.resnet18(pretrained=False).to(device)
+    model = torchvision.models.resnet18(weights=None).to(device)
     model.eval()
 
     buf = io.StringIO()
@@ -19,13 +19,12 @@ def main():
         summary(
             model,
             input_size=(1, 3, 224, 224),
-            col_names=("input_size", "output_size", "num_params", "trainable"),
-            verbose=2,
+            col_names=("output_size", "num_params"),
+            verbose=1,
         )
 
     out = buf.getvalue()
-    out_path = os.path.join("codefest", "cf01", "profiling", "resnet18_profile.txt")
-    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    out_path = os.path.join(os.path.dirname(__file__), "resnet18_profile.txt")
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(out)
 
@@ -34,4 +33,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
