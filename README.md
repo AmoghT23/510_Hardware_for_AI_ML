@@ -5,4 +5,5 @@ Languages used -
 * Verilog
 * Python
 
-Project Topic - 
+Project Topic - Depthwise separable convolution inference (MobileNet-v1 backbone from YAMNet) for audio classification / raga recognition \
+Target kernel: Single depthwise separable convolution layer (depthwise conv + pointwise conv) operating on mel-spectrogram input at INT8 precision
