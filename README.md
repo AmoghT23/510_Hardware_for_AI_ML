@@ -5,6 +5,6 @@ Languages used -
 * Verilog
 * Python
 
-**Project Topic -**  Hardware Accelerator for Lightweight CNN-Based audio classifier (raga recognition) \
-**Target kernel:** Single depthwise separable convolution layer (depthwise conv + pointwise conv) operating on mel-spectrogram input at INT8 precision
+**Project Topic -** AI Accelerator for "Hybrid CNN model for Anemia Detection in Blood Smear Images"
 
+**Git Repository-** https://github.com/nehalshivane04/Accelerator---Anemia-Dataset
