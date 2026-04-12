@@ -199,7 +199,7 @@ forward + backward, no DRAM reuse assumed): AI ≈ 46.9 FLOP/byte**
 
 ## 6. Interpretation
 
-On an Intel Core i7 CPU (measured baseline):
+On an Intel Core i5 CPU (measured baseline):
 - Peak theoretical throughput: ~100–200 GFLOP/s (AVX2, float32)
 - Peak memory bandwidth: ~40–50 GB/s (DDR4)
 - Ridge point ≈ 100 / 45 ≈ **2.2 FLOP/byte**
