@@ -12,7 +12,8 @@ Languages used -
 **Summary** \
 Design an hardware accelerator for a Hybrid CNN (Convolution Neural Network), understanding the profilling and the bottleneck through algorithm analysis.
 
-**Project Topic -** AI Accelerator for "Hybrid CNN model for Anemia Detection in Blood Smear Images"
+**Project Topic**\
+AI Accelerator for "Hybrid CNN model for Anemia Detection in Blood Smear Images"
 
-**Git Repository-** https://github.com/nehalshivane04/Accelerator---Anemia-Dataset
-
+**Git Repository**\
+https://github.com/nehalshivane04/Accelerator---Anemia-Dataset
