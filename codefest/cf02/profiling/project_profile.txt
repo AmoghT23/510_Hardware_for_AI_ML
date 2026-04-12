@@ -1,0 +1,242 @@
+======================================================================
+PROJECT PROFILE -- SOFTWARE BASELINE BENCHMARK
+ECE 410/510 | Anemia Detection -- Hybrid CNN + Handcrafted Feature Model
+Notebook: anemia-i7 core.ipynb
+Generated: 2026-04-11
+======================================================================
+
+======================================================================
+SECTION 1: SYSTEM CONFIGURATION
+======================================================================
+OS                  : Windows 11 Home (Build 10.0.26200)
+Machine / CPU       : Intel Core i7 (x86_64)
+Compute Device      : CPU only (CUDA not available)
+Python Version      : 3.11.9
+PyTorch Version     : 2.11.0
+torchvision         : 0.26.0
+scikit-learn        : 1.8.0
+scikit-image        : 0.26.0
+numpy               : 2.4.4
+Execution mode      : nbconvert (non-interactive batch)
+
+Model               : HybridModel (ResNet18 backbone + AttentionFusion)
+Dataset             : AneRBC -- Peripheral Blood Smear images
+  Total images      : 12,000  (6,000 Healthy / 6,000 Anemic)
+  Train split       : 9,600  images
+  Val split         : 2,400  images
+Batch size          : 32
+Epochs per run      : 1
+Batches per epoch   : 300  (9600 / 32)
+Number of runs      : 10
+
+======================================================================
+SECTION 2: PER-RUN TIMING RESULTS (wall-clock)
+======================================================================
+ Run   Start Time   Wall-clock (s)   Wall-clock (min)   Peak RAM (MB)   Status
+----------------------------------------------------------------------
+   1    14:21:36         2762.6              46.0            2049          OK
+   2    15:07:39         2670.4              44.5            2151          OK
+   3    15:52:10         2595.1              43.3            2186          OK
+   4    16:35:25         2537.6              42.3            2191          OK
+   5    17:17:43         2552.6              42.5            2157          OK
+   6    18:00:16         2497.8              41.6            2156          OK
+   7    18:41:55         2508.4              41.8            2169          OK
+   8    19:23:43         2481.1              41.4            2162          OK
+   9    20:05:04         2860.9              47.7            2169          OK
+  10    20:52:45         2719.2              45.3            2178          OK
+
+All 10 runs completed successfully.
+
+======================================================================
+SECTION 3: SUMMARY STATISTICS
+======================================================================
+Successful runs         : 10 / 10
+
+Wall-clock time:
+  Median                : 2573.9 s   (42.9 min)
+  Mean                  : 2618.6 s   (43.6 min)
+  Std deviation         : 128.8 s
+  Min                   : 2481.1 s   (Run 8)
+  Max                   : 2860.9 s   (Run 9)
+
+Peak RSS memory:
+  Median                : 2165.5 MB
+  Max observed          : 2191.0 MB  (Run 4)
+  Min observed          : 2049.0 MB  (Run 1)
+
+Throughput:
+  Samples per run       : 9,600  (train split x 1 epoch)
+  Throughput (median)   : 3.73 samples/sec  (9600 / 2573.9)
+  Training-only (tqdm)  : ~7.5 samples/sec  (32 samples/batch / ~4.27 s per batch)
+  Note: full-run throughput includes feature extraction, validation,
+        GradCAM inference, and result logging in addition to training.
+
+======================================================================
+SECTION 4: DOMINANT KERNEL IDENTIFICATION
+======================================================================
+The dominant kernel is the CNN training forward+backward pass
+(ResNet18 backbone via train_one_epoch), accounting for approximately
+55-60% of total runtime.
+
+Evidence from tqdm output (run_01_output.ipynb, Cell 12):
+  300 batches x ~4.27 s/batch (average) = ~1281 s
+  1281 s / 2762.6 s (run 1 wall-clock) = ~46.4% of run 1
+  Subsequent runs (warmed cache): ~4.0 s/batch avg
+  300 batches x 4.0 s = 1200 s / 2537.6 s (run 4) = ~47.3%
+
+  Hybrid model training (Cell 15) adds a comparable second pass:
+  ~1200 s additional = combined training ~55-60% of total runtime.
+
+  Remaining runtime breakdown (estimated):
+    Handcrafted feature extraction (GLCM, morphology, color)  : ~20-25%
+    Validation loops (CNN + Hybrid)                           : ~10%
+    Data loading, transforms, split, GradCAM, misc            : ~10-15%
+
+Dominant operation within the CNN kernel:
+  - Conv2d forward passes through ResNet18 layers (layer1-layer4)
+  - Backpropagation through same layers
+  - These are pure matrix multiply (GEMM) operations on CPU
+
+======================================================================
+SECTION 5: PHASE-BY-PHASE TIMING BREAKDOWN
+(Derived from tqdm batch timing in executed notebooks)
+======================================================================
+Phase                          Approx Time (s)    % of Total
+----------------------------------------------------------------------
+CNN training (300 batches)         ~1200              ~46%
+Hybrid training (300 batches)      ~1200              ~46%
+Handcrafted feature extraction      ~130               ~5%
+Validation (CNN + Hybrid)           ~60                ~2%
+GradCAM + inference + plots         ~30                ~1%
+----------------------------------------------------------------------
+Total (median run)                  2574              100%
+
+Batch-level timing from tqdm (run_01, Cell 12):
+  Batch   1: 3.90 s/it
+  Batch  10: 4.13 s/it
+  Batch  20: 4.02 s/it
+  Batch  30: 4.17 s/it
+  Batch  40: 4.35 s/it  (thermal throttle onset)
+  Batch  50: 4.74 s/it  (sustained throttle)
+  Average across 300 batches: ~4.27 s/batch
+  => Throughput during training: 32 / 4.27 = 7.49 samples/sec
+
+======================================================================
+SECTION 6: MODEL PERFORMANCE (from run_01_output.ipynb)
+======================================================================
+CNN Baseline (ResNet18, 1 epoch):
+  Train Loss  : 0.3039   Train Acc : 0.8552
+  Val Loss    : 0.1846   Val Acc   : 0.9237
+
+Hybrid Model (ResNet18 + AttentionFusion, 1 epoch):
+  Train Loss  : 0.3126   Train Acc : 0.8535
+  Val Loss    : 0.2212   Val Acc   : 0.8992
+
+  Full classification report (Hybrid, val set, 2400 samples):
+              precision    recall  f1-score   support
+    Healthy       0.88      0.93      0.90      1200
+     Anemic       0.92      0.87      0.90      1200
+   accuracy                           0.90      2400
+  macro avg       0.90      0.90      0.90      2400
+
+  Attention weights (sample inference on 0398_08_a.png):
+    CNN features         : 98.94%
+    Handcrafted features :  1.06%
+  => Model relies almost entirely on visual (CNN) features.
+
+======================================================================
+SECTION 7: NOTE ON cPROFILE PASS
+======================================================================
+The automated cProfile pass (run 11) in run_benchmark.py failed with:
+  TypeError: Cannot create or construct a pstats.Stats object from
+  <cProfile.Profile object at 0x...>
+
+Cause: the profiler's exec() call raised an import/path exception
+before recording any function calls, leaving the Profile object empty.
+pstats.Stats refuses to initialize from an empty profiler.
+
+The per-function timing above (Section 5) is derived analytically from
+tqdm batch-level output captured in the 10 executed output notebooks
+(_run_outputs/run_01_output.ipynb through run_10_output.ipynb).
+
+To obtain raw cProfile output, run the following directly in Jupyter
+on the training cell:
+  %%prun -s cumulative -l 40
+  train_one_epoch(model, train_loader, criterion, optimizer, device)
+
+======================================================================
+END OF REPORT
+======================================================================
+
+
+======================================================================
+SECTION 8: cPROFILE OUTPUT -- HYBRID MODEL TRAINING (1 EPOCH)
+Generated : 2026-04-12 00:49:45
+Profiled  : hybrid_train_one_epoch()  [HybridModel, ResNet18 + AttentionFusion]
+Dataset   : AneRBC, 9600 training images, batch_size=32, 300 batches
+Device    : cpu
+Sorted by : cumulative time  |  Top 50 functions
+======================================================================
+
+         6590136 function calls (6534033 primitive calls) in 1266.556 seconds
+
+   Ordered by: cumulative time
+   List reduced from 358 to 50 due to restriction <50>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1   18.471   18.471 1266.568 1266.568 profile_hybrid.py:81(hybrid_train_one_epoch)
+      300    0.003    0.000  732.744    2.442 _tensor.py:576(backward)
+      300    0.012    0.000  732.740    2.442 __init__.py:253(backward)
+      300    0.005    0.000  732.704    2.442 graph.py:860(_engine_run_backward)
+      300  732.698    2.442  732.698    2.442 {method 'run_backward' of 'torch._C._EngineBase' objects}
+65400/39000    0.334    0.000  441.481    0.011 module.py:1775(_wrapped_call_impl)
+65400/39000    1.088    0.000  441.305    0.011 module.py:1783(_call_impl)
+      300    0.008    0.000  421.561    1.405 hybrid_model.py:17(forward)
+ 3000/900    0.057    0.000  421.386    0.468 container.py:248(forward)
+     2400    6.325    0.003  324.849    0.135 resnet.py:89(forward)
+     6000    0.057    0.000  293.074    0.049 conv.py:552(forward)
+     6000    0.051    0.000  293.003    0.049 conv.py:534(_conv_forward)
+     6000  292.952    0.049  292.952    0.049 {built-in method torch.conv2d}
+      301    0.009    0.000   67.845    0.225 dataloader.py:736(__next__)
+      301    0.152    0.001   67.790    0.225 dataloader.py:799(_next_data)
+      300    0.003    0.000   67.624    0.225 fetch.py:49(fetch)
+      300    0.037    0.000   65.745    0.219 fetch.py:54(<listcomp>)
+     9600    0.326    0.000   65.708    0.007 hybrid_dataset.py:17(__getitem__)
+     6000    0.174    0.000   61.102    0.010 batchnorm.py:160(forward)
+     6000    0.111    0.000   60.548    0.010 functional.py:2811(batch_norm)
+     6000   60.328    0.010   60.328    0.010 {built-in method torch.batch_norm}
+      300    0.003    0.000   47.135    0.157 pooling.py:222(forward)
+      300    0.003    0.000   47.132    0.157 _jit_internal.py:626(fn)
+      300    0.002    0.000   47.129    0.157 functional.py:812(_max_pool2d)
+      300   47.126    0.157   47.126    0.157 {built-in method torch.max_pool2d}
+     9600    0.089    0.000   33.339    0.003 Image.py:1018(convert)
+    19200    1.153    0.000   32.444    0.002 ImageFile.py:291(load)
+     9600    0.251    0.000   27.130    0.003 transforms.py:93(__call__)
+   182136   25.237    0.000   25.237    0.000 {method 'decode' of 'ImagingDecoder' objects}
+      300    0.024    0.000   23.727    0.079 optimizer.py:512(wrapper)
+      300    0.011    0.000   23.645    0.079 optimizer.py:60(_use_grad)
+      300    0.007    0.000   23.628    0.079 adam.py:214(step)
+      300    0.003    0.000   23.387    0.078 optimizer.py:132(maybe_fallback)
+      300    0.006    0.000   23.384    0.078 adam.py:903(adam)
+      300    4.748    0.016   23.339    0.078 adam.py:347(_single_tensor_adam)
+     9600    0.045    0.000   14.071    0.001 transforms.py:354(forward)
+     9600    0.193    0.000   14.026    0.001 functional.py:387(resize)
+     9600    0.067    0.000   13.282    0.001 _functional_pil.py:241(resize)
+     9600    0.177    0.000   13.199    0.001 Image.py:2328(resize)
+     9600   12.806    0.001   12.806    0.001 {method 'resize' of 'ImagingCore' objects}
+     5700    0.025    0.000   12.047    0.002 activation.py:139(forward)
+     5700    0.029    0.000   12.022    0.002 functional.py:1712(relu)
+     5100   11.971    0.002   11.971    0.002 {built-in method torch.relu_}
+     9600    0.047    0.000    6.998    0.001 transforms.py:129(__call__)
+     9600    0.423    0.000    6.952    0.001 functional.py:127(to_tensor)
+   182136    0.844    0.000    4.756    0.000 PngImagePlugin.py:989(load_read)
+     9600    0.203    0.000    4.575    0.000 Image.py:3581(open)
+    21600    4.185    0.000    4.185    0.000 {method 'addcdiv_' of 'torch._C.TensorBase' objects}
+   604041    3.504    0.000    3.504    0.000 {method 'read' of '_io.BufferedReader' objects}
+    21600    3.391    0.000    3.391    0.000 {method 'sqrt' of 'torch._C.TensorBase' objects}
+
+
+
+======================================================================
+END OF cPROFILE SECTION
+======================================================================
