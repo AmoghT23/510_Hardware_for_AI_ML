@@ -20,8 +20,8 @@ https://github.com/nehalshivane04/Accelerator---Anemia-Dataset
 
 --- 
 ```
-    .
-└── 510_Hardware_for_AI_ML/
+    
+   510_Hardware_for_AI_ML/
     ├── codefest/
     │   ├── cf01
     │   └── cf02
