@@ -9,7 +9,7 @@ Generated: 2026-04-11
 SECTION 1: SYSTEM CONFIGURATION
 ======================================================================
 OS                  : Windows 11 Home (Build 10.0.26200)
-Machine / CPU       : Intel Core i7 (x86_64)
+Machine / CPU       : Intel Core i5 (x86_64)
 Compute Device      : CPU only (CUDA not available)
 Python Version      : 3.11.9
 PyTorch Version     : 2.11.0
