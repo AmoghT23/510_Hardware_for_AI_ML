@@ -18,3 +18,16 @@ AI Accelerator for "Hybrid CNN model for Anemia Detection in Blood Smear Images"
 **Git Repository**\
 https://github.com/nehalshivane04/Accelerator---Anemia-Dataset
 
+--- 
+```
+    .
+└── 510_Hardware_for_AI_ML/
+    ├── codefest/
+    │   ├── cf01
+    │   └── cf02
+    └── project/
+        ├── m1
+        ├── algorithm_diagram.png
+        └── heilmeier.md
+
+```
