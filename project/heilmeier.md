@@ -5,7 +5,7 @@
 
 ## Q1 — What are you trying to do?
 
-I am building a custom hardware chip that analyzes microscope images of blood cells
+I am building a co-processor chiplet that analyzes microscope images of blood cells
 to detect anemia. Currently this requires either a trained specialist or a powerful
 computer. My chip performs the image pattern recognition step — specifically the 2D
 convolution operations inside a ResNet18 neural network — on a small, low-power
