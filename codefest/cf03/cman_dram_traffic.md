@@ -1,4 +1,4 @@
-##CF03 CMAN — DRAM traffic analysis: naive vs. tiled matrix multiply <br>
+##**CF03 CMAN — DRAM traffic analysis: naive vs. tiled matrix multiply** <br>
 
 ---
 
@@ -49,6 +49,17 @@ Given Data - Two Square FP32 Matrices of size N x N (N = 32) stored and accessed
    ---
    3. Ratio of naive DRAM traffic to tiled DRAM traffic.
 
-      %% Naive
-         ----- =
-         Tiled
+      ## Ratio of Naive to Tiled DRAM Traffic
+
+$$
+\frac{\text{Naive}}{\text{Tiled}} = \frac{2N^3 \times 4}{2(N/T)^3 \times T^2 \times 4} = \frac{N^3}{(N/T)^3 \cdot T^2} = \frac{N^3 \cdot T^3}{N^3 \cdot T^2} = T
+$$
+
+For $N = 32$ and $T = 8$:
+
+$$
+\frac{262{,}144}{32{,}768} = 8 = T
+$$
+
+**Conclusion:** The ratio equals the tile size $T$, not the matrix dimension $N$. Each element of $A$ or $B$, once loaded into a tile, is reused exactly $T$ times before eviction, so tiling amortizes a single DRAM load over $T$ useful multiply-accumulate operations.
+      
