@@ -127,3 +127,8 @@ int main() {
     free(hA); free(hB); free(hC); free(hRef);
     return 0;
 }
+
+//Compile with nvcc
+!nvcc -O3 -arch=sm_75 gemm_naive.cu -o gemm_naive
+
+!./gemm_naive
