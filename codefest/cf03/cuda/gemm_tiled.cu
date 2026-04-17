@@ -149,3 +149,6 @@ int main() {
 !nvcc -O3 -arch=sm_75 gemm_tiled.cu -o gemm_tiled
 
 !./gemm_tiled
+
+//Detailed Summary report of 20runs
+!ncu --set full --print-summary per-kernel ./gemm_tiled
