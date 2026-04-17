@@ -63,7 +63,7 @@ Plugging in:
 
 $$\frac{262{,}144}{32{,}768} = 8$$
 
-**Note:** The ratio equals T = 8 (not N = 32) because each element loaded into a tile is reused T times before eviction, amortizing one DRAM load over T multiply-accumulates; it would equal N only in the idealized case where the whole matrix fits in one tile (T=N), giving $\frac{2timesN^{3}}/{2\timesN{2}}=N$.
+**Note:** The ratio equals T = 8 (not N = 32) because each element loaded into a tile is reused T times before eviction, amortizing one DRAM load over T multiply-accumulates; it would equal N only in the idealized case where the whole matrix fits in one tile (T=N), giving $$\frac{2 times N^{3}}/{2 \times N{2}}=N$$.
 
 ---
 
