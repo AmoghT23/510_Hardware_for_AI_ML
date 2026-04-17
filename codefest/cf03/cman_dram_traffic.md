@@ -1,4 +1,4 @@
-#CF03 CMAN — DRAM traffic analysis: naive vs. tiled matrix multiply <br>
+##CF03 CMAN — DRAM traffic analysis: naive vs. tiled matrix multiply <br>
 
 ---
 
@@ -23,7 +23,7 @@ Given Data - Two Square FP32 Matrices of size N x N (N = 32) stored and accessed
    traffic(without C) = 262,144byte (256KiB) <br>
    
    ---
-  3. Tiled Loop Analysis (T=8)\
+  2. Tiled Loop Analysis (T=8)\
      N=32 and T=8  so we divide each matrix into (N/T)^2 = 4 x 4  \
                                                     size = 16 tiles   \
                                                      T^2 = 64 elements (256 bytes)    \ <br>
@@ -46,3 +46,9 @@ Given Data - Two Square FP32 Matrices of size N x N (N = 32) stored and accessed
       traffic(without C) = 2 x (16384) \
       traffic(without C) = 32,768byte (32KiB) \
       
+   ---
+   3. Ratio of naive DRAM traffic to tiled DRAM traffic.
+
+      %% Naive
+         ----- =
+         Tiled
