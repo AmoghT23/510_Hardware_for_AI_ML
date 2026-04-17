@@ -63,8 +63,8 @@ Plugging in:
 
 $$\frac{262{,}144}{32{,}768} = 8$$
 
-The question asks why this ratio equals N, but working it out shows the ratio actually equals **T (the tile size), not N**. The ratio would only equal N in the idealized case where the entire matrix fits in cache as a single block (T = N), so each matrix gets loaded exactly once giving $3N^2$ total traffic and a $2N^3 / 2N^2 = N$ speedup. For the general tiled case with T < N, the ratio is T because each element loaded into a tile gets reused T times before eviction — tiling amortizes one DRAM load over T multiply-accumulates.
-
+**Note:** The ratio equals T = 8 (not N = 32) because each element loaded into a tile is reused T times before eviction, amortizing one DRAM load over T multiply-accumulates; it would equal N only in the idealized case where the whole matrix fits in one tile (T = N), giving 2N3/2N2=N2N^3 / 2N^2 = N
+2N3/2N2=N.
 ---
 
 ## 4. Execution Time: Naive vs. Tiled
