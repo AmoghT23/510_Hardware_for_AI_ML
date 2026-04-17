@@ -132,3 +132,6 @@ int main() {
 !nvcc -O3 -arch=sm_75 gemm_naive.cu -o gemm_naive
 
 !./gemm_naive
+
+//Detailed Summary of 20 runs and the averages 
+!ncu --set full --print-summary per-kernel ./gemm_naive
