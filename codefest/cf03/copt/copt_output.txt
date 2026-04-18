@@ -1,0 +1,20 @@
+$ python nn_forward_gpu.py
+CUDA GPU detected: Tesla T4
+CUDA version     : 12.8
+PyTorch version  : 2.10.0+cu128
+
+Model architecture:
+Sequential(
+  (0): Linear(in_features=4, out_features=5, bias=True)
+  (1): ReLU()
+  (2): Linear(in_features=5, out_features=1, bias=True)
+)
+Model device     : cuda:0
+
+Input  shape : [16, 4]
+Input  device: cuda:0
+
+Output shape : [16, 1]
+Output device: cuda:0
+
+Shape check passed: output is [16, 1]  OK
