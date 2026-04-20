@@ -23,13 +23,13 @@ Total A accesses = N² × N = N³ = 32,768
 
 Total B accesses = N² × N = N³ = 32,768
 
-Total A + B accesses = 2N³ = 65,536
+**Total A + B accesses = 2N³ = 65,536**
 
 So each individual element of B ends up being accessed N = 32 times overall (once per row of C that uses its column).
 
 **DRAM traffic (no reuse, FP32 = 4 bytes):**
 
-Traffic = 2N³ × 4 = 262,144 bytes = 256 KiB
+**Traffic = 2N³ × 4 = 262,144 bytes = 256 KiB**
 
 ## 2. Tiled Loop Analysis (T = 8)
 
@@ -47,15 +47,15 @@ Total elements loaded = 2 × N² = 2,048
 
 **DRAM traffic:**
 
-Traffic = 2N² × 4 = 2,048 × 4 = 8,192 bytes = 8 KiB
+**Traffic = 2N² × 4 = 2,048 × 4 = 8,192 bytes = 8 KiB**
 
 ## 3. Ratio of Naive to Tiled DRAM Traffic
 
 Ratio = (2 × N³ × 4) / (2 × N² × 4) = N³ / N² = N
 
-Plugging in: 262,144 / 8,192 = 32
+**Plugging in: 262,144 / 8,192 = 32**
 
-**One-sentence explanation:** The ratio equals N because the naive loop reads each matrix element from DRAM N times (once per output element that uses it, giving O(N³) traffic), while the ideal tiled version loads each element from DRAM exactly once and reuses it on-chip for all N of its multiply-accumulates, reducing traffic to O(N²).
+**Note:** The ratio equals N because the naive loop reads each matrix element from DRAM N times (once per output element that uses it, giving O(N³) traffic), while the ideal tiled version loads each element from DRAM exactly once and reuses it on-chip for all N of its multiply-accumulates, reducing traffic to O(N²).
 
 ## 4. Execution Time: Naive vs. Tiled
 
@@ -80,8 +80,8 @@ Arithmetic intensity = 65,536 / 262,144 = **0.25 FLOPs/byte**
 
 Memory time = 262,144 / (320 × 10⁹) = **819 ns**
 
-Execution time ≈ 819 ns. Compute sits idle ~99% of the time.
-
+**Execution time ≈ 819 ns. Compute sits idle ~99% of the time.
+**
 ### Tiled Case
 
 Arithmetic intensity = 65,536 / 8,192 = **8 FLOPs/byte**
@@ -90,7 +90,7 @@ Arithmetic intensity = 65,536 / 8,192 = **8 FLOPs/byte**
 
 Memory time = 8,192 / (320 × 10⁹) = **25.6 ns**
 
-Execution time ≈ 25.6 ns.
+**Execution time ≈ 25.6 ns.**
 
 ### Summary
 
