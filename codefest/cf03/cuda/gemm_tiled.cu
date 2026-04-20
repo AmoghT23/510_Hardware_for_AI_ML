@@ -144,11 +144,3 @@ int main() {
     free(hA); free(hB); free(hC); free(hRef);
     return 0;
 }
-
-//Compile with nvcc
-!nvcc -O3 -arch=sm_75 gemm_tiled.cu -o gemm_tiled
-
-!./gemm_tiled
-
-//Detailed Summary report of 20runs
-!ncu --set full --print-summary per-kernel ./gemm_tiled
