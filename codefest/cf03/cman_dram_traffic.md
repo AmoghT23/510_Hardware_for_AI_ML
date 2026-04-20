@@ -55,7 +55,8 @@ Ratio = (2 × N³ × 4) / (2 × N² × 4) = N³ / N² = N
 
 **Plugging in: 262,144 / 8,192 = 32**
 
-**Note:** The ratio equals N because the naive loop reads each matrix element from DRAM N times (once per output element that uses it, giving O(N³) traffic), while the ideal tiled version loads each element from DRAM exactly once and reuses it on-chip for all N of its multiply-accumulates, reducing traffic to O(N²).
+**Note:** 
+One-sentence explanation: The ratio equals N because the naive loop reads each matrix element from DRAM N times (once per output element that uses it, giving O(N³) traffic), while the ideal tiled version loads each element from DRAM exactly once and reuses it on-chip for all N of its multiply-accumulates, reducing traffic to O(N²).
 
 ## 4. Execution Time: Naive vs. Tiled
 
