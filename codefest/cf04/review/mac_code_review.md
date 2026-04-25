@@ -31,8 +31,10 @@ Waveform Output
 Transcript Output 
 <img width="740" height="271" alt="image" src="https://github.com/user-attachments/assets/513f6cd6-421d-437b-ac05-431d581c50f1" />
 
-Waveform Output 
+Waveform Output
+
 <img width="1065" height="162" alt="image" src="https://github.com/user-attachments/assets/4d6278fa-5f5e-40ed-b7c2-56ea4dd40765" />
+
 ---
 
 ## mac_correct.sv — Simulation & Code Review
