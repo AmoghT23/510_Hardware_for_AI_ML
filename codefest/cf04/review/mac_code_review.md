@@ -21,7 +21,7 @@ Transcript Output
 <img width="709" height="273" alt="image" src="https://github.com/user-attachments/assets/a34966b8-f060-47af-8a0f-a3800c2974bd" />
 
 Waveform Output
-<img width="1895" height="880" alt="image" src="https://github.com/user-attachments/assets/e32445e7-c803-4349-9218-8959c7ae989d" />
+<img width="1067" height="166" alt="image" src="https://github.com/user-attachments/assets/ac7811f8-d184-4ea2-9999-4ee22758a358" />
 
 --- 
 **DUT:** `mac_llm_B.sv` — INT8 MAC unit (AI accelerator building block)  
@@ -31,7 +31,6 @@ Transcript Output
 <img width="740" height="271" alt="image" src="https://github.com/user-attachments/assets/513f6cd6-421d-437b-ac05-431d581c50f1" />
 
 Waveform Output 
-<img width="1915" height="861" alt="image" src="https://github.com/user-attachments/assets/78bf25de-54df-49d8-8096-7d23a6161f68" />
+<img width="1065" height="162" alt="image" src="https://github.com/user-attachments/assets/4d6278fa-5f5e-40ed-b7c2-56ea4dd40765" />
 ---
 
-##Compiling 
