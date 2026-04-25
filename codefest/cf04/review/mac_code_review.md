@@ -6,13 +6,12 @@
 | mac_llm_B.sv | Claude 4.7 Opus |
 
 ---
-**Simulation Using Questasim**
--> Execution using run.do file 
+**Simulation Using Questasim** \
+-> run.do file 
 <img width="525" height="406" alt="image" src="https://github.com/user-attachments/assets/0c543b32-147f-4054-9fd2-b6d76f11da63" />
 
 ---
 ## mac_llm_A.sv — Simulation & Code Review
-
 **DUT:** `mac_llm_A.sv` — INT8 MAC unit (AI accelerator building block)  
 **Testbench:** `mac_tb.sv`
 
