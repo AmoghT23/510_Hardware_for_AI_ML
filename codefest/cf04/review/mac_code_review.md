@@ -23,7 +23,7 @@ Waveform Output
 <img width="1067" height="166" alt="image" src="https://github.com/user-attachments/assets/ac7811f8-d184-4ea2-9999-4ee22758a358" />
 
 --- 
-## mac_llm_A.sv — Simulation & Code Review
+## mac_llm_B.sv — Simulation & Code Review
 **DUT:** `mac_llm_B.sv` — INT8 MAC unit (AI accelerator building block)  
 **Testbench:** `mac_tb.sv`
 
