@@ -6,7 +6,8 @@
 | mac_llm_B.sv | Claude 4.7 Opus |
 
 ---
-**Simulation Using Questasim** \
+## Simulation Using Questasim'
+
 -> run.do file 
 <img width="525" height="406" alt="image" src="https://github.com/user-attachments/assets/0c543b32-147f-4054-9fd2-b6d76f11da63" />
 
