@@ -9,26 +9,27 @@
 
 ---
 
-## 1. Verilator Lint Check
+## 1. Compile Check — iverilog
+
+> **Note:** Verilator is not installed on this machine. Compile checks were performed
+> with `iverilog 11.0 -g2012` instead.
 
 **Command:**
 ```bash
-verilator --lint-only mac_llm_A.sv
-verilator --lint-only mac_llm_B.sv
+iverilog -g2012 -o mac_llm_A_check.vvp mac_llm_A.sv
+iverilog -g2012 -o mac_llm_B_check.vvp mac_llm_B.sv
+iverilog -g2012 -o mac_correct_check.vvp mac_correct.sv
 ```
 
-Both files compile with **no errors and no warnings** under Verilator.  
-`logic signed [7:0]` is valid IEEE 1800 SystemVerilog; Verilator accepts it.
+**Results:**
 
-> **Verification of error reporting:** Removing a comma from a port declaration  
-> (e.g. between port `a` and port `b`) causes Verilator to report:
-> ```
-> %Error: mac_llm_A.sv:18:5: syntax error, unexpected input, expecting ','
->     18 |      input  logic signed [7:0]  b,
->        |      ^~~~~
-> %Error: Exiting due to 4 error(s)
-> ```
-> This confirms Verilator's error detection is working — the original files are clean.
+| File | Exit code | Errors / Warnings |
+|------|-----------|-------------------|
+| `mac_llm_A.sv` | 0 | None |
+| `mac_llm_B.sv` | 0 | None |
+| `mac_correct.sv` | 0 | None |
+
+All three files compile cleanly under `iverilog -g2012`.
 
 ---
 
@@ -104,11 +105,14 @@ vvp sim.vvp
 
 ### mac_llm_A.sv — Simulation Transcript
 
+> Transcript header reads `DUT file: mac_llm_B.sv` — this is a hardcoded string
+> in `mac_tb.sv` and does not reflect which DUT was compiled. All cycle values are correct.
+
 ```
 VCD info: dumpfile mac_tb.vcd opened for output.
 ============================================================
  mac_tb: INT8 MAC unit simulation
- DUT file: mac_llm_B.sv
+ DUT file: mac_llm_A.sv  [actual DUT — header string hardcoded in mac_tb.sv]
 ============================================================
 CYCLE 0 | RESET (init)       | rst=1 a=   0 b=   0 | out=0   (expected 0)   | PASS
 CYCLE 1 | a=3 b=4 (cyc 1/3) | rst=0 a=   3 b=   4 | out=12  (expected 12)  | PASS
@@ -125,8 +129,7 @@ Errors: 0  Warnings: 0
 
 **GTKWave waveform — mac_llm_A:**
 
-<img width="1751" height="672" alt="llm_A" src="https://github.com/user-attachments/assets/fb08183d-3216-4a7a-a0d4-757442dee548" />
-
+<img width="1751" height="672" alt="llm_A" src="https://github.com/user-attachments/assets/7e412c27-b233-41a7-b4ca-9a9dc961a47a" />
 
 > Note: `product[15:0]` is visible as a separate wire in the signal list (Gemini's  
 > intermediate wire). Values: `000C` (12 decimal) → `0018` (24) → `0024` (36) → reset  
@@ -158,8 +161,7 @@ Errors: 0  Warnings: 0
 
 **GTKWave waveform — mac_llm_B:**
 
-<img width="1751" height="662" alt="llm_B" src="https://github.com/user-attachments/assets/060cf7a8-3c6e-46df-a591-a87183ab5f9c" />
-
+<img width="1751" height="662" alt="llm_B" src="https://github.com/user-attachments/assets/6faf01dd-68a6-4c89-a9e1-079927a704e9" />
 
 > Note: No intermediate `product` wire — only `clk`, `rst`, `a[7:0]`, `b[7:0]`, `out[31:0]`  
 > visible in the signal list. `out[31:0]` hex trace identical to mac_llm_A.
@@ -288,48 +290,5 @@ Errors: 0  Warnings: 0
 
 **GTKWave waveform — mac_correct:**
 
-<img width="1755" height="668" alt="correct" src="https://github.com/user-attachments/assets/51236813-2e0a-473a-a7df-8075384ac7c0" />
+<img width="1755" height="668" alt="correct" src="https://github.com/user-attachments/assets/9f0aa14e-6c5d-4de1-a811-2f0256f7320b" />
 
----
-
-## 6. Yosys Synthesis — mac_correct.sv
-
-**Command:**
-```bash
-yosys -p 'synth; stat' mac_correct.v
-```
-
-**Output (`synth; stat`):**
-```
-=== mac ===
-
-   Number of wires:                1039
-   Number of wire bits:            1301
-   Number of public wires:            5
-   Number of public wire bits:       50
-   Number of memories:                0
-   Number of memory bits:             0
-   Number of processes:               0
-   Number of cells:                1091
-     $_ANDNOT_                      351
-     $_AND_                          61
-     $_NAND_                         46
-     $_NOR_                          33
-     $_NOT_                          47
-     $_ORNOT_                        18
-     $_OR_                          133
-     $_SDFF_PP0_                     32
-     $_XNOR_                         97
-     $_XOR_                         273
-
-End of script. Logfile hash: 00b03e11c6
-CPU: user 0.14s  MEM: 17.50 MB peak
-Yosys 0.33 (git sha1 2584903a060)
-```
-
-**Key observations:**
-- **5 public wires:** `clk` (1-bit), `rst` (1-bit), `a` (8-bit), `b` (8-bit), `out` (32-bit) = **50 bits total** ✅
-- **32 × `$_SDFF_PP0_`:** One D flip-flop per accumulator bit — correct for a 32-bit register ✅
-- **273 × `$_XOR_` + 97 × `$_XNOR_`:** Adder and multiplier carry/sum logic
-- **351 × `$_ANDNOT_`:** Dominant cell — partial product generation for the 8×8 multiplier
-- **1091 total cells:** Expected for an unoptimised generic-cell netlist combining a full combinational INT8 multiplier with a 32-bit accumulator register
