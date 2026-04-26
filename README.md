@@ -92,15 +92,14 @@ The co-processor shares the host DDR4-2667 bus (45.8 GB/s peak), giving a co-pro
 
 ```
 510_Hardware_for_AI_ML/
-├── codefest/                      # Weekly codefests (cf01–cf04)
-│   └── cf04/                      # Quantization (CMAN) + MAC unit (CLLM) + cocotb (COPT)
-│       ├── cman_quantization.pdf
-│       ├── hdl/                   # mac_llm_A.sv, mac_llm_B.sv, mac_correct.sv, testbenches
-│       ├── review/mac_code_review.md
-│       └── cocotb_mac/            # cocotb env, simulation log, GTKWave screenshot
+├── codefest/
+│   ├── cf01/
+│   ├── cf02/
+│   ├── cf03/
+│   └── cf04/
 └── project/
-    ├── m1/                        # Software baseline, profiling, roofline, interface selection
-    ├── hdl/                       # Conv2D accelerator HDL stub + cocotb testbench
+    ├── m1/
+    ├── hdl/
     ├── algorithm_diagram.png
     └── heilmeier.md
 ```
