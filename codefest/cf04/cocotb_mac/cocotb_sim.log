@@ -1,0 +1,49 @@
+STDOUT:
+rm -f results.xml
+"C:/MinGW/bin/mingw32-make" -f Makefile results.xml
+mingw32-make[1]: Entering directory 'D:/PSU/Q3/HW_AI-ML/codefest/cf04/cocotb_mac'
+C:/iverilog/bin/iverilog -o sim_build/sim.vvp -s mac -g2012 -f sim_build/cmds.f -s cocotb_iverilog_dump  D:/PSU/Q3/HW_AI-ML/codefest/cf04/cocotb_mac/mac_correct.sv sim_build/cocotb_iverilog_dump.v
+rm -f results.xml
+COCOTB_TEST_MODULES=test_mac COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=mac TOPLEVEL_LANG=verilog \
+         C:/iverilog/bin/vvp -M C:/Users/amogh/AppData/Local/Programs/Python/Python311/Lib/site-packages/cocotb/libs -m cocotbvpi_icarus   sim_build/sim.vvp -fst  
+     -.--ns INFO     gpi                                ..mbed\gpi_embed.cpp:94   in _embed_init_python              Using Python 3.11.9 interpreter at C:/Users/amogh/AppData/Local/Programs/Python/Python311/python.exe
+     -.--ns ERROR    gpi                                ..mbed\gpi_embed.cpp:155  in _embed_init_python              Unexpected sys.executable value (expected 'C:/Users/amogh/AppData/Local/Programs/Python/Python311/python.exe', got 'C:\iverilog\bin\vvp.exe')
+     -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 11.0 (devel)
+     0.00ns WARNING  gpi                                vpi_iterate returned NULL for type vpiInstance for object NULL
+     0.00ns INFO     cocotb                             Seeding Python random module with 1777223770
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from C:\Users\amogh\AppData\Local\Programs\Python\Python311\Lib\site-packages\cocotb
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_mac.test_mac_basic (1/2)
+                                                            [a=3,b=4] for 3 cycles, assert rst, [a=-5,b=2] for 2 cycles.
+     0.00ns INFO     cocotb.mac                         CYCLE 0 | RESET (init)        | out = 0  PASS
+    10.00ns INFO     cocotb.mac                         CYCLE 1 | a=3 b=4 (1/3)       | out =     12  exp =     12  PASS
+    20.00ns INFO     cocotb.mac                         CYCLE 2 | a=3 b=4 (2/3)       | out =     24  exp =     24  PASS
+    30.00ns INFO     cocotb.mac                         CYCLE 3 | a=3 b=4 (3/3)       | out =     36  exp =     36  PASS
+    40.00ns INFO     cocotb.mac                         CYCLE 4 | RESET (mid-stream)  | out =      0  PASS
+    40.00ns INFO     cocotb.mac                         NEGATIVE STIMULUS | a=251 signed=-5 bin=11111011 b=2
+    50.00ns INFO     cocotb.mac                         CYCLE 5 | a=-5 b=2 (1/2)      | out =    -10  exp =    -10  PASS
+    60.00ns INFO     cocotb.mac                         CYCLE 6 | a=-5 b=2 (2/2)      | out =    -20  exp =    -20  PASS
+    60.00ns INFO     cocotb.mac                         test_mac_basic — all 7 cycles PASS
+    60.00ns INFO     cocotb.regression                  test_mac.test_mac_basic passed
+    60.00ns INFO     cocotb.regression                  running test_mac.test_mac_overflow (2/2)
+                                                            Accumulator WRAPS (not saturates) when it crosses 2^31 - 1.
+1310790.00ns INFO     cocotb.mac                         Pre-overflow  | out =     2147467264
+1310790.00ns INFO     cocotb.mac                         Post-overflow | out =    -2147483648  (expected -2147483648)
+1310790.00ns INFO     cocotb.mac                         RESULT: Design WRAPS — two's complement rollover, no saturation.
+1310790.00ns INFO     cocotb.mac                         test_mac_overflow PASS
+1310790.00ns INFO     cocotb.regression                  test_mac.test_mac_overflow passed
+1310790.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                         **************************************************************************************
+                                                         ** test_mac.test_mac_basic        PASS          60.00           0.01      11780.29  **
+                                                         ** test_mac.test_mac_overflow     PASS     1310730.00          13.13      99827.34  **
+                                                         **************************************************************************************
+                                                         ** TESTS=2 PASS=2 FAIL=0 SKIP=0            1310790.00          13.14      99750.55  **
+                                                         **************************************************************************************
+FST info: dumpfile sim_build/mac.fst opened for output.
+mingw32-make[1]: Leaving directory 'D:/PSU/Q3/HW_AI-ML/codefest/cf04/cocotb_mac'
+
+STDERR:
+C:/Users/amogh/AppData/Local/Programs/Python/Python311/Lib/site-packages/cocotb_tools/makefiles/simulators/Makefile.icarus:65: Using MODULE is deprecated, please use COCOTB_TEST_MODULES instead.
