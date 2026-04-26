@@ -11,30 +11,29 @@ Constraints: Synthesizable SystemVerilog only. No initial blocks, no $display, n
 (#). Use always_ff.
 */
 
-
 module mac (
-    input  logic              clk,  // 1-bit clock
-    input  logic              rst,  // 1-bit active-high synchronous reset
-    input  logic signed [7:0] a,    // 8-bit signed input A
-    input  logic signed [7:0] b,    // 8-bit signed input B
-    output logic signed [31:0] out  // 32-bit signed accumulator
+    input  logic              clk,
+    input  logic              rst,
+    input  logic signed [7:0] a,
+    input  logic signed [7:0] b,
+    output logic signed [31:0] out
 );
 
-    // Internal signal to hold the product of a * b
-    // A signed 8-bit * 8-bit mult results in a 16-bit signed value
+    // Intermediate signal for the product.
+    // 8x8 signed multiplication results in a 16-bit signed value.
     logic signed [15:0] product;
 
-    // Combinational multiplication
+    // Explicitly casting or ensuring signed context for multiplication
     assign product = a * b;
 
-    // Sequential logic for the accumulator
+    // Synchronous Reset: Only clk in the sensitivity list.
     always_ff @(posedge clk) begin
         if (rst) begin
             out <= 32'sd0;
         end else begin
-            // Sign-extension of the product to 32 bits is handled 
-            // automatically by the compiler because 'product' and 'out' 
-            // are both declared as 'signed'.
+            // When adding 16-bit 'product' to 32-bit 'out', 
+            // the signed property ensures the sign-bit (MSB) 
+            // of product is replicated to fill bits [31:16].
             out <= out + product;
         end
     end
