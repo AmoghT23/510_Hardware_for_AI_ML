@@ -125,7 +125,8 @@ Errors: 0  Warnings: 0
 
 **GTKWave waveform — mac_llm_A:**
 
-![mac_llm_A waveform](waveform_llm_A.png)
+<img width="1751" height="672" alt="llm_A" src="https://github.com/user-attachments/assets/fb08183d-3216-4a7a-a0d4-757442dee548" />
+
 
 > Note: `product[15:0]` is visible as a separate wire in the signal list (Gemini's  
 > intermediate wire). Values: `000C` (12 decimal) → `0018` (24) → `0024` (36) → reset  
@@ -157,7 +158,8 @@ Errors: 0  Warnings: 0
 
 **GTKWave waveform — mac_llm_B:**
 
-![mac_llm_B waveform](waveform_llm_B.png)
+<img width="1751" height="662" alt="llm_B" src="https://github.com/user-attachments/assets/060cf7a8-3c6e-46df-a591-a87183ab5f9c" />
+
 
 > Note: No intermediate `product` wire — only `clk`, `rst`, `a[7:0]`, `b[7:0]`, `out[31:0]`  
 > visible in the signal list. `out[31:0]` hex trace identical to mac_llm_A.
@@ -286,7 +288,7 @@ Errors: 0  Warnings: 0
 
 **GTKWave waveform — mac_correct:**
 
-![mac_correct waveform](waveform_correct.png)
+<img width="1755" height="668" alt="correct" src="https://github.com/user-attachments/assets/51236813-2e0a-473a-a7df-8075384ac7c0" />
 
 ---
 
