@@ -1,0 +1,1 @@
+module sigtest3; reg clk=0, rst; reg [7:0] a,b; wire [31:0] out; reg [31:0] outreg; assign out = outreg; always @(posedge clk) begin if (rst) outreg <= 0; else outreg <= outreg + ($signed(a) * $signed(b)); end initial begin a=0; b=0; rst=1; #7 rst=0; a=8'hfb; b=2; #10 $display("OUT=%0d OUTHEX=%h", out, out); #10 $finish; end always #5 clk=~clk; endmodule
