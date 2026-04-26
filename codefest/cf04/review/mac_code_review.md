@@ -48,3 +48,7 @@ Transcript Output
 
 Waveform Output 
 <img width="1068" height="169" alt="mac_correct_wave" src="https://github.com/user-attachments/assets/2b5d7004-3575-4bca-a5a8-308c462d5323" />
+
+---
+## Yosys Synthesis using EDA-Playground (Diagram)
+<img width="849" height="290" alt="image" src="https://github.com/user-attachments/assets/633f588f-fb83-4047-baf9-1e47fb850818" />
