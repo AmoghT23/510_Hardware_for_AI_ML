@@ -104,7 +104,7 @@ vvp sim/sim_if.out > sim/interface_run.log
 
 After running the interface simulation (step 2 above):
 ```
-python sim/plot_waveform.py
+m2>gtkwave sim\waveform.vcd
 ```
 
 Output: `sim/waveform.png` — 15-signal digital waveform covering all four test cases.
