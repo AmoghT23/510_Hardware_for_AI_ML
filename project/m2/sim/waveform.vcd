@@ -1,0 +1,214 @@
+$date
+	Fri May 01 21:13:44 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_interface $end
+$var wire 2 ! bresp [1:0] $end
+$var wire 1 " core_done $end
+$var wire 1 # core_ready $end
+$var wire 32 $ core_result [31:0] $end
+$var wire 2 % rresp [1:0] $end
+$var wire 1 & tready $end
+$var wire 1 ' wready $end
+$var wire 1 ( rvalid $end
+$var wire 32 ) rdata [31:0] $end
+$var wire 8 * core_tile_len [7:0] $end
+$var wire 1 + core_start $end
+$var wire 1 , bvalid $end
+$var wire 1 - awready $end
+$var wire 1 . arready $end
+$var reg 4 / araddr [3:0] $end
+$var reg 1 0 arvalid $end
+$var reg 4 1 awaddr [3:0] $end
+$var reg 1 2 awvalid $end
+$var reg 1 3 bready $end
+$var reg 1 4 clk $end
+$var reg 1 5 got_start $end
+$var reg 32 6 read_val [31:0] $end
+$var reg 1 7 rready $end
+$var reg 1 8 rst_n $end
+$var reg 512 9 tdata [511:0] $end
+$var reg 1 : tlast $end
+$var reg 1 ; tvalid $end
+$var reg 32 < wdata [31:0] $end
+$var reg 4 = wstrb [3:0] $end
+$var reg 1 > wvalid $end
+$var integer 32 ? fail_count [31:0] $end
+$var integer 32 @ pass_count [31:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 @
+b0 ?
+0>
+b0 =
+b0 <
+0;
+0:
+b0 9
+08
+07
+bx 6
+05
+04
+03
+02
+b0 1
+00
+b0 /
+x.
+x-
+x,
+x+
+bx *
+bx )
+x(
+x'
+1&
+b0 %
+b0 $
+1#
+0"
+b0 !
+$end
+#500
+1'
+1-
+b0 *
+0+
+b0 )
+1.
+0(
+0,
+14
+#1000
+04
+#1500
+14
+#2000
+04
+#2500
+14
+#3000
+04
+#3500
+14
+#3600
+18
+#4000
+04
+#4500
+14
+#4600
+b1111 =
+1>
+b1001 <
+12
+b1000 1
+#5000
+04
+#5500
+0'
+0-
+1,
+b1001 *
+14
+#5600
+0>
+02
+#5700
+13
+#6000
+04
+#6500
+1-
+1'
+0,
+14
+#6600
+b1 @
+03
+#7000
+04
+#7500
+14
+#7600
+10
+b1000 /
+#8000
+04
+#8500
+b1001 )
+0.
+1(
+14
+#8600
+00
+#8700
+17
+#9000
+04
+#9500
+1.
+0(
+14
+#9600
+b10 @
+b1001 6
+07
+#10000
+04
+#10500
+14
+#10600
+b11 @
+1:
+1;
+b11011110101011011011111011101111 9
+#11000
+04
+#11500
+14
+#11600
+0:
+0;
+#12000
+04
+#12500
+14
+#12600
+1>
+b1 <
+12
+b0 1
+#13000
+04
+#13500
+0'
+0-
+1,
+1+
+14
+#13600
+15
+0>
+02
+#13700
+13
+#14000
+04
+#14500
+1-
+1'
+0,
+0+
+14
+#14600
+b100 @
+03

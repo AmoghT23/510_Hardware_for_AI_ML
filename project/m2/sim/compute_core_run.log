@@ -1,0 +1,5 @@
+=== tb_compute_core ===
+  T1 [ramp-w / unit-x / expect 45.0] : PASS  got=0x002d0000
+  T2 [alt-sign-w / 2x / expect 2.0]  : PASS  got=0x00020000
+---
+PASS — all 2 tests passed.
