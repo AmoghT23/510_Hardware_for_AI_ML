@@ -35,6 +35,9 @@ The hardware case for Q16.16 over FP32 on this project:
 
 **Bottom line:** Q16.16 is the precision sweet spot for this project — bit-exact, single-cycle at 1 GHz, ~3× cheaper than FP32, with comfortable headroom over the worst-case tile sum, and no QAT pipeline required. The full error analysis is in `precision.md`.
 
+**Benchmark comparison for ResNet18
+<img width="1159" height="1321" alt="decision_radar" src="https://github.com/user-attachments/assets/6843615f-04ae-48a6-9fd7-fc17ac76dfa7" />
+
 ---
 
 ## Directory Structure
