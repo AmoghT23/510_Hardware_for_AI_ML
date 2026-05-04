@@ -1,3 +1,4 @@
+VCD info: dumpfile sim/waveform.vcd opened for output.
 === tb_interface ===
   T1 [AXI4-Lite write TILE_LEN=9] : PASS  bresp=2'b00 (OKAY)
   T2 [AXI4-Lite read  TILE_LEN]  : PASS  rdata=0x00000009  rresp=OKAY
