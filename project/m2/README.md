@@ -33,6 +33,8 @@ Motivations for the change:
 4. **Precision**: FP32 accumulation prevents catastrophic cancellation across the deepest
    ResNet18 tiles (4,608 MACs in Layer 4). See `precision.md` for full error analysis.
 
+<img width="895" height="868" alt="fp16_radar" src="https://github.com/user-attachments/assets/e1dcfff6-1b1e-4874-8177-17952ac631d4" />
+
 ---
 
 ## Directory Structure
