@@ -1,5 +1,6 @@
-=== tb_compute_core ===
-  T1 [ramp-w / unit-x / expect 45.0] : PASS  got=0x002d0000
-  T2 [alt-sign-w / 2x / expect 2.0]  : PASS  got=0x00020000
+VCD info: dumpfile sim/compute_core.vcd opened for output.
+=== tb_compute_core (FP16) ===
+  T1 [ramp-w / unit-x / expect 45.0] : PASS  got=0x51a0
+  T2 [alt-sign-w / 2x / expect 2.0]  : PASS  got=0x4000
 ---
 PASS — all 2 tests passed.
