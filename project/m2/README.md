@@ -1,42 +1,37 @@
 # ECE 410/510 — Conv2d Co-processor Chiplet, Milestone 2
 
-Synthesizable RTL for a Q16.16 fixed-point Conv2d output-pixel accelerator targeting 1 GHz, with an AXI4-Stream + AXI4-Lite host interface.
+## Overview
 
-## Modules
+Synthesizable RTL for a 3 × 3 Conv2d output-pixel accelerator targeting 1 GHz.
 
 | Module | File | Description |
 |--------|------|-------------|
-| `compute_core` | `rtl/compute_core.sv` | Q16.16 MAC engine — output-stationary dot product, 64-bit Q32.32 accumulator |
-| `conv_interface` | `rtl/interface.sv` | AXI4-Stream 512-bit data plane + AXI4-Lite 32-bit control plane |
+| `compute_core` | `rtl/compute_core.sv` | FP16 MAC engine — FP16×FP16→FP32 dot product, FP16 output |
+| `conv_interface` | `rtl/interface.sv` | AXI4-Stream 512-bit + AXI4-Lite 32-bit wrapper |
 
-Both modules share a single clock domain and a synchronous active-low reset.
+Both modules share a single clock domain and synchronous active-low reset.
 
 ---
 
-## Why Q16.16 fixed-point (not FP32)
+## Deviation from Milestone 1 Plan
 
-FP32 is the conventional format for AI software because training needs 10⁻⁸ to 10⁴ dynamic range and GPUs already shipped with FP32 ALUs. Neither reason applies to a custom inference chiplet running on a pre-trained, frozen ResNet18.
+**Arithmetic format changed: Q16.16 → FP16 mixed-precision.**
 
-The hardware case for Q16.16 over FP32 on this project:
+The M1 design specification used Q16.16 signed fixed-point (32-bit words).
+After analysis, the M2 implementation adopts IEEE 754 FP16 (half-precision) inputs and
+outputs with an FP32 (single-precision) accumulator, matching the industry-standard
+mixed-precision pipeline used by NVIDIA Tensor Cores and Apple Neural Engine.
 
-| Factor | FP32 | Q16.16 | Why it matters here |
-|---|---|---|---|
-| FPGA LUTs per multiplier | ~280–320 | ~70–90 | ~3–4× cheaper silicon at the same throughput |
-| Multiply latency at 1 GHz | 3–5 cycles | 1–2 cycles | Hits the 1 GHz target without deep pipelining |
-| Result reproducibility | Rounding-mode dependent | Bit-exact | Required for golden-value testbench checks (`0x002D_0000`) |
-| Dynamic range needed | ±10³⁸ | ±32 768 | ResNet18 post-BN weights are |w| < 4; activations post-ReLU < 4. ±32 768 is 8 000× more headroom than needed |
-| Training support | yes | no (inference only) | Irrelevant — training stays on the host CPU |
+Motivations for the change:
 
-**The 576-MAC tile bound:** A 3×3 kernel × 64 input channels accumulates 576 MACs per output pixel. Worst-case magnitude is 576 × 4 × 4 = 9,216, which needs 14 integer bits. Q16.16 provides 16 integer bits, giving a 3.5× safety margin. Q8.8 (max value 128) would overflow and was rejected for that reason. See `precision.md` for the full format comparison.
-
-**Why not INT8?** INT8 is the industry default for *quantization-aware-trained* models (TPU, A100, Hopper). This project's HybridModel (ResNet18 + AttentionFusion) was not trained with QAT. Plain post-training INT8 quantization typically loses 1–3% accuracy on non-QAT models — unacceptable for binary medical classification. Q16.16 carries 256× more precision than INT8 with no calibration step, at a moderate (~3×) silicon cost over INT8.
-
-**Why not BF16/FP16?** BF16 was engineered for training, not inference cost reduction — it preserves FP32's exponent at FP16's width but still requires float hardware. FP16 has limited dynamic range (±10⁴·⁸) and the same float overhead. Both lose bit-exact reproducibility, which Q16.16 keeps.
-
-**Bottom line:** Q16.16 is the precision sweet spot for this project — bit-exact, single-cycle at 1 GHz, ~3× cheaper than FP32, with comfortable headroom over the worst-case tile sum, and no QAT pipeline required. The full error analysis is in `precision.md`.
-
-**Benchmark comparison for ResNet18
-<img width="1159" height="1321" alt="decision_radar" src="https://github.com/user-attachments/assets/6843615f-04ae-48a6-9fd7-fc17ac76dfa7" />
+1. **Bandwidth**: FP16 is 16 bits vs 32 bits for Q16.16, doubling the number of values
+   per AXI4-Stream 512-bit beat (32 vs 16 values per beat).
+2. **Dynamic range**: FP16's floating exponent handles the full ResNet18 weight/activation
+   magnitude range without any fixed-point scaling convention.
+3. **Tapeout alignment**: FP16 is the dominant inference format; M3/M4 tapeout can use
+   standard FP16 MAC hard macros directly.
+4. **Precision**: FP32 accumulation prevents catastrophic cancellation across the deepest
+   ResNet18 tiles (4,608 MACs in Layer 4). See `precision.md` for full error analysis.
 
 ---
 
@@ -45,17 +40,17 @@ The hardware case for Q16.16 over FP32 on this project:
 ```
 m2/
 ├── rtl/
-│   ├── compute_core.sv       Q16.16 MAC engine (IDLE → LOAD → COMPUTE → DONE FSM)
+│   ├── compute_core.sv       FP16 MAC engine (IDLE→LOAD→COMPUTE→DONE FSM)
 │   └── interface.sv          AXI4-Stream + AXI4-Lite wrapper (conv_interface)
 ├── tb/
-│   ├── tb_compute_core.sv    Two dot-product test vectors against golden Q16.16 values
+│   ├── tb_compute_core.sv    Two FP16 dot-product test vectors
 │   └── tb_interface.sv       Four AXI4-Lite / AXI4-Stream transaction tests
 ├── sim/
+│   ├── run.ps1               PowerShell script: compile → simulate → launch GTKWave
 │   ├── compute_core_run.log  Captured stdout — 2/2 PASS
 │   ├── interface_run.log     Captured stdout — 4/4 PASS
-│   ├── waveform.vcd          VCD dump (generated by tb_interface)
-│   └── waveform.png          Digital waveform plot (15 key signals)
-├── precision.md              Q16.16 format definition, error analysis, and rejected alternatives
+│   └── waveform.png          Digital waveform plot (key signals from interface TB)
+├── precision.md              FP16 mixed-precision choice rationale and error analysis
 └── README.md                 This file
 ```
 
@@ -66,48 +61,51 @@ m2/
 | Tool | Minimum version | Check |
 |------|----------------|-------|
 | Icarus Verilog | 10.3 | `iverilog -V` |
-| Python 3 | 3.8 | `python --version` |
-| matplotlib | 3.0 | `python -c "import matplotlib"` |
-
-Install matplotlib if needed:
-```
-pip install matplotlib
-```
+| GTKWave | any | `gtkwave --version` |
 
 ---
 
 ## Reproducing the Simulations
 
-All commands are run from the `m2/` directory.
+### One-step (recommended)
 
-### 1 — Compute Core
+From the `m2/` directory in PowerShell:
+
+```powershell
+.\sim\run.ps1
+```
+
+The script compiles both modules, runs both simulations (saving logs to `sim/`),
+and launches GTKWave with the generated VCD files.
+
+### Manual steps
+
+#### Compute Core
 
 ```
-iverilog -g2012 -o sim/sim_core.out rtl/compute_core.sv tb/tb_compute_core.sv
-vvp sim/sim_core.out
+iverilog -g2012 -o sim/cc_sim.out rtl/compute_core.sv tb/tb_compute_core.sv
+vvp sim/cc_sim.out
 ```
 
 Expected output:
 ```
-=== tb_compute_core ===
-  T1 [ramp-w / unit-x / expect 45.0] : PASS  got=0x002d0000
-  T2 [alt-sign-w / 2x / expect 2.0]  : PASS  got=0x00020000
+=== tb_compute_core (FP16) ===
+  T1 [ramp-w / unit-x / expect 45.0] : PASS  got=0x51a0
+  T2 [alt-sign-w / 2x / expect 2.0]  : PASS  got=0x4000
 ---
 PASS — all 2 tests passed.
 ```
 
-`0x002d0000` is exactly 45.0 in Q16.16 (45 × 65,536 = 2,949,120 = 0x002D_0000). Bit-exact match confirms both the multiplier sign-extension and the `accum[47:16]` extraction formula are correct.
-
-To capture to log:
+To save to log:
 ```
-vvp sim/sim_core.out > sim/compute_core_run.log
+vvp sim/cc_sim.out | tee sim/compute_core_run.log
 ```
 
-### 2 — Interface
+#### Interface
 
 ```
-iverilog -g2012 -o sim/sim_if.out rtl/interface.sv tb/tb_interface.sv
-vvp sim/sim_if.out
+iverilog -g2012 -o sim/if_sim.out rtl/interface.sv tb/tb_interface.sv
+vvp sim/if_sim.out
 ```
 
 Expected output:
@@ -121,66 +119,38 @@ Expected output:
 PASS — all 4 tests passed.
 ```
 
-T1 + T2 satisfy the M2 spec requirement of "at least one complete write transaction and one complete read or response transaction." T3 verifies the data plane handshake. T4 verifies the control-plane → core start signal that M3 will exercise in full integration.
-
-Running `vvp` also writes `sim/waveform.vcd` (the testbench dumps all top-level signals automatically).
-
-To capture to log:
-```
-vvp sim/sim_if.out > sim/interface_run.log
-```
-
-### 3 — Waveform Plot
-
-After running the interface simulation:
-```
-m2> gtkwave sim\waveform.vcd
-```
-
-Output: `sim/waveform.png` — 15-signal digital waveform covering all four test cases.
-
 ---
 
 ## Register Map (AXI4-Lite, 4-bit address)
 
 | Addr | Name     | Access | Bits   | Description                             |
 |------|----------|--------|--------|-----------------------------------------|
-| 0x00 | CTRL     | W      | [0]    | `start` — pulse `core_start` one cycle (W1S, auto-clears) |
-|      |          |        | [1]    | `sw_rst` — software reset request (W1S, auto-clears) |
-| 0x04 | STATUS   | R      | [0]    | `done` — latched from `core_done`; clears on read |
-|      |          |        | [1]    | `busy` — high when core is not idle |
-| 0x08 | TILE_LEN | RW     | [7:0]  | Number of MAC operations per tile (default 9 = 3×3 kernel) |
-| 0x0C | RESULT   | R      | [31:0] | Q16.16 output pixel (latched on `done`) |
+| 0x00 | CTRL     | W      | [0]    | start — pulse `core_start` one cycle (auto-clears) |
+|      |          |        | [1]    | sw_rst — software reset (auto-clears)   |
+| 0x04 | STATUS   | R      | [0]    | done — latched from `core_done`; clears on read |
+|      |          |        | [1]    | busy — high when core is not idle       |
+| 0x08 | TILE_LEN | RW     | [7:0]  | Number of MAC operations per tile       |
+| 0x0C | RESULT   | R      | [15:0] | FP16 output pixel (latched on done); bits [31:16] read as zero |
 
 ---
 
 ## AXI4-Stream Format
 
-Each 512-bit beat carries **16 × 32-bit Q16.16 values** packed contiguously. `TREADY` is held permanently high (no backpressure in the M2 testbench). `TLAST` marks the final beat of a tile packet.
-
-The 512-bit / 1 GHz configuration provides 64 GB/s rated bandwidth, against the 21.3 GB/s required at the 1 TFLOP/s compute-core target derived in `project/m1/interface_selection.md`. The 3× margin guarantees the design is **not interface-bound**.
-
----
-
-## Compute-Core FSM
-
-```
-IDLE  ──start──▶  LOAD  ──cnt==NUM_ELEM-1──▶  COMPUTE  ──cnt==NUM_ELEM-1──▶  DONE_ST  ──▶  IDLE
-                   │                              │                              │
-                   └─ buffer (weight, ifm) pairs  └─ accum += w × x (Q32.32)     └─ result_reg = accum[47:16]
-                                                                                    done pulses high one cycle
-```
-
-`NUM_ELEM = KERNEL_H × KERNEL_W × IN_CH` (default 9 for a 3×3 kernel, single channel). The 64-bit Q32.32 accumulator preserves full precision across all MACs; the result is extracted as `accum[47:16]`, mapping the Q32.32 sum back to a Q16.16 output pixel.
+Each 512-bit beat carries **32 × 16-bit FP16 values**.  
+`TREADY` is held permanently high (no backpressure).  
+`TLAST` marks the final beat of a tile packet.
 
 ---
 
 ## Design Notes
 
-- **`interface` keyword**: SystemVerilog reserves `interface`; the module is named `conv_interface` throughout to avoid the collision.
-- **Icarus Verilog compatibility**: `automatic` variables inside `always_ff` and bit-select on ternary expressions are unsupported. Both are avoided via module-level combinational wires (`wr_addr`, `wr_data`).
-- **Sign-extended multiply**: Q16.16 operands are sign-extended to 64 bits before multiplication so the Q32.32 product is correct for negative values. See lines 73–82 of `compute_core.sv`.
-- **Output-stationary justification**: Each output pixel accumulates in a single register through the full tile, then writes to `result_reg` once. This minimizes write-back traffic to DDR4, which matters because the co-processor shares the host's DDR4-2667 bus (45.8 GB/s peak). Weight reuse is achieved through the on-chip weight buffer rather than weight-stationary placement.
-- **Simultaneous AW/W arrival**: The AXI4-Lite write path handles both same-cycle and separate-cycle AW/W arrival via dual latch registers with a combinational mux selecting the active source.
-
----
+- **`interface` keyword**: SystemVerilog reserves `interface`; the module is named
+  `conv_interface` throughout.
+- **Icarus Verilog compatibility**: `automatic` variables inside `always_ff` and
+  bit-select on ternary expressions are unsupported — both are avoided via module-level
+  combinational wires (`wr_addr`, `wr_data`).
+- **FP32 accumulator**: prevents precision loss (catastrophic cancellation) across deep
+  tiles up to 4,608 MACs (ResNet18 Layer 4). See `precision.md` for full error analysis.
+- **Simultaneous AW/W arrival**: The write path handles both same-cycle and separate-cycle
+  AW/W arrival via dual latch registers with a combinational mux selecting the active source.
+- **Denormals**: flushed to zero on FP16 input; acceptable for inference with trained weights.
