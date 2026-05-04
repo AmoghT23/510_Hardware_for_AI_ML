@@ -48,7 +48,7 @@ module tb_interface;
     // Core stub signals
     logic        core_start;
     logic [7:0]  core_tile_len;
-    logic [31:0] core_result;
+    logic [15:0] core_result;          // FP16 (was 32-bit Q16.16)
     logic        core_done, core_ready;
 
     // ── DUT instantiation ─────────────────────────────────────────────────
@@ -83,13 +83,13 @@ module tb_interface;
     // ── VCD dump ──────────────────────────────────────────────────────────
     initial begin
         $dumpfile("sim/waveform.vcd");
-        $dumpvars(1, tb_interface);
+        $dumpvars(0, tb_interface);
     end
 
     // ── core stubs: no compute_core attached for this testbench ───────────
     assign core_done   = 1'b0;
     assign core_ready  = 1'b1;
-    assign core_result = 32'd0;
+    assign core_result = 16'h0;   // FP16 stub
 
     // ── counters and shared variables ─────────────────────────────────────
     integer      pass_count, fail_count;
