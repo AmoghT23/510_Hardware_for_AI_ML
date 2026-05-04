@@ -13,7 +13,7 @@ Both modules share a single clock domain and synchronous active-low reset.
 
 ---
 
-## Deviation from Milestone 1 Plan
+## Deviation from M1
 
 **Arithmetic format changed: Q16.16 → FP16 mixed-precision.**
 
