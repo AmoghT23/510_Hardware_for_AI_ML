@@ -17,11 +17,11 @@
 //   0x04  STATUS    R       [0]      done     — latched from core_done; clears on read
 //                           [1]      busy     — asserted when core is not idle
 //   0x08  TILE_LEN  RW      [7:0]   num_elem — number of MAC operations per tile
-//   0x0C  RESULT    R       [31:0]  q1616    — Q16.16 output pixel (latched on done)
+//   0x0C  RESULT    R       [15:0]  fp16     — FP16 output pixel in bits [15:0] (latched on done)
 //
 // ── AXI4-Stream transaction format ──────────────────────────────────────────
-//   Each beat carries 512 bits of packed data (16 × 32-bit Q16.16 values).
-//   TDATA[31:0] of the first beat is captured into stream_buf for inspection.
+//   Each beat carries 512 bits of packed data (32 × 16-bit FP16 values).
+//   TDATA[15:0] of the first beat is captured into stream_buf for inspection.
 //   TLAST marks the final beat of a tile packet.
 //   TREADY is held high; the interface always accepts incoming beats.
 //
@@ -51,7 +51,7 @@
 //   s_axis_tlast     in    1    Last beat of packet
 //   core_start       out   1    Forwarded start pulse to compute_core
 //   core_tile_len    out   8    Tile length forwarded to compute_core
-//   core_result      in   32    Result from compute_core
+//   core_result      in   16    Result from compute_core  (FP16)
 //   core_done        in    1    Done pulse from compute_core
 //   core_ready       in    1    Idle flag from compute_core
 //
@@ -103,7 +103,7 @@ module conv_interface #(
     // ── Compute core interface ───────────────────────────────────────────
     output logic        core_start,
     output logic [7:0]  core_tile_len,
-    input  logic [31:0] core_result,
+    input  logic [15:0] core_result,
     input  logic        core_done,
     input  logic        core_ready
 );
@@ -113,7 +113,7 @@ module conv_interface #(
     logic        reg_done;       // latched from core_done, clears on STATUS read
     logic [7:0]  reg_tile_len;   // tile length register
     logic [31:0] reg_result;     // output pixel latch
-    logic [31:0] stream_buf;     // first 32 bits of last stream beat
+    logic [15:0] stream_buf;     // first 16 bits (one FP16 word) of last stream beat
 
     // ── AXI4-Lite write path state ────────────────────────────────────────
     logic                    aw_latch;  // write address pending
@@ -159,7 +159,7 @@ module conv_interface #(
             reg_done     <= 1'b0;
             reg_tile_len <= 8'd0;
             reg_result   <= 32'd0;
-            stream_buf   <= 32'd0;
+            stream_buf   <= 16'd0;
         end else begin
 
             // ── auto-clear start pulse ────────────────────────────────
@@ -168,13 +168,13 @@ module conv_interface #(
             // ── latch core result on done ─────────────────────────────
             if (core_done) begin
                 reg_done   <= 1'b1;
-                reg_result <= core_result;
+                reg_result <= {16'h0, core_result};  // FP16 in [15:0], zeros in [31:16]
             end
 
             // ── AXI4-Stream beat capture ──────────────────────────────
             // TVALID/TREADY contract: transfer on any cycle both are high.
             if (s_axis_tvalid) begin
-                stream_buf <= s_axis_tdata[31:0];
+                stream_buf <= s_axis_tdata[15:0];   // capture first FP16 word
             end
 
             // ── AXI4-Lite write address latch ─────────────────────────
