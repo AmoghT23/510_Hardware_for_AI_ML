@@ -1,0 +1,71 @@
+[*]
+[*] GTKWave save — conv_interface AXI4-Lite + AXI4-Stream
+[*] ECE 410/510 M2 — open with: gtkwave sim/waveform.vcd sim/interface.gtkw
+[*]
+[*] Signal order follows data flow:
+[*]   1. Clock / Reset
+[*]   2. AXI4-Lite Write channel  (AW → W → B)   — Tests 1 and 4
+[*]   3. AXI4-Lite Read  channel  (AR → R)        — Test 2
+[*]   4. AXI4-Stream               (TVALID/TREADY) — Test 3
+[*]   5. Core outputs               (start / tile_len / result) — visible effect
+[*]
+[timestart] 0
+[size] 1920 1080
+[pos] -1 -1
+*-21.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_interface.
+[treeopen] tb_interface.dut.
+
+@28
+tb_interface.clk
+@28
+tb_interface.rst_n
+
+@28
+tb_interface.awaddr[3:0]
+@28
+tb_interface.awvalid
+@28
+tb_interface.awready
+@28
+tb_interface.wdata[31:0]
+@28
+tb_interface.wvalid
+@28
+tb_interface.wready
+@28
+tb_interface.bresp[1:0]
+@28
+tb_interface.bvalid
+@28
+tb_interface.bready
+
+@28
+tb_interface.araddr[3:0]
+@28
+tb_interface.arvalid
+@28
+tb_interface.arready
+@28
+tb_interface.rdata[31:0]
+@28
+tb_interface.rresp[1:0]
+@28
+tb_interface.rvalid
+@28
+tb_interface.rready
+
+@28
+tb_interface.tvalid
+@28
+tb_interface.tready
+@28
+tb_interface.tlast
+
+@28
+tb_interface.core_start
+@22
+tb_interface.core_tile_len[7:0]
+@28
+tb_interface.core_result[15:0]
+[end]

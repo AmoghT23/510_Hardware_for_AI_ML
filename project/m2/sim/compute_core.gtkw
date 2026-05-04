@@ -1,0 +1,51 @@
+[*]
+[*] GTKWave save — compute_core FP16 MAC engine
+[*] ECE 410/510 M2 — open with: gtkwave sim/compute_core.vcd sim/compute_core.gtkw
+[*]
+[*] Signal order follows data flow:
+[*]   1. Clock / Reset
+[*]   2. Control (start / ready / done)
+[*]   3. FSM state + counter
+[*]   4. Input data (weight, IFM)
+[*]   5. Internal FP32 accumulator
+[*]   6. Output result
+[*]
+[timestart] 0
+[size] 1920 1080
+[pos] -1 -1
+*-21.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_compute_core.
+[treeopen] tb_compute_core.dut.
+
+@28
+tb_compute_core.clk
+@28
+tb_compute_core.rst_n
+
+@28
+tb_compute_core.start
+@28
+tb_compute_core.ready
+@28
+tb_compute_core.done
+
+@28
+tb_compute_core.dut.state[1:0]
+@22
+tb_compute_core.dut.cnt[3:0]
+
+@28
+tb_compute_core.weight_valid
+@28
+tb_compute_core.weight_data[15:0]
+@28
+tb_compute_core.ifm_valid
+@28
+tb_compute_core.ifm_data[15:0]
+
+@28
+tb_compute_core.dut.accum[31:0]
+
+@28
+tb_compute_core.result[15:0]
+[end]
