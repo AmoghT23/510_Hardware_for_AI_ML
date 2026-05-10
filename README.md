@@ -97,8 +97,11 @@ The co-processor shares the host DDR4-2667 bus (45.8 GB/s peak), giving a co-pro
 │   ├── cf02/
 │   ├── cf03/
 │   └── cf04/
+│   └── cf05/
+│   └── cf06/
 └── project/
     ├── m1/
+    ├── m2/
     ├── hdl/
     ├── algorithm_diagram.png
     └── heilmeier.md
