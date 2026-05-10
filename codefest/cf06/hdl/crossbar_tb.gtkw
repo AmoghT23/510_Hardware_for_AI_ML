@@ -1,0 +1,37 @@
+[dumpfile] "crossbar_tb.vcd"
+[dumpfile_mtime] Thu Jan  1 00:00:00 1970
+[dumpfile_size] 0
+[savefile] "crossbar_tb.gtkw"
+[timestart] 0
+[size] 1400 600
+[pos] 0 0
+*-17.500000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] crossbar_tb.
+[sst_width] 250
+[signals_width] 200
+[sst_expanded] 1
+[sst_vpaned_height] 300
+@28
+crossbar_tb.clk
+@28
+crossbar_tb.rst_n
+@28
+crossbar_tb.load_weights
+@22
+crossbar_tb.weight_in[15:0]
+@28
+-
+@22
+crossbar_tb.in_data[31:0]
+@28
+-
+@22
+crossbar_tb.out_data[39:0]
+@28
+-
+@22
+crossbar_tb.dut.weight_reg[15:0]
+@22
+crossbar_tb.dut.mac_comb[39:0]
+[pattern_trace] 1
+[pattern_trace] 0

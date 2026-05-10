@@ -1,0 +1,214 @@
+$date
+	Sat May 09 22:33:12 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module crossbar_tb $end
+$var wire 40 ! out_data [39:0] $end
+$var reg 1 " clk $end
+$var reg 32 # in_data [31:0] $end
+$var reg 1 $ load_weights $end
+$var reg 1 % rst_n $end
+$var reg 16 & weight_in [15:0] $end
+$var integer 32 ' fail_count [31:0] $end
+$var integer 32 ( pass_count [31:0] $end
+$scope module dut $end
+$var wire 1 " clk $end
+$var wire 32 ) in_data [31:0] $end
+$var wire 1 $ load_weights $end
+$var wire 1 % rst_n $end
+$var wire 16 * weight_in [15:0] $end
+$var wire 40 + mac_comb [39:0] $end
+$var wire 40 , in_ext [39:0] $end
+$var reg 40 - out_data [39:0] $end
+$var reg 16 . weight_reg [15:0] $end
+$scope begin gen_col[0] $end
+$scope begin gen_row[0] $end
+$upscope $end
+$scope begin gen_row[1] $end
+$upscope $end
+$scope begin gen_row[2] $end
+$upscope $end
+$scope begin gen_row[3] $end
+$upscope $end
+$upscope $end
+$scope begin gen_col[1] $end
+$scope begin gen_row[0] $end
+$upscope $end
+$scope begin gen_row[1] $end
+$upscope $end
+$scope begin gen_row[2] $end
+$upscope $end
+$scope begin gen_row[3] $end
+$upscope $end
+$upscope $end
+$scope begin gen_col[2] $end
+$scope begin gen_row[0] $end
+$upscope $end
+$scope begin gen_row[1] $end
+$upscope $end
+$scope begin gen_row[2] $end
+$upscope $end
+$scope begin gen_row[3] $end
+$upscope $end
+$upscope $end
+$scope begin gen_col[3] $end
+$scope begin gen_row[0] $end
+$upscope $end
+$scope begin gen_row[1] $end
+$upscope $end
+$scope begin gen_row[2] $end
+$upscope $end
+$scope begin gen_row[3] $end
+$upscope $end
+$upscope $end
+$scope begin gen_ext[0] $end
+$upscope $end
+$scope begin gen_ext[1] $end
+$upscope $end
+$scope begin gen_ext[2] $end
+$upscope $end
+$scope begin gen_ext[3] $end
+$upscope $end
+$scope begin gen_fin[0] $end
+$upscope $end
+$scope begin gen_fin[1] $end
+$upscope $end
+$scope begin gen_fin[2] $end
+$upscope $end
+$scope begin gen_fin[3] $end
+$upscope $end
+$upscope $end
+$scope task check_port $end
+$var reg 10 / actual [9:0] $end
+$var integer 32 0 expected [31:0] $end
+$var integer 32 1 port_idx [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx 1
+bx 0
+bx /
+b0 .
+b0 -
+b0 ,
+b0 +
+b0 *
+b0 )
+b0 (
+b0 '
+b0 &
+0%
+0$
+b0 #
+0"
+b0 !
+$end
+#5000
+1"
+#10000
+0"
+#15000
+1"
+#16000
+b1110011100111001110011100111001110011100 +
+b101000000001111000000101000000001010 ,
+b101000000111100001010000001010 #
+b101000000111100001010000001010 )
+1$
+b1000011000110101 &
+b1000011000110101 *
+1%
+#20000
+0"
+#25000
+b1111101100111110110000000000001111011000 +
+b1110011100111001110011100111001110011100 !
+b1110011100111001110011100111001110011100 -
+b1000011000110101 .
+1"
+#26000
+0$
+#30000
+0"
+#35000
+b1111101100111110110000000000001111011000 !
+b1111101100111110110000000000001111011000 -
+1"
+#36000
+b0 +
+b0 ,
+b0 #
+b0 )
+b100 (
+b11111111111111111111111111101100 0
+b1111101100 /
+b11 1
+#40000
+0"
+#45000
+b0 !
+b0 -
+1"
+#50000
+0"
+#55000
+1"
+#56000
+b1111101100111110110000000000001111011000 +
+b101000000001111000000101000000001010 ,
+b101000000111100001010000001010 #
+b101000000111100001010000001010 )
+b1000 (
+b0 0
+b0 /
+b11 1
+#60000
+0"
+#65000
+b1111101100111110110000000000001111011000 !
+b1111101100111110110000000000001111011000 -
+1"
+#66000
+b1110011100111001110011100111001110011100 +
+b0 .
+b0 !
+b0 -
+0%
+#69000
+b1100 (
+b11 1
+#70000
+0"
+#75000
+1"
+#76000
+1$
+1%
+#80000
+0"
+#85000
+b1111101100111110110000000000001111011000 +
+b1000011000110101 .
+b1110011100111001110011100111001110011100 !
+b1110011100111001110011100111001110011100 -
+1"
+#86000
+0$
+#90000
+0"
+#95000
+b1111101100111110110000000000001111011000 !
+b1111101100111110110000000000001111011000 -
+1"
+#96000
+b10000 (
+b11111111111111111111111111101100 0
+b1111101100 /
+b11 1
