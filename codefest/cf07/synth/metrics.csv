@@ -1,0 +1,2 @@
+design,tool,pdk,scl,clock_period_ns,num_cells,area_um2,sequential_cells,sequential_area_um2,sequential_frac,sta_wns_ns,sta_tns_ns,sta_hold_wns_ns,sta_setup_vio_count,sta_status,sta_corner,notes
+compute_core,yosys-0.49+3+openroad-opensta,sky130A,sky130_fd_sc_hd,2.0,2700,31264.985600,349,7423.369600,0.237,-19.652598,-1026.790330,0.207624,336,violated,nom_tt_025C_1v80,"OpenROAD/OpenSTA pre-PnR formal STA; worst corner (ss 100C): WNS=-41.050 ns; fast corner (ff -40C): WNS=-11.234 ns; hold met all corners"

@@ -1,0 +1,2711 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.49+3 (git sha1 3d35f367c, clang++ 18.1.8 -fPIC -O3)
+[TCL: yosys -import] Command name collision: found pre-existing command `cd' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `eval' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `exec' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `read' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `trace' -> skip.
+
+1. Executing Liberty frontend: /home/amogh23/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+Imported 428 cell types from liberty file.
+
+2. Executing Verilog-2005 frontend: /mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv
+Parsing SystemVerilog input from `/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv' to AST representation.
+Generating RTLIL representation for module `\compute_core'.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \compute_core
+
+3.2. Analyzing design hierarchy..
+Top module:  \compute_core
+Removed 0 unused modules.
+Renaming module compute_core to compute_core.
+
+4. Generating Graphviz representation of design.
+Writing dot description to `/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/runs/RUN_2026-05-14_09-52-45/06-yosys-synthesis/hierarchy.dot'.
+Dumping module compute_core to page 1.
+
+5. Executing TRIBUF pass.
+
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1. Analyzing design hierarchy..
+Top module:  \compute_core
+
+6.2. Analyzing design hierarchy..
+Top module:  \compute_core
+Removed 0 unused modules.
+
+7. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed 1 dead cases from process $proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9 in module compute_core.
+Marked 47 switch rules as full_case in process $proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9 in module compute_core.
+Removed a total of 1 dead cases.
+
+9. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 53 assignments to connections.
+
+10. Executing PROC_INIT pass (extract init attributes).
+
+11. Executing PROC_ARST pass (detect async resets in processes).
+
+12. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~48 debug messages>
+
+13. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+     1/242: $5\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.$result[15:0]$344
+     2/242: $5\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.e16w[7:0]$345
+     3/242: $4\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.$result[15:0]$341
+     4/242: $4\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.e16w[7:0]$342
+     5/242: $3\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.$result[15:0]$338
+     6/242: $3\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.e16w[7:0]$339
+     7/242: $8\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.$result[31:0]$332
+     8/242: $9\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er[7:0]$333
+     9/242: $31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329
+    10/242: $30\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$328
+    11/242: $29\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$327
+    12/242: $28\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$326
+    13/242: $27\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$325
+    14/242: $26\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$324
+    15/242: $25\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$323
+    16/242: $24\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$322
+    17/242: $23\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$321
+    18/242: $22\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$320
+    19/242: $21\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$319
+    20/242: $20\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$318
+    21/242: $19\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$317
+    22/242: $18\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$316
+    23/242: $17\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$315
+    24/242: $16\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$314
+    25/242: $15\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$313
+    26/242: $14\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$312
+    27/242: $13\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$311
+    28/242: $12\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$310
+    29/242: $11\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$309
+    30/242: $10\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$308
+    31/242: $9\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$307
+    32/242: $8\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$306
+    33/242: $7\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.$result[31:0]$299
+    34/242: $7\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.x[23:0]$305
+    35/242: $7\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$304
+    36/242: $8\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mr[22:0]$303
+    37/242: $7\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.lz[4:0]$302
+    38/242: $7\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_shifted[23:0]$301
+    39/242: $8\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er[7:0]$300
+    40/242: $7\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er[7:0]$294
+    41/242: $7\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mr[22:0]$295
+    42/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.$result[31:0]$284
+    43/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mr[22:0]$290
+    44/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er[7:0]$285
+    45/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sum25[24:0]$286
+    46/242: $6\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.x[23:0]$292
+    47/242: $6\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$291
+    48/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.lz[4:0]$289
+    49/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_shifted[23:0]$288
+    50/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff24[23:0]$287
+    51/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_shifted[23:0]$281
+    52/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ss[0:0]$274
+    53/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_m[23:0]$278
+    54/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ess[7:0]$276
+    55/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sl[0:0]$273
+    56/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ml[23:0]$277
+    57/242: $6\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.el[7:0]$275
+    58/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.$result[31:0]$251
+    59/242: $5\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.x[23:0]$267
+    60/242: $5\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$266
+    61/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mr[22:0]$265
+    62/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.lz[4:0]$264
+    63/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_shifted[23:0]$263
+    64/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff24[23:0]$262
+    65/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sum25[24:0]$261
+    66/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_e[7:0]$260
+    67/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_shifted[23:0]$259
+    68/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_m[23:0]$258
+    69/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ml[23:0]$257
+    70/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er[7:0]$256
+    71/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ess[7:0]$255
+    72/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.el[7:0]$254
+    73/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ss[0:0]$253
+    74/242: $5\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sl[0:0]$252
+    75/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.$result[31:0]$233
+    76/242: $4\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.x[23:0]$249
+    77/242: $4\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$248
+    78/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mr[22:0]$247
+    79/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.lz[4:0]$246
+    80/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_shifted[23:0]$245
+    81/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff24[23:0]$244
+    82/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sum25[24:0]$243
+    83/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_e[7:0]$242
+    84/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_shifted[23:0]$241
+    85/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_m[23:0]$240
+    86/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ml[23:0]$239
+    87/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er[7:0]$238
+    88/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ess[7:0]$237
+    89/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.el[7:0]$236
+    90/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ss[0:0]$235
+    91/242: $4\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sl[0:0]$234
+    92/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.$result[31:0]$215
+    93/242: $3\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.x[23:0]$231
+    94/242: $3\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$230
+    95/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mr[22:0]$229
+    96/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.lz[4:0]$228
+    97/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_shifted[23:0]$227
+    98/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff24[23:0]$226
+    99/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sum25[24:0]$225
+   100/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_e[7:0]$224
+   101/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_shifted[23:0]$223
+   102/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_m[23:0]$222
+   103/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ml[23:0]$221
+   104/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er[7:0]$220
+   105/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ess[7:0]$219
+   106/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.el[7:0]$218
+   107/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ss[0:0]$217
+   108/242: $3\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sl[0:0]$216
+   109/242: $4\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.er[7:0]$208
+   110/242: $4\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mr[22:0]$209
+   111/242: $3\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.$result[31:0]$199
+   112/242: $3\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mr[22:0]$205
+   113/242: $3\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.er[7:0]$204
+   114/242: $3\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.es[9:0]$203
+   115/242: $3\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mp[47:0]$202
+   116/242: $3\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mb[23:0]$201
+   117/242: $3\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.ma[23:0]$200
+   118/242: $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$192
+   119/242: $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.e32[7:0]$193
+   120/242: $3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$189
+   121/242: $3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.e32[7:0]$190
+   122/242: $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$184
+   123/242: $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.e32[7:0]$185
+   124/242: $3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$181
+   125/242: $3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.e32[7:0]$182
+   126/242: $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176
+   127/242: $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_DATA[15:0]$175
+   128/242: $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_ADDR[3:0]$174
+   129/242: $3$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_EN[15:0]$173
+   130/242: $3$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_DATA[15:0]$172
+   131/242: $3$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_ADDR[3:0]$171
+   132/242: $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169
+   133/242: $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_DATA[15:0]$168
+   134/242: $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_ADDR[3:0]$167
+   135/242: $2$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_EN[15:0]$166
+   136/242: $2$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_DATA[15:0]$165
+   137/242: $2$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_ADDR[3:0]$164
+   138/242: $2\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.e16w[7:0]$163
+   139/242: $2\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.e32[7:0]$162
+   140/242: $2\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.f32[31:0]$161
+   141/242: $2\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.$result[15:0]$160
+   142/242: $2\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.x[23:0]$159
+   143/242: $2\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$158
+   144/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mr[22:0]$157
+   145/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.lz[4:0]$156
+   146/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_shifted[23:0]$155
+   147/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff24[23:0]$154
+   148/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sum25[24:0]$153
+   149/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_e[7:0]$152
+   150/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_shifted[23:0]$151
+   151/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_m[23:0]$150
+   152/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ml[23:0]$149
+   153/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mb[23:0]$148
+   154/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ma[23:0]$147
+   155/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er[7:0]$146
+   156/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ess[7:0]$145
+   157/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.el[7:0]$144
+   158/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.eb[7:0]$143
+   159/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ea[7:0]$142
+   160/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ss[0:0]$141
+   161/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sl[0:0]$140
+   162/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sb[0:0]$139
+   163/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sa[0:0]$138
+   164/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.b[31:0]$137
+   165/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.a[31:0]$136
+   166/242: $2\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.$result[31:0]$135
+   167/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mr[22:0]$134
+   168/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.er[7:0]$133
+   169/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.es[9:0]$132
+   170/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mp[47:0]$131
+   171/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mb[23:0]$130
+   172/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.ma[23:0]$129
+   173/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.eb[7:0]$128
+   174/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.ea[7:0]$127
+   175/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.sr[0:0]$126
+   176/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.b[31:0]$125
+   177/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.a[31:0]$124
+   178/242: $2\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.$result[31:0]$123
+   179/242: $2\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.e32[7:0]$122
+   180/242: $2\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.f16[15:0]$121
+   181/242: $2\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$120
+   182/242: $2\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.e32[7:0]$119
+   183/242: $2\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.f16[15:0]$118
+   184/242: $2\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$117
+   185/242: $0\done[0:0]
+   186/242: $1$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$116
+   187/242: $1$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_DATA[15:0]$115
+   188/242: $1$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_ADDR[3:0]$114
+   189/242: $1$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_EN[15:0]$113
+   190/242: $1$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_DATA[15:0]$112
+   191/242: $1$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_ADDR[3:0]$111
+   192/242: $1\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.e16w[7:0]$110
+   193/242: $1\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.e32[7:0]$109
+   194/242: $1\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.f32[31:0]$108
+   195/242: $1\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.$result[15:0]$107
+   196/242: $1\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.x[23:0]$106
+   197/242: $1\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$105
+   198/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mr[22:0]$104
+   199/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.lz[4:0]$103
+   200/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_shifted[23:0]$102
+   201/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff24[23:0]$101
+   202/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sum25[24:0]$100
+   203/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_e[7:0]$99
+   204/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_shifted[23:0]$98
+   205/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_m[23:0]$97
+   206/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ml[23:0]$96
+   207/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mb[23:0]$95
+   208/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ma[23:0]$94
+   209/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er[7:0]$93
+   210/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ess[7:0]$92
+   211/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.el[7:0]$91
+   212/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.eb[7:0]$90
+   213/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ea[7:0]$89
+   214/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ss[0:0]$88
+   215/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sl[0:0]$87
+   216/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sb[0:0]$86
+   217/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sa[0:0]$85
+   218/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.b[31:0]$84
+   219/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.a[31:0]$83
+   220/242: $1\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.$result[31:0]$82
+   221/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mr[22:0]$81
+   222/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.er[7:0]$80
+   223/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.es[9:0]$79
+   224/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mp[47:0]$78
+   225/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mb[23:0]$77
+   226/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.ma[23:0]$76
+   227/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.eb[7:0]$75
+   228/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.ea[7:0]$74
+   229/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.sr[0:0]$73
+   230/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.b[31:0]$72
+   231/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.a[31:0]$71
+   232/242: $1\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.$result[31:0]$70
+   233/242: $1\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.e32[7:0]$69
+   234/242: $1\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.f16[15:0]$68
+   235/242: $1\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$67
+   236/242: $1\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.e32[7:0]$66
+   237/242: $1\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.f16[15:0]$65
+   238/242: $1\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$64
+   239/242: $0\result_reg[15:0]
+   240/242: $0\accum[31:0]
+   241/242: $0\cnt[3:0]
+   242/242: $0\state[1:0]
+
+14. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+15. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\compute_core.\done' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3826' with positive edge clock.
+Creating register for signal `\compute_core.\state' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3827' with positive edge clock.
+Creating register for signal `\compute_core.\cnt' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3828' with positive edge clock.
+Creating register for signal `\compute_core.\accum' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3829' with positive edge clock.
+Creating register for signal `\compute_core.\result_reg' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3830' with positive edge clock.
+Creating register for signal `\compute_core.\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3831' with positive edge clock.
+Creating register for signal `\compute_core.\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.f16' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3832' with positive edge clock.
+Creating register for signal `\compute_core.\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.e32' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3833' with positive edge clock.
+Creating register for signal `\compute_core.\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3834' with positive edge clock.
+Creating register for signal `\compute_core.\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.f16' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3835' with positive edge clock.
+Creating register for signal `\compute_core.\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.e32' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3836' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.$result' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3837' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.a' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3838' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.b' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3839' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.sr' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3840' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.ea' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3841' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.eb' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3842' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.ma' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3843' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mb' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3844' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mp' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3845' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.es' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3846' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.er' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3847' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_mul$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$3.mr' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3848' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.$result' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3849' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.a' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3850' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.b' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3851' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sa' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3852' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sb' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3853' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sl' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3854' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ss' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3855' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ea' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3856' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.eb' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3857' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.el' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3858' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ess' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3859' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.er' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3860' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ma' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3861' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mb' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3862' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ml' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3863' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_m' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3864' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.ms_shifted' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3865' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_e' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3866' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.sum25' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3867' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff24' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3868' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.diff_shifted' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3869' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.lz' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3870' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_add$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:308$4.mr' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3871' with positive edge clock.
+Creating register for signal `\compute_core.\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3872' with positive edge clock.
+Creating register for signal `\compute_core.\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.x' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3873' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.$result' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3874' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.f32' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3875' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.e32' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3876' with positive edge clock.
+Creating register for signal `\compute_core.\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.e16w' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3877' with positive edge clock.
+Creating register for signal `\compute_core.$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_ADDR' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3878' with positive edge clock.
+Creating register for signal `\compute_core.$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_DATA' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3879' with positive edge clock.
+Creating register for signal `\compute_core.$memwr$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:292$7_EN' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3880' with positive edge clock.
+Creating register for signal `\compute_core.$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_ADDR' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3881' with positive edge clock.
+Creating register for signal `\compute_core.$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_DATA' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3882' with positive edge clock.
+Creating register for signal `\compute_core.$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN' using process `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+  created $dff cell `$procdff$3883' with positive edge clock.
+
+16. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+17. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 48 empty switches in `\compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+Removing empty process `compute_core.$proc$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:269$9'.
+Cleaned up 48 empty switches.
+
+18. Executing CHECK pass (checking for obvious problems).
+Checking module compute_core...
+Found and reported 0 problems.
+
+19. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+<suppressed ~303 debug messages>
+
+20. Executing FLATTEN pass (flatten design).
+
+21. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+22. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 793 unused cells and 2002 unused wires.
+<suppressed ~835 debug messages>
+
+23. Executing OPT pass (performing simple optimizations).
+
+23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+<suppressed ~240 debug messages>
+Removed a total of 80 cells.
+
+23.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1103.
+    dead port 1/2 on $mux $procmux$1106.
+    dead port 1/2 on $mux $procmux$1109.
+    dead port 1/2 on $mux $procmux$1112.
+    dead port 1/2 on $mux $procmux$1115.
+    dead port 2/2 on $mux $procmux$1117.
+    dead port 2/2 on $mux $procmux$1120.
+    dead port 1/2 on $mux $procmux$1127.
+    dead port 1/2 on $mux $procmux$1130.
+    dead port 1/2 on $mux $procmux$1133.
+    dead port 1/2 on $mux $procmux$1136.
+    dead port 1/2 on $mux $procmux$1139.
+    dead port 1/2 on $mux $procmux$1142.
+    dead port 1/2 on $mux $procmux$1145.
+    dead port 1/2 on $mux $procmux$1148.
+    dead port 1/2 on $mux $procmux$1151.
+    dead port 1/2 on $mux $procmux$1154.
+    dead port 1/2 on $mux $procmux$1157.
+    dead port 1/2 on $mux $procmux$1160.
+    dead port 1/2 on $mux $procmux$1163.
+    dead port 1/2 on $mux $procmux$1166.
+    dead port 1/2 on $mux $procmux$1169.
+    dead port 1/2 on $mux $procmux$1172.
+    dead port 1/2 on $mux $procmux$1175.
+    dead port 1/2 on $mux $procmux$1178.
+    dead port 1/2 on $mux $procmux$1181.
+    dead port 1/2 on $mux $procmux$1184.
+    dead port 2/2 on $mux $procmux$1186.
+    dead port 2/2 on $mux $procmux$1189.
+    dead port 1/2 on $mux $procmux$1196.
+    dead port 1/2 on $mux $procmux$1199.
+    dead port 1/2 on $mux $procmux$1202.
+    dead port 1/2 on $mux $procmux$1205.
+    dead port 1/2 on $mux $procmux$1208.
+    dead port 1/2 on $mux $procmux$1211.
+    dead port 1/2 on $mux $procmux$1214.
+    dead port 1/2 on $mux $procmux$1217.
+    dead port 1/2 on $mux $procmux$1220.
+    dead port 1/2 on $mux $procmux$1223.
+    dead port 1/2 on $mux $procmux$1226.
+    dead port 1/2 on $mux $procmux$1229.
+    dead port 1/2 on $mux $procmux$1232.
+    dead port 1/2 on $mux $procmux$1235.
+    dead port 1/2 on $mux $procmux$1238.
+    dead port 1/2 on $mux $procmux$1241.
+    dead port 1/2 on $mux $procmux$1244.
+    dead port 1/2 on $mux $procmux$1247.
+    dead port 1/2 on $mux $procmux$1250.
+    dead port 2/2 on $mux $procmux$1252.
+    dead port 2/2 on $mux $procmux$1255.
+    dead port 1/2 on $mux $procmux$1262.
+    dead port 1/2 on $mux $procmux$1265.
+    dead port 1/2 on $mux $procmux$1268.
+    dead port 1/2 on $mux $procmux$1271.
+    dead port 1/2 on $mux $procmux$1274.
+    dead port 1/2 on $mux $procmux$1277.
+    dead port 1/2 on $mux $procmux$1280.
+    dead port 1/2 on $mux $procmux$1283.
+    dead port 1/2 on $mux $procmux$1286.
+    dead port 1/2 on $mux $procmux$1289.
+    dead port 1/2 on $mux $procmux$1292.
+    dead port 1/2 on $mux $procmux$1295.
+    dead port 1/2 on $mux $procmux$1298.
+    dead port 1/2 on $mux $procmux$1301.
+    dead port 1/2 on $mux $procmux$1304.
+    dead port 1/2 on $mux $procmux$1307.
+    dead port 1/2 on $mux $procmux$1310.
+    dead port 1/2 on $mux $procmux$1313.
+    dead port 2/2 on $mux $procmux$1315.
+    dead port 2/2 on $mux $procmux$1318.
+    dead port 1/2 on $mux $procmux$1325.
+    dead port 1/2 on $mux $procmux$1328.
+    dead port 1/2 on $mux $procmux$1331.
+    dead port 1/2 on $mux $procmux$1334.
+    dead port 1/2 on $mux $procmux$1337.
+    dead port 1/2 on $mux $procmux$1340.
+    dead port 1/2 on $mux $procmux$1343.
+    dead port 1/2 on $mux $procmux$1346.
+    dead port 1/2 on $mux $procmux$1349.
+    dead port 1/2 on $mux $procmux$1352.
+    dead port 1/2 on $mux $procmux$1355.
+    dead port 1/2 on $mux $procmux$1358.
+    dead port 1/2 on $mux $procmux$1361.
+    dead port 1/2 on $mux $procmux$1364.
+    dead port 1/2 on $mux $procmux$1367.
+    dead port 1/2 on $mux $procmux$1370.
+    dead port 1/2 on $mux $procmux$1373.
+    dead port 2/2 on $mux $procmux$1375.
+    dead port 2/2 on $mux $procmux$1378.
+    dead port 1/2 on $mux $procmux$1385.
+    dead port 1/2 on $mux $procmux$1388.
+    dead port 1/2 on $mux $procmux$1391.
+    dead port 1/2 on $mux $procmux$1394.
+    dead port 1/2 on $mux $procmux$1397.
+    dead port 1/2 on $mux $procmux$1400.
+    dead port 1/2 on $mux $procmux$1403.
+    dead port 1/2 on $mux $procmux$1406.
+    dead port 1/2 on $mux $procmux$1409.
+    dead port 1/2 on $mux $procmux$1412.
+    dead port 1/2 on $mux $procmux$1415.
+    dead port 1/2 on $mux $procmux$1418.
+    dead port 1/2 on $mux $procmux$1421.
+    dead port 1/2 on $mux $procmux$1424.
+    dead port 1/2 on $mux $procmux$1427.
+    dead port 1/2 on $mux $procmux$1430.
+    dead port 2/2 on $mux $procmux$1432.
+    dead port 2/2 on $mux $procmux$1435.
+    dead port 1/2 on $mux $procmux$1442.
+    dead port 1/2 on $mux $procmux$1445.
+    dead port 1/2 on $mux $procmux$1448.
+    dead port 1/2 on $mux $procmux$1451.
+    dead port 1/2 on $mux $procmux$1454.
+    dead port 1/2 on $mux $procmux$1457.
+    dead port 1/2 on $mux $procmux$1460.
+    dead port 1/2 on $mux $procmux$1463.
+    dead port 1/2 on $mux $procmux$1466.
+    dead port 1/2 on $mux $procmux$1469.
+    dead port 1/2 on $mux $procmux$1472.
+    dead port 1/2 on $mux $procmux$1475.
+    dead port 1/2 on $mux $procmux$1478.
+    dead port 1/2 on $mux $procmux$1481.
+    dead port 1/2 on $mux $procmux$1484.
+    dead port 2/2 on $mux $procmux$1486.
+    dead port 2/2 on $mux $procmux$1489.
+    dead port 1/2 on $mux $procmux$1496.
+    dead port 1/2 on $mux $procmux$1499.
+    dead port 1/2 on $mux $procmux$1502.
+    dead port 1/2 on $mux $procmux$1505.
+    dead port 1/2 on $mux $procmux$1508.
+    dead port 1/2 on $mux $procmux$1511.
+    dead port 1/2 on $mux $procmux$1514.
+    dead port 1/2 on $mux $procmux$1517.
+    dead port 1/2 on $mux $procmux$1520.
+    dead port 1/2 on $mux $procmux$1523.
+    dead port 1/2 on $mux $procmux$1526.
+    dead port 1/2 on $mux $procmux$1529.
+    dead port 1/2 on $mux $procmux$1532.
+    dead port 1/2 on $mux $procmux$1535.
+    dead port 2/2 on $mux $procmux$1537.
+    dead port 2/2 on $mux $procmux$1540.
+    dead port 1/2 on $mux $procmux$1547.
+    dead port 1/2 on $mux $procmux$1550.
+    dead port 1/2 on $mux $procmux$1553.
+    dead port 1/2 on $mux $procmux$1556.
+    dead port 1/2 on $mux $procmux$1559.
+    dead port 1/2 on $mux $procmux$1562.
+    dead port 1/2 on $mux $procmux$1565.
+    dead port 1/2 on $mux $procmux$1568.
+    dead port 1/2 on $mux $procmux$1571.
+    dead port 1/2 on $mux $procmux$1574.
+    dead port 1/2 on $mux $procmux$1577.
+    dead port 1/2 on $mux $procmux$1580.
+    dead port 1/2 on $mux $procmux$1583.
+    dead port 2/2 on $mux $procmux$1585.
+    dead port 2/2 on $mux $procmux$1588.
+    dead port 1/2 on $mux $procmux$1595.
+    dead port 1/2 on $mux $procmux$1598.
+    dead port 1/2 on $mux $procmux$1601.
+    dead port 1/2 on $mux $procmux$1604.
+    dead port 1/2 on $mux $procmux$1607.
+    dead port 1/2 on $mux $procmux$1610.
+    dead port 1/2 on $mux $procmux$1613.
+    dead port 1/2 on $mux $procmux$1616.
+    dead port 1/2 on $mux $procmux$1619.
+    dead port 1/2 on $mux $procmux$1622.
+    dead port 1/2 on $mux $procmux$1625.
+    dead port 1/2 on $mux $procmux$1628.
+    dead port 2/2 on $mux $procmux$1630.
+    dead port 2/2 on $mux $procmux$1633.
+    dead port 1/2 on $mux $procmux$1640.
+    dead port 1/2 on $mux $procmux$1643.
+    dead port 1/2 on $mux $procmux$1646.
+    dead port 1/2 on $mux $procmux$1649.
+    dead port 1/2 on $mux $procmux$1652.
+    dead port 1/2 on $mux $procmux$1655.
+    dead port 1/2 on $mux $procmux$1658.
+    dead port 1/2 on $mux $procmux$1661.
+    dead port 1/2 on $mux $procmux$1664.
+    dead port 1/2 on $mux $procmux$1667.
+    dead port 1/2 on $mux $procmux$1670.
+    dead port 2/2 on $mux $procmux$1672.
+    dead port 2/2 on $mux $procmux$1675.
+    dead port 1/2 on $mux $procmux$1682.
+    dead port 1/2 on $mux $procmux$1685.
+    dead port 1/2 on $mux $procmux$1688.
+    dead port 1/2 on $mux $procmux$1691.
+    dead port 1/2 on $mux $procmux$1694.
+    dead port 1/2 on $mux $procmux$1697.
+    dead port 1/2 on $mux $procmux$1700.
+    dead port 1/2 on $mux $procmux$1703.
+    dead port 1/2 on $mux $procmux$1706.
+    dead port 1/2 on $mux $procmux$1709.
+    dead port 2/2 on $mux $procmux$1711.
+    dead port 2/2 on $mux $procmux$1714.
+    dead port 1/2 on $mux $procmux$1721.
+    dead port 1/2 on $mux $procmux$1724.
+    dead port 1/2 on $mux $procmux$1727.
+    dead port 1/2 on $mux $procmux$1730.
+    dead port 1/2 on $mux $procmux$1733.
+    dead port 1/2 on $mux $procmux$1736.
+    dead port 1/2 on $mux $procmux$1739.
+    dead port 1/2 on $mux $procmux$1742.
+    dead port 1/2 on $mux $procmux$1745.
+    dead port 2/2 on $mux $procmux$1747.
+    dead port 2/2 on $mux $procmux$1750.
+    dead port 1/2 on $mux $procmux$1757.
+    dead port 1/2 on $mux $procmux$1760.
+    dead port 1/2 on $mux $procmux$1763.
+    dead port 1/2 on $mux $procmux$1766.
+    dead port 1/2 on $mux $procmux$1769.
+    dead port 1/2 on $mux $procmux$1772.
+    dead port 1/2 on $mux $procmux$1775.
+    dead port 1/2 on $mux $procmux$1778.
+    dead port 2/2 on $mux $procmux$1780.
+    dead port 2/2 on $mux $procmux$1783.
+    dead port 1/2 on $mux $procmux$1790.
+    dead port 1/2 on $mux $procmux$1793.
+    dead port 1/2 on $mux $procmux$1796.
+    dead port 1/2 on $mux $procmux$1799.
+    dead port 1/2 on $mux $procmux$1802.
+    dead port 1/2 on $mux $procmux$1805.
+    dead port 1/2 on $mux $procmux$1808.
+    dead port 2/2 on $mux $procmux$1810.
+    dead port 2/2 on $mux $procmux$1813.
+    dead port 1/2 on $mux $procmux$1820.
+    dead port 1/2 on $mux $procmux$1823.
+    dead port 1/2 on $mux $procmux$1826.
+    dead port 1/2 on $mux $procmux$1829.
+    dead port 1/2 on $mux $procmux$1832.
+    dead port 1/2 on $mux $procmux$1835.
+    dead port 2/2 on $mux $procmux$1837.
+    dead port 2/2 on $mux $procmux$1840.
+    dead port 1/2 on $mux $procmux$1871.
+    dead port 1/2 on $mux $procmux$1874.
+    dead port 1/2 on $mux $procmux$1877.
+    dead port 1/2 on $mux $procmux$1880.
+    dead port 2/2 on $mux $procmux$1882.
+    dead port 2/2 on $mux $procmux$1885.
+    dead port 2/2 on $mux $procmux$2018.
+    dead port 1/2 on $mux $procmux$2021.
+    dead port 1/2 on $mux $procmux$2024.
+    dead port 1/2 on $mux $procmux$2027.
+    dead port 2/2 on $mux $procmux$2029.
+    dead port 2/2 on $mux $procmux$2032.
+    dead port 2/2 on $mux $procmux$2039.
+    dead port 1/2 on $mux $procmux$2042.
+    dead port 1/2 on $mux $procmux$2045.
+    dead port 1/2 on $mux $procmux$2048.
+    dead port 2/2 on $mux $procmux$2050.
+    dead port 2/2 on $mux $procmux$2053.
+    dead port 1/2 on $mux $procmux$2060.
+    dead port 1/2 on $mux $procmux$2063.
+    dead port 1/2 on $mux $procmux$2066.
+    dead port 2/2 on $mux $procmux$2068.
+    dead port 2/2 on $mux $procmux$2071.
+    dead port 1/2 on $mux $procmux$2348.
+    dead port 1/2 on $mux $procmux$2351.
+    dead port 2/2 on $mux $procmux$2353.
+    dead port 2/2 on $mux $procmux$2356.
+    dead port 1/2 on $mux $procmux$2603.
+    dead port 2/2 on $mux $procmux$2605.
+    dead port 2/2 on $mux $procmux$2608.
+    dead port 2/2 on $mux $procmux$2806.
+    dead port 2/2 on $mux $procmux$2809.
+    dead port 1/2 on $mux $procmux$2960.
+    dead port 2/2 on $mux $procmux$2962.
+    dead port 2/2 on $mux $procmux$2965.
+    dead port 1/2 on $mux $procmux$2972.
+    dead port 2/2 on $mux $procmux$2974.
+    dead port 2/2 on $mux $procmux$2977.
+    dead port 1/2 on $mux $procmux$3047.
+    dead port 2/2 on $mux $procmux$3049.
+    dead port 2/2 on $mux $procmux$3052.
+    dead port 1/2 on $mux $procmux$3089.
+    dead port 2/2 on $mux $procmux$3091.
+    dead port 2/2 on $mux $procmux$3094.
+    dead port 2/2 on $mux $procmux$3131.
+    dead port 2/2 on $mux $procmux$3134.
+    dead port 2/2 on $mux $procmux$3141.
+    dead port 2/2 on $mux $procmux$3144.
+    dead port 2/2 on $mux $procmux$3151.
+    dead port 2/2 on $mux $procmux$3154.
+    dead port 2/2 on $mux $procmux$3161.
+    dead port 2/2 on $mux $procmux$3164.
+    dead port 2/2 on $mux $procmux$3171.
+    dead port 1/2 on $mux $procmux$1001.
+    dead port 2/2 on $mux $procmux$3174.
+    dead port 2/2 on $mux $procmux$3181.
+    dead port 1/2 on $mux $procmux$1004.
+    dead port 2/2 on $mux $procmux$3184.
+    dead port 1/2 on $mux $procmux$1007.
+    dead port 1/2 on $mux $procmux$1010.
+    dead port 1/2 on $mux $procmux$1013.
+    dead port 2/2 on $mux $procmux$3192.
+    dead port 1/2 on $mux $procmux$1016.
+    dead port 2/2 on $mux $procmux$3199.
+    dead port 1/2 on $mux $procmux$1019.
+    dead port 2/2 on $mux $procmux$3206.
+    dead port 1/2 on $mux $procmux$1022.
+    dead port 1/2 on $mux $procmux$1025.
+    dead port 1/2 on $mux $procmux$1028.
+    dead port 1/2 on $mux $procmux$1031.
+    dead port 2/2 on $mux $procmux$3214.
+    dead port 1/2 on $mux $procmux$1034.
+    dead port 2/2 on $mux $procmux$3221.
+    dead port 1/2 on $mux $procmux$1037.
+    dead port 2/2 on $mux $procmux$3228.
+    dead port 1/2 on $mux $procmux$352.
+    dead port 1/2 on $mux $procmux$355.
+    dead port 2/2 on $mux $procmux$357.
+    dead port 1/2 on $mux $procmux$1040.
+    dead port 2/2 on $mux $procmux$360.
+    dead port 1/2 on $mux $procmux$1043.
+    dead port 2/2 on $mux $procmux$1045.
+    dead port 2/2 on $mux $procmux$1048.
+    dead port 1/2 on $mux $procmux$1055.
+    dead port 1/2 on $mux $procmux$380.
+    dead port 1/2 on $mux $procmux$1058.
+    dead port 1/2 on $mux $procmux$1061.
+    dead port 1/2 on $mux $procmux$1064.
+    dead port 1/2 on $mux $procmux$1067.
+    dead port 1/2 on $mux $procmux$1070.
+    dead port 2/2 on $mux $procmux$382.
+    dead port 1/2 on $mux $procmux$1073.
+    dead port 1/2 on $mux $procmux$1076.
+    dead port 2/2 on $mux $procmux$385.
+    dead port 2/2 on $mux $procmux$401.
+    dead port 1/2 on $mux $procmux$1079.
+    dead port 2/2 on $mux $procmux$404.
+    dead port 1/2 on $mux $procmux$419.
+    dead port 1/2 on $mux $procmux$422.
+    dead port 1/2 on $mux $procmux$425.
+    dead port 1/2 on $mux $procmux$428.
+    dead port 1/2 on $mux $procmux$431.
+    dead port 2/2 on $mux $procmux$433.
+    dead port 1/2 on $mux $procmux$1082.
+    dead port 2/2 on $mux $procmux$436.
+    dead port 1/2 on $mux $procmux$467.
+    dead port 1/2 on $mux $procmux$470.
+    dead port 1/2 on $mux $procmux$473.
+    dead port 1/2 on $mux $procmux$476.
+    dead port 1/2 on $mux $procmux$479.
+    dead port 1/2 on $mux $procmux$482.
+    dead port 1/2 on $mux $procmux$485.
+    dead port 1/2 on $mux $procmux$488.
+    dead port 1/2 on $mux $procmux$491.
+    dead port 1/2 on $mux $procmux$494.
+    dead port 1/2 on $mux $procmux$497.
+    dead port 1/2 on $mux $procmux$500.
+    dead port 1/2 on $mux $procmux$503.
+    dead port 1/2 on $mux $procmux$506.
+    dead port 1/2 on $mux $procmux$509.
+    dead port 1/2 on $mux $procmux$512.
+    dead port 1/2 on $mux $procmux$515.
+    dead port 1/2 on $mux $procmux$518.
+    dead port 1/2 on $mux $procmux$521.
+    dead port 1/2 on $mux $procmux$524.
+    dead port 1/2 on $mux $procmux$527.
+    dead port 1/2 on $mux $procmux$530.
+    dead port 1/2 on $mux $procmux$533.
+    dead port 1/2 on $mux $procmux$536.
+    dead port 1/2 on $mux $procmux$539.
+    dead port 1/2 on $mux $procmux$542.
+    dead port 1/2 on $mux $procmux$545.
+    dead port 1/2 on $mux $procmux$548.
+    dead port 2/2 on $mux $procmux$550.
+    dead port 1/2 on $mux $procmux$1085.
+    dead port 2/2 on $mux $procmux$553.
+    dead port 1/2 on $mux $procmux$560.
+    dead port 1/2 on $mux $procmux$563.
+    dead port 1/2 on $mux $procmux$566.
+    dead port 1/2 on $mux $procmux$569.
+    dead port 1/2 on $mux $procmux$572.
+    dead port 1/2 on $mux $procmux$575.
+    dead port 1/2 on $mux $procmux$578.
+    dead port 1/2 on $mux $procmux$581.
+    dead port 1/2 on $mux $procmux$584.
+    dead port 1/2 on $mux $procmux$587.
+    dead port 1/2 on $mux $procmux$590.
+    dead port 1/2 on $mux $procmux$593.
+    dead port 1/2 on $mux $procmux$596.
+    dead port 1/2 on $mux $procmux$599.
+    dead port 1/2 on $mux $procmux$602.
+    dead port 1/2 on $mux $procmux$605.
+    dead port 1/2 on $mux $procmux$608.
+    dead port 1/2 on $mux $procmux$611.
+    dead port 1/2 on $mux $procmux$614.
+    dead port 1/2 on $mux $procmux$617.
+    dead port 1/2 on $mux $procmux$620.
+    dead port 1/2 on $mux $procmux$623.
+    dead port 1/2 on $mux $procmux$626.
+    dead port 1/2 on $mux $procmux$629.
+    dead port 1/2 on $mux $procmux$632.
+    dead port 1/2 on $mux $procmux$635.
+    dead port 1/2 on $mux $procmux$638.
+    dead port 2/2 on $mux $procmux$640.
+    dead port 1/2 on $mux $procmux$1088.
+    dead port 2/2 on $mux $procmux$643.
+    dead port 1/2 on $mux $procmux$650.
+    dead port 1/2 on $mux $procmux$653.
+    dead port 1/2 on $mux $procmux$656.
+    dead port 1/2 on $mux $procmux$659.
+    dead port 1/2 on $mux $procmux$662.
+    dead port 1/2 on $mux $procmux$665.
+    dead port 1/2 on $mux $procmux$668.
+    dead port 1/2 on $mux $procmux$671.
+    dead port 1/2 on $mux $procmux$674.
+    dead port 1/2 on $mux $procmux$677.
+    dead port 1/2 on $mux $procmux$680.
+    dead port 1/2 on $mux $procmux$683.
+    dead port 1/2 on $mux $procmux$686.
+    dead port 1/2 on $mux $procmux$689.
+    dead port 1/2 on $mux $procmux$692.
+    dead port 1/2 on $mux $procmux$695.
+    dead port 1/2 on $mux $procmux$698.
+    dead port 1/2 on $mux $procmux$701.
+    dead port 1/2 on $mux $procmux$704.
+    dead port 1/2 on $mux $procmux$707.
+    dead port 1/2 on $mux $procmux$710.
+    dead port 1/2 on $mux $procmux$713.
+    dead port 1/2 on $mux $procmux$716.
+    dead port 1/2 on $mux $procmux$719.
+    dead port 1/2 on $mux $procmux$722.
+    dead port 1/2 on $mux $procmux$725.
+    dead port 2/2 on $mux $procmux$727.
+    dead port 1/2 on $mux $procmux$1091.
+    dead port 2/2 on $mux $procmux$730.
+    dead port 1/2 on $mux $procmux$737.
+    dead port 1/2 on $mux $procmux$740.
+    dead port 1/2 on $mux $procmux$743.
+    dead port 1/2 on $mux $procmux$746.
+    dead port 1/2 on $mux $procmux$749.
+    dead port 1/2 on $mux $procmux$752.
+    dead port 1/2 on $mux $procmux$755.
+    dead port 1/2 on $mux $procmux$758.
+    dead port 1/2 on $mux $procmux$761.
+    dead port 1/2 on $mux $procmux$764.
+    dead port 1/2 on $mux $procmux$767.
+    dead port 1/2 on $mux $procmux$770.
+    dead port 1/2 on $mux $procmux$773.
+    dead port 1/2 on $mux $procmux$776.
+    dead port 1/2 on $mux $procmux$779.
+    dead port 1/2 on $mux $procmux$782.
+    dead port 1/2 on $mux $procmux$785.
+    dead port 1/2 on $mux $procmux$788.
+    dead port 1/2 on $mux $procmux$791.
+    dead port 1/2 on $mux $procmux$794.
+    dead port 1/2 on $mux $procmux$797.
+    dead port 1/2 on $mux $procmux$800.
+    dead port 1/2 on $mux $procmux$803.
+    dead port 1/2 on $mux $procmux$806.
+    dead port 1/2 on $mux $procmux$809.
+    dead port 2/2 on $mux $procmux$811.
+    dead port 1/2 on $mux $procmux$1094.
+    dead port 2/2 on $mux $procmux$814.
+    dead port 1/2 on $mux $procmux$821.
+    dead port 1/2 on $mux $procmux$824.
+    dead port 1/2 on $mux $procmux$827.
+    dead port 1/2 on $mux $procmux$830.
+    dead port 1/2 on $mux $procmux$833.
+    dead port 1/2 on $mux $procmux$836.
+    dead port 1/2 on $mux $procmux$839.
+    dead port 1/2 on $mux $procmux$842.
+    dead port 1/2 on $mux $procmux$845.
+    dead port 1/2 on $mux $procmux$848.
+    dead port 1/2 on $mux $procmux$851.
+    dead port 1/2 on $mux $procmux$854.
+    dead port 1/2 on $mux $procmux$857.
+    dead port 1/2 on $mux $procmux$860.
+    dead port 1/2 on $mux $procmux$863.
+    dead port 1/2 on $mux $procmux$866.
+    dead port 1/2 on $mux $procmux$869.
+    dead port 1/2 on $mux $procmux$872.
+    dead port 1/2 on $mux $procmux$875.
+    dead port 1/2 on $mux $procmux$878.
+    dead port 1/2 on $mux $procmux$881.
+    dead port 1/2 on $mux $procmux$884.
+    dead port 1/2 on $mux $procmux$887.
+    dead port 1/2 on $mux $procmux$890.
+    dead port 2/2 on $mux $procmux$892.
+    dead port 1/2 on $mux $procmux$1097.
+    dead port 2/2 on $mux $procmux$895.
+    dead port 1/2 on $mux $procmux$902.
+    dead port 1/2 on $mux $procmux$905.
+    dead port 1/2 on $mux $procmux$908.
+    dead port 1/2 on $mux $procmux$911.
+    dead port 1/2 on $mux $procmux$914.
+    dead port 1/2 on $mux $procmux$917.
+    dead port 1/2 on $mux $procmux$920.
+    dead port 1/2 on $mux $procmux$923.
+    dead port 1/2 on $mux $procmux$926.
+    dead port 1/2 on $mux $procmux$929.
+    dead port 1/2 on $mux $procmux$932.
+    dead port 1/2 on $mux $procmux$935.
+    dead port 1/2 on $mux $procmux$938.
+    dead port 1/2 on $mux $procmux$941.
+    dead port 1/2 on $mux $procmux$944.
+    dead port 1/2 on $mux $procmux$947.
+    dead port 1/2 on $mux $procmux$950.
+    dead port 1/2 on $mux $procmux$953.
+    dead port 1/2 on $mux $procmux$956.
+    dead port 1/2 on $mux $procmux$959.
+    dead port 1/2 on $mux $procmux$962.
+    dead port 1/2 on $mux $procmux$965.
+    dead port 1/2 on $mux $procmux$968.
+    dead port 2/2 on $mux $procmux$970.
+    dead port 1/2 on $mux $procmux$1100.
+    dead port 2/2 on $mux $procmux$973.
+    dead port 1/2 on $mux $procmux$980.
+    dead port 1/2 on $mux $procmux$983.
+    dead port 1/2 on $mux $procmux$986.
+    dead port 1/2 on $mux $procmux$989.
+    dead port 1/2 on $mux $procmux$992.
+    dead port 1/2 on $mux $procmux$995.
+    dead port 1/2 on $mux $procmux$998.
+Removed 515 multiplexer ports.
+<suppressed ~22 debug messages>
+
+23.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+    New ctrl vector for $pmux cell $procmux$3186: { $procmux$3132_CMP $auto$opt_reduce.cc:137:opt_pmux$3887 }
+    New ctrl vector for $pmux cell $procmux$3208: { $procmux$3132_CMP $auto$opt_reduce.cc:137:opt_pmux$3889 }
+  Optimizing cells in module \compute_core.
+Performed a total of 2 changes.
+
+23.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+<suppressed ~21 debug messages>
+Removed a total of 7 cells.
+
+23.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+23.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 0 unused cells and 602 unused wires.
+<suppressed ~1 debug messages>
+
+23.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+23.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+23.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~20 debug messages>
+
+23.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+23.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+23.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+23.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+
+23.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+23.16. Finished OPT passes. (There is nothing left to do.)
+
+24. Executing FSM pass (extract and optimize FSM).
+
+24.1. Executing FSM_DETECT pass (finding FSMs in design).
+Found FSM state register compute_core.state.
+
+24.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\state' from module `\compute_core'.
+  found $dff cell for state register: $procdff$3827
+  root of input selection tree: $0\state[1:0]
+  found reset state: 2'00 (guessed from mux tree)
+  found ctrl input: \rst_n
+  found state code: 2'00
+  found ctrl input: $procmux$3187_CMP
+  found ctrl input: $procmux$1046_CMP
+  found ctrl input: $procmux$3132_CMP
+  found ctrl input: \ready
+  found ctrl input: $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:294$177_Y
+  found state code: 2'11
+  found ctrl input: $logic_and$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:291$170_Y
+  found state code: 2'10
+  found ctrl input: \start
+  found state code: 2'01
+  found ctrl output: \ready
+  found ctrl output: $procmux$1046_CMP
+  found ctrl output: $procmux$3132_CMP
+  found ctrl output: $procmux$3187_CMP
+  ctrl inputs: { $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:294$177_Y $logic_and$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:291$170_Y \start \rst_n }
+  ctrl outputs: { $procmux$3187_CMP $procmux$3132_CMP $procmux$1046_CMP $0\state[1:0] \ready }
+  transition:       2'00 4'---0 ->       2'00 6'000001
+  transition:       2'00 4'--01 ->       2'00 6'000001
+  transition:       2'00 4'--11 ->       2'01 6'000011
+  transition:       2'10 4'---0 ->       2'00 6'001000
+  transition:       2'10 4'0--1 ->       2'10 6'001100
+  transition:       2'10 4'1--1 ->       2'11 6'001110
+  transition:       2'01 4'---0 ->       2'00 6'010000
+  transition:       2'01 4'-0-1 ->       2'01 6'010010
+  transition:       2'01 4'01-1 ->       2'01 6'010010
+  transition:       2'01 4'11-1 ->       2'10 6'010100
+  transition:       2'11 4'---0 ->       2'00 6'100000
+  transition:       2'11 4'---1 ->       2'00 6'100000
+
+24.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\state$3890' from module `\compute_core'.
+  Merging pattern 4'---0 and 4'---1 from group (3 0 6'100000).
+  Merging pattern 4'---1 and 4'---0 from group (3 0 6'100000).
+
+24.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 11 unused cells and 11 unused wires.
+<suppressed ~12 debug messages>
+
+24.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\state$3890' from module `\compute_core'.
+  Removing unused output signal $0\state[1:0] [0].
+  Removing unused output signal $0\state[1:0] [1].
+
+24.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\state$3890' from module `\compute_core' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  00 -> ---1
+  10 -> --1-
+  01 -> -1--
+  11 -> 1---
+
+24.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\state$3890' from module `compute_core':
+-------------------------------------
+
+  Information on FSM $fsm$\state$3890 (\state):
+
+  Number of input signals:    4
+  Number of output signals:   4
+  Number of state bits:       4
+
+  Input signals:
+    0: \rst_n
+    1: \start
+    2: $logic_and$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:291$170_Y
+    3: $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:294$177_Y
+
+  Output signals:
+    0: \ready
+    1: $procmux$1046_CMP
+    2: $procmux$3132_CMP
+    3: $procmux$3187_CMP
+
+  State encoding:
+    0:     4'---1  <RESET STATE>
+    1:     4'--1-
+    2:     4'-1--
+    3:     4'1---
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 4'---0   ->     0 4'0001
+      1:     0 4'--01   ->     0 4'0001
+      2:     0 4'--11   ->     2 4'0001
+      3:     1 4'---0   ->     0 4'0010
+      4:     1 4'0--1   ->     1 4'0010
+      5:     1 4'1--1   ->     3 4'0010
+      6:     2 4'---0   ->     0 4'0100
+      7:     2 4'11-1   ->     1 4'0100
+      8:     2 4'-0-1   ->     2 4'0100
+      9:     2 4'01-1   ->     2 4'0100
+     10:     3 4'----   ->     0 4'1000
+
+-------------------------------------
+
+24.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\state$3890' from module `\compute_core'.
+
+25. Executing OPT pass (performing simple optimizations).
+
+25.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+<suppressed ~1 debug messages>
+
+25.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+25.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~19 debug messages>
+
+25.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+25.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+25.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$3830 ($dff) from module compute_core (D = $procmux$3770_Y, Q = \result_reg, rval = 16'0000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$3933 ($sdff) from module compute_core (D = $3\fp32_to_fp16$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:322$6.$result[15:0]$338, Q = \result_reg).
+Adding SRST signal on $procdff$3829 ($dff) from module compute_core (D = $procmux$3776_Y, Q = \accum, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$3935 ($sdff) from module compute_core (D = $procmux$3776_Y, Q = \accum).
+Adding SRST signal on $procdff$3828 ($dff) from module compute_core (D = $procmux$3788_Y, Q = \cnt, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$3947 ($sdff) from module compute_core (D = $procmux$3788_Y, Q = \cnt).
+Adding SRST signal on $procdff$3826 ($dff) from module compute_core (D = $procmux$3606_Y, Q = \done, rval = 1'0).
+
+25.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 5 unused cells and 11 unused wires.
+<suppressed ~6 debug messages>
+
+25.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+<suppressed ~2 debug messages>
+
+25.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+25.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~19 debug messages>
+
+25.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+25.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+25.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+25.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+25.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+25.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+25.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~19 debug messages>
+
+25.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+25.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+25.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+25.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+
+25.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+25.23. Finished OPT passes. (There is nothing left to do.)
+
+26. Executing WREDUCE pass (reducing word size of cells).
+Removed top 3 bits (of 8) from port A of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$186 ($add).
+Removed top 1 bits (of 8) from port B of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$186 ($add).
+Removed top 3 bits (of 8) from port A of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$194 ($add).
+Removed top 1 bits (of 8) from port B of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$194 ($add).
+Removed top 2 bits (of 10) from port A of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:170$207 ($add).
+Removed top 2 bits (of 10) from port B of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:170$207 ($add).
+Removed top 2 bits (of 10) from port Y of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:170$207 ($add).
+Removed top 1 bits (of 8) from port B of cell compute_core.$sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:175$210 ($sub).
+Removed top 1 bits (of 8) from port B of cell compute_core.$sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:179$211 ($sub).
+Removed top 3 bits (of 8) from port B of cell compute_core.$ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:224$280 ($ge).
+Removed top 1 bits (of 25) from port A of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:231$293 ($add).
+Removed top 1 bits (of 25) from port B of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:231$293 ($add).
+Removed top 7 bits (of 8) from port B of cell compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:235$296 ($add).
+Removed top 1 bits (of 24) from port Y of cell compute_core.$shl$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:251$330 ($shl).
+Removed top 6 bits (of 11) from port A of cell compute_core.$ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:255$331 ($ge).
+Removed top 3 bits (of 11) from port B of cell compute_core.$ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:255$331 ($ge).
+Removed top 3 bits (of 8) from port B of cell compute_core.$sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:258$334 ($sub).
+Removed top 1 bits (of 2) from port B of cell compute_core.$auto$fsm_map.cc:77:implement_pattern_cache$3921 ($eq).
+Removed top 1 bits (of 8) from port B of cell compute_core.$le$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:101$340 ($le).
+Removed top 1 bits (of 8) from port B of cell compute_core.$sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:109$346 ($sub).
+Removed top 3 bits (of 8) from port Y of cell compute_core.$sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:109$346 ($sub).
+Removed top 3 bits (of 8) from port A of cell compute_core.$sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:109$346 ($sub).
+Removed top 2 bits (of 7) from port B of cell compute_core.$sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:109$346 ($sub).
+Removed top 1 bits (of 16) from mux cell compute_core.$procmux$349 ($mux).
+Removed top 1 bits (of 16) from mux cell compute_core.$procmux$377 ($mux).
+Removed top 1 bits (of 16) from mux cell compute_core.$procmux$399 ($mux).
+Removed top 1 bits (of 5) from mux cell compute_core.$procmux$464 ($mux).
+Removed top 1 bits (of 5) from mux cell compute_core.$procmux$557 ($mux).
+Removed top 1 bits (of 5) from mux cell compute_core.$procmux$647 ($mux).
+Removed top 1 bits (of 5) from mux cell compute_core.$procmux$734 ($mux).
+Removed top 1 bits (of 5) from mux cell compute_core.$procmux$818 ($mux).
+Removed top 1 bits (of 5) from mux cell compute_core.$procmux$899 ($mux).
+Removed top 1 bits (of 5) from mux cell compute_core.$procmux$977 ($mux).
+Removed top 1 bits (of 3) from port B of cell compute_core.$auto$opt_dff.cc:195:make_patterns_logic$3940 ($ne).
+Removed top 1 bits (of 3) from port B of cell compute_core.$auto$fsm_map.cc:77:implement_pattern_cache$3925 ($eq).
+Removed top 1 bits (of 4) from port B of cell compute_core.$auto$opt_dff.cc:195:make_patterns_logic$3944 ($ne).
+Removed top 1 bits (of 5) from mux cell compute_core.$procmux$1052 ($mux).
+Removed top 1 bits (of 24) from mux cell compute_core.$procmux$2255 ($mux).
+Removed top 1 bits (of 24) from mux cell compute_core.$procmux$2309 ($mux).
+Removed top 1 bits (of 32) from mux cell compute_core.$procmux$3044 ($mux).
+Removed top 1 bits (of 32) from mux cell compute_core.$procmux$3086 ($mux).
+Removed top 1 bits (of 2) from port B of cell compute_core.$auto$fsm_map.cc:77:implement_pattern_cache$3912 ($eq).
+Removed top 1 bits (of 2) from port B of cell compute_core.$auto$fsm_map.cc:77:implement_pattern_cache$3903 ($eq).
+Removed top 1 bits (of 5) from wire compute_core.$24\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$322.
+Removed top 1 bits (of 5) from wire compute_core.$25\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$323.
+Removed top 2 bits (of 10) from wire compute_core.$add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:170$207_Y.
+Removed top 1 bits (of 24) from wire compute_core.$procmux$2255_Y.
+Removed top 1 bits (of 24) from wire compute_core.$procmux$2309_Y.
+Removed top 1 bits (of 24) from wire compute_core.$shl$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:251$330_Y.
+Removed top 3 bits (of 8) from wire compute_core.$sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:109$346_Y.
+
+27. Executing PEEPOPT pass (run peephole optimizers).
+
+28. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 0 unused cells and 7 unused wires.
+<suppressed ~1 debug messages>
+
+29. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module compute_core:
+  creating $macc model for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:170$207 ($add).
+  creating $macc model for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:231$293 ($add).
+  creating $macc model for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:235$296 ($add).
+  creating $macc model for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:299$178 ($add).
+  creating $macc model for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$186 ($add).
+  creating $macc model for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$194 ($add).
+  creating $macc model for $mul$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:165$206 ($mul).
+  creating $macc model for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:109$346 ($sub).
+  creating $macc model for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:175$210 ($sub).
+  creating $macc model for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:179$211 ($sub).
+  creating $macc model for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:223$279 ($sub).
+  creating $macc model for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:244$297 ($sub).
+  creating $macc model for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:258$334 ($sub).
+  creating $alu model for $macc $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:258$334.
+  creating $alu model for $macc $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:244$297.
+  creating $alu model for $macc $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:223$279.
+  creating $alu model for $macc $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:179$211.
+  creating $alu model for $macc $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:175$210.
+  creating $alu model for $macc $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:109$346.
+  creating $alu model for $macc $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$194.
+  creating $alu model for $macc $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$186.
+  creating $alu model for $macc $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:299$178.
+  creating $alu model for $macc $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:235$296.
+  creating $alu model for $macc $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:231$293.
+  creating $alu model for $macc $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:170$207.
+  creating $macc cell for $mul$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:165$206: $auto$alumacc.cc:365:replace_macc$3967
+  creating $alu model for $ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:104$343 ($ge): new $alu
+  creating $alu model for $ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:214$270 ($ge): new $alu
+  creating $alu model for $ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:224$280 ($ge): new $alu
+  creating $alu model for $ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:255$331 ($ge): new $alu
+  creating $alu model for $gt$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:214$268 ($gt): new $alu
+  creating $alu model for $le$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:101$340 ($le): new $alu
+  creating $alu model for $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:214$269 ($eq): merged with $gt$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:214$268.
+  creating $alu cell for $le$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:101$340: $auto$alumacc.cc:485:replace_alu$3974
+  creating $alu cell for $gt$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:214$268, $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:214$269: $auto$alumacc.cc:485:replace_alu$3987
+  creating $alu cell for $ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:255$331: $auto$alumacc.cc:485:replace_alu$3998
+  creating $alu cell for $ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:224$280: $auto$alumacc.cc:485:replace_alu$4011
+  creating $alu cell for $ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:214$270: $auto$alumacc.cc:485:replace_alu$4020
+  creating $alu cell for $ge$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:104$343: $auto$alumacc.cc:485:replace_alu$4029
+  creating $alu cell for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:170$207: $auto$alumacc.cc:485:replace_alu$4038
+  creating $alu cell for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:231$293: $auto$alumacc.cc:485:replace_alu$4041
+  creating $alu cell for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:235$296: $auto$alumacc.cc:485:replace_alu$4044
+  creating $alu cell for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:299$178: $auto$alumacc.cc:485:replace_alu$4047
+  creating $alu cell for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$186: $auto$alumacc.cc:485:replace_alu$4050
+  creating $alu cell for $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$194: $auto$alumacc.cc:485:replace_alu$4053
+  creating $alu cell for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:109$346: $auto$alumacc.cc:485:replace_alu$4056
+  creating $alu cell for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:175$210: $auto$alumacc.cc:485:replace_alu$4059
+  creating $alu cell for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:179$211: $auto$alumacc.cc:485:replace_alu$4062
+  creating $alu cell for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:223$279: $auto$alumacc.cc:485:replace_alu$4065
+  creating $alu cell for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:244$297: $auto$alumacc.cc:485:replace_alu$4068
+  creating $alu cell for $sub$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:258$334: $auto$alumacc.cc:485:replace_alu$4071
+  created 18 $alu and 1 $macc cells.
+
+30. Executing SHARE pass (SAT-based resource sharing).
+Found 4 cells in module compute_core that may be considered for resource sharing.
+  Analyzing resource sharing options for $shr$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:227$282 ($shr):
+    Found 49 activation_patterns using ctrl signal { $auto$rtlil.cc:2743:ReduceOr$4019 $auto$rtlil.cc:2743:ReduceOr$4010 $procmux$1071_CMP $procmux$1068_CMP $procmux$1065_CMP $procmux$1062_CMP $procmux$1059_CMP $procmux$1056_CMP $procmux$1053_CMP $procmux$1029_CMP $procmux$1026_CMP $procmux$1023_CMP $procmux$1020_CMP $procmux$1017_CMP $procmux$1014_CMP $procmux$1011_CMP $procmux$1008_CMP $procmux$1005_CMP $procmux$1002_CMP $procmux$483_CMP $procmux$480_CMP $procmux$477_CMP $procmux$474_CMP $procmux$471_CMP $procmux$468_CMP $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:246$298_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:229$283_Y $logic_and$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:205$214_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:205$213_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:205$212_Y \state [1] \rst_n }.
+    No candidates found.
+  Analyzing resource sharing options for $shl$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:251$330 ($shl):
+    Found 1 activation_patterns using ctrl signal { $auto$rtlil.cc:2743:ReduceOr$4010 $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:246$298_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:229$283_Y $logic_and$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:205$214_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:205$213_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:205$212_Y \state [1] }.
+    No candidates found.
+  Analyzing resource sharing options for $memrd$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$179 ($memrd):
+    Found 4 activation_patterns using ctrl signal { $logic_or$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:160$198_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:83$183_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:80$180_Y \state [1] \rst_n }.
+    No candidates found.
+  Analyzing resource sharing options for $memrd$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$187 ($memrd):
+    Found 4 activation_patterns using ctrl signal { $logic_or$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:160$198_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:83$191_Y $eq$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:80$188_Y \state [1] \rst_n }.
+    No candidates found.
+
+31. Executing OPT pass (performing simple optimizations).
+
+31.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+31.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+31.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~19 debug messages>
+
+31.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+31.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+31.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+31.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 0 unused cells and 7 unused wires.
+<suppressed ~1 debug messages>
+
+31.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+31.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+31.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~19 debug messages>
+
+31.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+31.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+31.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+31.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+
+31.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+31.16. Finished OPT passes. (There is nothing left to do.)
+
+32. Executing MEMORY pass.
+
+32.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+32.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+32.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+  Analyzing compute_core.ifm_buf write port 0.
+  Analyzing compute_core.weight_buf write port 0.
+
+32.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+32.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\ifm_buf'[0] in module `\compute_core': no output FF found.
+Checking read port `\weight_buf'[0] in module `\compute_core': no output FF found.
+Checking read port address `\ifm_buf'[0] in module `\compute_core': merged address FF to cell.
+Checking read port address `\weight_buf'[0] in module `\compute_core': merged address FF to cell.
+
+32.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+
+32.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+32.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+32.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+
+32.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+33. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+
+34. Executing OPT pass (performing simple optimizations).
+
+34.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+<suppressed ~72 debug messages>
+
+34.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+<suppressed ~18 debug messages>
+Removed a total of 6 cells.
+
+34.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 5 unused cells and 75 unused wires.
+<suppressed ~6 debug messages>
+
+34.5. Finished fast OPT passes.
+
+35. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \ifm_buf in module \compute_core:
+  created 9 $dff cells and 0 static cells of width 16.
+Extracted addr FF from read port 0 of compute_core.ifm_buf: $\ifm_buf$rdreg[0]
+  read interface: 1 $dff and 15 $mux cells.
+  write interface: 144 write mux blocks.
+Mapping memory \weight_buf in module \compute_core:
+  created 9 $dff cells and 0 static cells of width 16.
+Extracted addr FF from read port 0 of compute_core.weight_buf: $\weight_buf$rdreg[0]
+  read interface: 1 $dff and 15 $mux cells.
+  write interface: 144 write mux blocks.
+
+36. Executing OPT pass (performing simple optimizations).
+
+36.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+<suppressed ~41 debug messages>
+
+36.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+<suppressed ~435 debug messages>
+Removed a total of 145 cells.
+
+36.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~306 debug messages>
+
+36.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+    Consolidated identical input bits for $mux cell $procmux$3044:
+      Old ports: A={ $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$194_Y $memrd$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$187_DATA [9:0] 13'0000000000000 }, B=31'0000000000000000000000000000000, Y=$4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$192 [30:0]
+      New ports: A={ $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$194_Y $memrd$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$187_DATA [9:0] }, B=18'000000000000000000, Y=$4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$192 [30:13]
+      New connections: $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$192 [12:0] = 13'0000000000000
+    Consolidated identical input bits for $mux cell $procmux$3086:
+      Old ports: A={ $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$186_Y $memrd$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$179_DATA [9:0] 13'0000000000000 }, B=31'0000000000000000000000000000000, Y=$4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$184 [30:0]
+      New ports: A={ $add$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:88$186_Y $memrd$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$179_DATA [9:0] }, B=18'000000000000000000, Y=$4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$184 [30:13]
+      New connections: $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$184 [12:0] = 13'0000000000000
+    Consolidated identical input bits for $mux cell $procmux$3129:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176
+      New ports: A=1'0, B=1'1, Y=$3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0]
+      New connections: $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [15:1] = { $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] $3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0] }
+    New ctrl vector for $pmux cell $procmux$3788: \state [2:1]
+    Consolidated identical input bits for $mux cell $procmux$464:
+      Old ports: A=4'1000, B=4'0111, Y=$31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [3:0]
+      New ports: A=2'10, B=2'01, Y={ $31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [3] $31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [0] }
+      New connections: $31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [2:1] = { $31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [0] $31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [0] }
+  Optimizing cells in module \compute_core.
+    Consolidated identical input bits for $mux cell $procmux$3068:
+      Old ports: A=$4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$192, B={ 9'000000000 $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$192 [31] 8'11111111 $memrd$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$187_DATA [9] 13'0000000000000 }, Y=$3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$189
+      New ports: A=$4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$192 [31:13], B={ 9'000000000 $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$192 [31] 8'11111111 $memrd$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$187_DATA [9] }, Y=$3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$189 [31:13]
+      New connections: $3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$189 [12:0] = 13'0000000000000
+    Consolidated identical input bits for $mux cell $procmux$3110:
+      Old ports: A=$4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$184, B={ 9'000000000 $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$184 [31] 8'11111111 $memrd$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$179_DATA [9] 13'0000000000000 }, Y=$3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$181
+      New ports: A=$4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$184 [31:13], B={ 9'000000000 $4\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$184 [31] 8'11111111 $memrd$\weight_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$179_DATA [9] }, Y=$3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$181 [31:13]
+      New connections: $3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$181 [12:0] = 13'0000000000000
+    Consolidated identical input bits for $mux cell $procmux$3186:
+      Old ports: A=$3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176, B=16'0000000000000000, Y=$2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169
+      New ports: A=$3$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$176 [0], B=1'0, Y=$2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0]
+      New connections: $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [15:1] = { $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] $2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0] }
+    Consolidated identical input bits for $mux cell $procmux$557:
+      Old ports: A=$31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [3:0], B=4'0110, Y=$30\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$328 [3:0]
+      New ports: A={ $31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [3] $31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [0] $31\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$329 [0] }, B=3'010, Y={ $30\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$328 [3] $30\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$328 [1:0] }
+      New connections: $30\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$328 [2] = $30\clz24$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:250$5.$result[4:0]$328 [1]
+  Optimizing cells in module \compute_core.
+    Consolidated identical input bits for $mux cell $procmux$3612:
+      Old ports: A=16'0000000000000000, B=$2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169, Y=$0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62
+      New ports: A=1'0, B=$2$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$169 [0], Y=$0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0]
+      New connections: $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [15:1] = { $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] $0$memwr$\ifm_buf$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:293$8_EN[15:0]$62 [0] }
+  Optimizing cells in module \compute_core.
+Performed a total of 10 changes.
+
+36.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+<suppressed ~405 debug messages>
+Removed a total of 135 cells.
+
+36.6. Executing OPT_SHARE pass.
+
+36.7. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $\weight_buf$rdreg[0] ($dff) from module compute_core (D = $auto$rtlil.cc:2874:Mux$4078, Q = $\weight_buf$rdreg[0]$q, rval = 4'0000).
+
+36.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 1 unused cells and 343 unused wires.
+<suppressed ~2 debug messages>
+
+36.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+<suppressed ~8 debug messages>
+
+36.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+36.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~306 debug messages>
+
+36.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+36.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+36.14. Executing OPT_SHARE pass.
+
+36.15. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $memory\weight_buf[8]$4807 ($dff) from module compute_core (D = \weight_data, Q = \weight_buf[8]).
+Adding EN signal on $memory\weight_buf[7]$4805 ($dff) from module compute_core (D = \weight_data, Q = \weight_buf[7]).
+Adding EN signal on $memory\weight_buf[6]$4803 ($dff) from module compute_core (D = \weight_data, Q = \weight_buf[6]).
+Adding EN signal on $memory\weight_buf[5]$4801 ($dff) from module compute_core (D = \weight_data, Q = \weight_buf[5]).
+Adding EN signal on $memory\weight_buf[4]$4799 ($dff) from module compute_core (D = \weight_data, Q = \weight_buf[4]).
+Adding EN signal on $memory\weight_buf[3]$4797 ($dff) from module compute_core (D = \weight_data, Q = \weight_buf[3]).
+Adding EN signal on $memory\weight_buf[2]$4795 ($dff) from module compute_core (D = \weight_data, Q = \weight_buf[2]).
+Adding EN signal on $memory\weight_buf[1]$4793 ($dff) from module compute_core (D = \weight_data, Q = \weight_buf[1]).
+Adding EN signal on $memory\weight_buf[0]$4791 ($dff) from module compute_core (D = \weight_data, Q = \weight_buf[0]).
+Adding EN signal on $memory\ifm_buf[8]$4120 ($dff) from module compute_core (D = \ifm_data, Q = \ifm_buf[8]).
+Adding EN signal on $memory\ifm_buf[7]$4118 ($dff) from module compute_core (D = \ifm_data, Q = \ifm_buf[7]).
+Adding EN signal on $memory\ifm_buf[6]$4116 ($dff) from module compute_core (D = \ifm_data, Q = \ifm_buf[6]).
+Adding EN signal on $memory\ifm_buf[5]$4114 ($dff) from module compute_core (D = \ifm_data, Q = \ifm_buf[5]).
+Adding EN signal on $memory\ifm_buf[4]$4112 ($dff) from module compute_core (D = \ifm_data, Q = \ifm_buf[4]).
+Adding EN signal on $memory\ifm_buf[3]$4110 ($dff) from module compute_core (D = \ifm_data, Q = \ifm_buf[3]).
+Adding EN signal on $memory\ifm_buf[2]$4108 ($dff) from module compute_core (D = \ifm_data, Q = \ifm_buf[2]).
+Adding EN signal on $memory\ifm_buf[1]$4106 ($dff) from module compute_core (D = \ifm_data, Q = \ifm_buf[1]).
+Adding EN signal on $memory\ifm_buf[0]$4104 ($dff) from module compute_core (D = \ifm_data, Q = \ifm_buf[0]).
+
+36.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 288 unused cells and 295 unused wires.
+<suppressed ~289 debug messages>
+
+36.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+36.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+36.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~18 debug messages>
+
+36.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+36.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+36.22. Executing OPT_SHARE pass.
+
+36.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+36.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+
+36.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+36.26. Finished OPT passes. (There is nothing left to do.)
+
+37. Executing TECHMAP pass (map to technology primitives).
+
+37.1. Executing Verilog-2005 frontend: /opt/oss-cad-suite/lib/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+37.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$bfceb922395790c0ce92e9f9b5b428d4fc72cc30\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$fc972a7a46956c1788f3cb5257b53c8f1df2d0cc\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$a7a1d5fc4563c49b9a54941942b1beedd64a98db\_90_alu for cells of type $alu.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using template $paramod$befd47b1c77b68561d11d0cb61a0fae29b79f34c\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod$cc48387a3f2cae79a81035f3d5a9b4758cb77854\_90_alu for cells of type $alu.
+Using template $paramod$740b056ede97228d3eae64ea2fdc81f0a33e0fe7\_90_alu for cells of type $alu.
+Using template $paramod$e82d3fc1811c5751348a3964470632b35a435fc7\_90_alu for cells of type $alu.
+Using template $paramod$constmap:c405201d267c50179e77021e426cb047cc33c577$paramod$532ed33aa48e40f5030f3f04e98e15a19c73fe90\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shr.
+Using template $paramod$c3cd1564c35d873179656addd6052d7ea8b6d991\_90_alu for cells of type $alu.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using template $paramod$5d2e07eca6b9fbd538aff231e6f05d9604b7a77e\_90_alu for cells of type $alu.
+Using template $paramod$constmap:43885dd6663c0b87bd65a3b01bb10caff3ea385a$paramod$d6560863f186992a192a406d9f1b9c6555b9b725\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod$dfca81329cbbac01700318224209a5f2318c7128\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$d597a1d02e4b78ac244cbe0a6bc64f098a6f19e7\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc.
+  add { 1'1 $3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:310$1.$result[31:0]$181 [22:13] 13'0000000000000 } * { 1'1 $3\fp16_to_fp32$func$/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/synth_top.sv:311$2.$result[31:0]$189 [22:13] 13'0000000000000 } (24x24 bits, unsigned)
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$bf2533632d512eac76dd186c0da49367e29b8e98\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011001 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000001 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000110000 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000101111 for cells of type $fa.
+Using template $paramod$88aad6f8473fb7e4e5fbfb8335ddebad03429eaa\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000111 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000110000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~3291 debug messages>
+
+38. Executing OPT pass (performing simple optimizations).
+
+38.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+<suppressed ~6864 debug messages>
+
+38.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+<suppressed ~342 debug messages>
+Removed a total of 114 cells.
+
+38.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+38.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 244 unused cells and 1281 unused wires.
+<suppressed ~245 debug messages>
+
+38.5. Finished fast OPT passes.
+
+39. Executing ABC pass (technology mapping using ABC).
+
+39.1. Extracting gate netlist of module `\compute_core' to `<abc-temp-dir>/input.blif'..
+Extracted 2912 gates and 3250 wires to a netlist network with 336 inputs and 70 outputs.
+
+39.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+39.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       61
+ABC RESULTS:            ANDNOT cells:      670
+ABC RESULTS:               MUX cells:      629
+ABC RESULTS:              NAND cells:       47
+ABC RESULTS:               NOR cells:      153
+ABC RESULTS:               NOT cells:      286
+ABC RESULTS:                OR cells:      575
+ABC RESULTS:             ORNOT cells:      121
+ABC RESULTS:              XNOR cells:      107
+ABC RESULTS:               XOR cells:      359
+ABC RESULTS:        internal signals:     2844
+ABC RESULTS:           input signals:      336
+ABC RESULTS:          output signals:       70
+Removing temp directory.
+
+40. Executing OPT pass (performing simple optimizations).
+
+40.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+<suppressed ~224 debug messages>
+
+40.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+<suppressed ~78 debug messages>
+Removed a total of 26 cells.
+
+40.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+40.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 4 unused cells and 1048 unused wires.
+<suppressed ~5 debug messages>
+
+40.5. Finished fast OPT passes.
+
+41. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `compute_core'. Setting top module to compute_core.
+
+41.1. Analyzing design hierarchy..
+Top module:  \compute_core
+
+41.2. Analyzing design hierarchy..
+Top module:  \compute_core
+Removed 0 unused modules.
+
+42. Printing statistics.
+
+=== compute_core ===
+
+   Number of wires:               2994
+   Number of wire bits:           3382
+   Number of public wires:          32
+   Number of public wire bits:     399
+   Number of ports:                 10
+   Number of port bits:             55
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3327
+     $_ANDNOT_                     668
+     $_AND_                         61
+     $_DFFE_PP_                    288
+     $_DFF_P_                        4
+     $_MUX_                        629
+     $_NAND_                        46
+     $_NOR_                        152
+     $_NOT_                        282
+     $_ORNOT_                      121
+     $_OR_                         575
+     $_SDFFE_PN0P_                  52
+     $_SDFF_PN0_                     5
+     $_XNOR_                       106
+     $_XOR_                        338
+
+43. Executing CHECK pass (checking for obvious problems).
+Checking module compute_core...
+Found and reported 0 problems.
+
+44. Generating Graphviz representation of design.
+Writing dot description to `/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/runs/RUN_2026-05-14_09-52-45/06-yosys-synthesis/primitive_techmap.dot'.
+Dumping module compute_core to page 1.
+
+45. Executing OPT pass (performing simple optimizations).
+
+45.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+<suppressed ~1 debug messages>
+
+45.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+45.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+45.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+45.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+45.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+45.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+45.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+45.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+45.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \compute_core..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+45.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \compute_core.
+Performed a total of 0 changes.
+
+45.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\compute_core'.
+Removed a total of 0 cells.
+
+45.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+45.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+
+45.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module compute_core.
+
+45.16. Finished OPT passes. (There is nothing left to do.)
+
+46. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+{
+   "creator": "Yosys 0.49+3 (git sha1 3d35f367c, clang++ 18.1.8 -fPIC -O3)",
+   "invocation": "stat -json -liberty /mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/runs/RUN_2026-05-14_09-52-45/tmp/0feb395695db49b1b4b6985733bbf5ec.lib ",
+   "modules": {
+      "\\compute_core": {
+         "num_wires":         2991,
+         "num_wire_bits":     3364,
+         "num_pub_wires":     31,
+         "num_pub_wire_bits": 383,
+         "num_ports":         10,
+         "num_port_bits":     55,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         3325,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 667,
+            "$_AND_": 61,
+            "$_DFFE_PP_": 288,
+            "$_DFF_P_": 4,
+            "$_MUX_": 629,
+            "$_NAND_": 46,
+            "$_NOR_": 152,
+            "$_NOT_": 282,
+            "$_ORNOT_": 121,
+            "$_OR_": 574,
+            "$_SDFFE_PN0P_": 52,
+            "$_SDFF_PN0_": 5,
+            "$_XNOR_": 106,
+            "$_XOR_": 338
+         }
+      }
+   },
+      "design": {
+         "num_wires":         2991,
+         "num_wire_bits":     3364,
+         "num_pub_wires":     31,
+         "num_pub_wire_bits": 383,
+         "num_ports":         10,
+         "num_port_bits":     55,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         3325,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 667,
+            "$_AND_": 61,
+            "$_DFFE_PP_": 288,
+            "$_DFF_P_": 4,
+            "$_MUX_": 629,
+            "$_NAND_": 46,
+            "$_NOR_": 152,
+            "$_NOT_": 282,
+            "$_ORNOT_": 121,
+            "$_OR_": 574,
+            "$_SDFFE_PN0P_": 52,
+            "$_SDFF_PN0_": 5,
+            "$_XNOR_": 106,
+            "$_XOR_": 338
+         }
+      }
+}
+
+47. Printing statistics.
+
+=== compute_core ===
+
+   Number of wires:               2991
+   Number of wire bits:           3364
+   Number of public wires:          31
+   Number of public wire bits:     383
+   Number of ports:                 10
+   Number of port bits:             55
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3325
+     $_ANDNOT_                     667
+     $_AND_                         61
+     $_DFFE_PP_                    288
+     $_DFF_P_                        4
+     $_MUX_                        629
+     $_NAND_                        46
+     $_NOR_                        152
+     $_NOT_                        282
+     $_ORNOT_                      121
+     $_OR_                         574
+     $_SDFFE_PN0P_                  52
+     $_SDFF_PN0_                     5
+     $_XNOR_                       106
+     $_XOR_                        338
+
+   Area for cell type $_NOT_ is unknown!
+   Area for cell type $_AND_ is unknown!
+   Area for cell type $_NAND_ is unknown!
+   Area for cell type $_OR_ is unknown!
+   Area for cell type $_NOR_ is unknown!
+   Area for cell type $_XOR_ is unknown!
+   Area for cell type $_XNOR_ is unknown!
+   Area for cell type $_ANDNOT_ is unknown!
+   Area for cell type $_ORNOT_ is unknown!
+   Area for cell type $_MUX_ is unknown!
+   Area for cell type $_DFF_P_ is unknown!
+   Area for cell type $_DFFE_PP_ is unknown!
+   Area for cell type $_SDFF_PN0_ is unknown!
+   Area for cell type $_SDFFE_PN0P_ is unknown!
+
+mapping tbuf
+[INFO] Applying tri-state buffer mapping from '/home/amogh23/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v'...
+
+48. Executing TECHMAP pass (map to technology primitives).
+
+48.1. Executing Verilog-2005 frontend: /home/amogh23/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v
+Parsing Verilog input from `/home/amogh23/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v' to AST representation.
+Generating RTLIL representation for module `\$_TBUF_'.
+Successfully finished Verilog frontend.
+
+48.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+49. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+[INFO] Applying latch mapping from '/home/amogh23/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v'...
+
+50. Executing TECHMAP pass (map to technology primitives).
+
+50.1. Executing Verilog-2005 frontend: /home/amogh23/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v
+Parsing Verilog input from `/home/amogh23/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v' to AST representation.
+Generating RTLIL representation for module `\$_DLATCH_P_'.
+Generating RTLIL representation for module `\$_DLATCH_N_'.
+Successfully finished Verilog frontend.
+
+50.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+51. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+52. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sky130_fd_sc_hd__dfxtp_2 (noninv, pins=3, area=21.27) is a direct match for cell type $_DFF_P_.
+  cell sky130_fd_sc_hd__dfrtp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN0_.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+  cell sky130_fd_sc_hd__dfbbn_2 (noninv, pins=6, area=35.03) is a direct match for cell type $_DFFSR_NNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_2 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_2 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    unmapped dff cell: $_DFFE_PP_
+    \sky130_fd_sc_hd__dfbbn_2 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    unmapped dff cell: $_DFFSR_PNN_
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+52.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+Mapping DFF cells in module `\compute_core':
+  mapped 349 $_DFF_P_ cells to \sky130_fd_sc_hd__dfxtp_2 cells.
+{
+   "creator": "Yosys 0.49+3 (git sha1 3d35f367c, clang++ 18.1.8 -fPIC -O3)",
+   "invocation": "stat -json -liberty /mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/runs/RUN_2026-05-14_09-52-45/tmp/0feb395695db49b1b4b6985733bbf5ec.lib ",
+   "modules": {
+      "\\compute_core": {
+         "num_wires":         3388,
+         "num_wire_bits":     3761,
+         "num_pub_wires":     31,
+         "num_pub_wire_bits": 383,
+         "num_ports":         10,
+         "num_port_bits":     55,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         3722,
+         "area":              7423.369600,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 667,
+            "$_AND_": 61,
+            "$_MUX_": 1026,
+            "$_NAND_": 46,
+            "$_NOR_": 152,
+            "$_NOT_": 282,
+            "$_ORNOT_": 121,
+            "$_OR_": 574,
+            "$_XNOR_": 106,
+            "$_XOR_": 338,
+            "sky130_fd_sc_hd__dfxtp_2": 349
+         }
+      }
+   },
+      "design": {
+         "num_wires":         3388,
+         "num_wire_bits":     3761,
+         "num_pub_wires":     31,
+         "num_pub_wire_bits": 383,
+         "num_ports":         10,
+         "num_port_bits":     55,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         3722,
+         "area":              7423.369600,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 667,
+            "$_AND_": 61,
+            "$_MUX_": 1026,
+            "$_NAND_": 46,
+            "$_NOR_": 152,
+            "$_NOT_": 282,
+            "$_ORNOT_": 121,
+            "$_OR_": 574,
+            "$_XNOR_": 106,
+            "$_XOR_": 338,
+            "sky130_fd_sc_hd__dfxtp_2": 349
+         }
+      }
+}
+
+53. Printing statistics.
+
+=== compute_core ===
+
+   Number of wires:               3388
+   Number of wire bits:           3761
+   Number of public wires:          31
+   Number of public wire bits:     383
+   Number of ports:                 10
+   Number of port bits:             55
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3722
+     $_ANDNOT_                     667
+     $_AND_                         61
+     $_MUX_                       1026
+     $_NAND_                        46
+     $_NOR_                        152
+     $_NOT_                        282
+     $_ORNOT_                      121
+     $_OR_                         574
+     $_XNOR_                       106
+     $_XOR_                        338
+     sky130_fd_sc_hd__dfxtp_2      349
+
+   Area for cell type $_NOT_ is unknown!
+   Area for cell type $_AND_ is unknown!
+   Area for cell type $_NAND_ is unknown!
+   Area for cell type $_OR_ is unknown!
+   Area for cell type $_NOR_ is unknown!
+   Area for cell type $_XOR_ is unknown!
+   Area for cell type $_XNOR_ is unknown!
+   Area for cell type $_ANDNOT_ is unknown!
+   Area for cell type $_ORNOT_ is unknown!
+   Area for cell type $_MUX_ is unknown!
+
+   Chip area for module '\compute_core': 7423.369600
+     of which used for sequential elements: 7423.369600 (100.00%)
+
+[INFO] Using strategy "AREA 0"...
+
+54. Executing ABC pass (technology mapping using ABC).
+
+54.1. Extracting gate netlist of module `\compute_core' to `/tmp/yosys-abc-N6kvyt/input.blif'..
+Extracted 3373 gates and 3758 wires to a netlist network with 384 inputs and 349 outputs.
+
+54.1.1. Executing ABC.
+Running ABC command: "/opt/oss-cad-suite/lib/yosys-abc" -s -f /tmp/yosys-abc-N6kvyt/abc.script 2>&1
+ABC: ABC command line: "source /tmp/yosys-abc-N6kvyt/abc.script".
+ABC: 
+ABC: + read_blif /tmp/yosys-abc-N6kvyt/input.blif 
+ABC: + read_lib -w /mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/runs/RUN_2026-05-14_09-52-45/tmp/0feb395695db49b1b4b6985733bbf5ec.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.36 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/runs/RUN_2026-05-14_09-52-45/tmp/0feb395695db49b1b4b6985733bbf5ec.lib" has 175 cells (17 skipped: 14 seq; 3 tri-state; 0 no func; 0 dont_use).  Time =     0.43 sec
+ABC: Memory =    9.54 MB. Time =     0.43 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + read_constr -v /mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/runs/RUN_2026-05-14_09-52-45/06-yosys-synthesis/synthesis.sdc 
+ABC: Setting driving cell to be "sky130_fd_sc_hd__inv_2/Y".
+ABC: Setting output load to be 33.442001.
+ABC: + read_constr /mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/runs/RUN_2026-05-14_09-52-45/06-yosys-synthesis/synthesis.sdc 
+ABC: + fx 
+ABC: + mfs 
+ABC: + strash 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + drf -l -z 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + retime -D -D 2000.0 -M 5 
+ABC: + scleanup 
+ABC: Error: The network is combinational.
+ABC: + fraig_store 
+ABC: + balance 
+ABC: + fraig_store 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + drf -l -z 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + fraig_store 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + drf -l -z 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + fraig_store 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + drf -l -z 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + fraig_store 
+ABC: + fraig_restore 
+ABC: + amap -m -Q 0.1 -F 20 -A 20 -C 5000 
+ABC: + retime -D -D 2000.0 
+ABC: + &get -n 
+ABC: + &st 
+ABC: + &dch 
+ABC: + &nf 
+ABC: + &put 
+ABC: + 
+ABC: + stime -p 
+ABC: Cannot find the default PI driving cell (sky130_fd_sc_hd__inv_2/Y) in the library.
+ABC: WireLoad = "none"  Gates =   2382 (  3.9 %)   Cap = 11.8 ff (  7.6 %)   Area =    23770.30 ( 71.3 %)   Delay = 19028.07 ps  ( 12.8 %)               
+ABC: Path  0 --      63 : 0   73 pi                        A =   0.00  Df =   0.0   -0.0 ps  S =   0.0 ps  Cin =  0.0 ff  Cout = 380.5 ff  Cmax =   0.0 ff  G =    0  
+ABC: Path  1 --    1113 : 6    1 sky130_fd_sc_hd__mux4_2   A =  22.52  Df = 453.3 -156.0 ps  S =  76.6 ps  Cin =  2.6 ff  Cout =   2.0 ff  Cmax = 301.2 ff  G =   71  
+ABC: Path  2 --    1114 : 3    1 sky130_fd_sc_hd__mux2_1   A =  11.26  Df = 742.0 -116.0 ps  S =  51.0 ps  Cin =  2.3 ff  Cout =   2.0 ff  Cmax = 173.0 ff  G =   82  
+ABC: Path  3 --    1115 : 3    4 sky130_fd_sc_hd__mux2_1   A =  11.26  Df =1098.6 -275.8 ps  S = 149.4 ps  Cin =  2.3 ff  Cout =  15.4 ff  Cmax = 173.0 ff  G =  644  
+ABC: Path  4 --    1117 : 3    3 sky130_fd_sc_hd__and3b_2  A =  10.01  Df =1346.6 -287.6 ps  S =  66.6 ps  Cin =  1.5 ff  Cout =   7.7 ff  Cmax = 309.5 ff  G =  503  
+ABC: Path  5 --    1118 : 2   52 sky130_fd_sc_hd__nand2_2  A =   6.26  Df =1934.1 -435.2 ps  S = 791.6 ps  Cin =  4.4 ff  Cout = 157.5 ff  Cmax = 295.7 ff  G = 3404  
+ABC: Path  6 --    1419 : 2   15 sky130_fd_sc_hd__nand2_2  A =   6.26  Df =2267.2 -341.2 ps  S = 304.7 ps  Cin =  4.4 ff  Cout =  47.2 ff  Cmax = 295.7 ff  G = 1020  
+ABC: Path  7 --    1420 : 2    2 sky130_fd_sc_hd__and2_2   A =   7.51  Df =2594.3 -379.4 ps  S =  81.8 ps  Cin =  1.5 ff  Cout =  11.5 ff  Cmax = 303.0 ff  G =  753  
+ABC: Path  8 --    1559 : 4    3 sky130_fd_sc_hd__a22o_2   A =  10.01  Df =2857.0 -203.7 ps  S =  76.5 ps  Cin =  2.3 ff  Cout =  11.6 ff  Cmax = 301.2 ff  G =  478  
+ABC: Path  9 --    1565 : 3    2 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =3080.4 -289.2 ps  S =  50.5 ps  Cin =  2.4 ff  Cout =   7.1 ff  Cmax = 309.5 ff  G =  289  
+ABC: Path 10 --    1567 : 3    3 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =3304.6 -223.9 ps  S =  61.1 ps  Cin =  2.4 ff  Cout =   9.5 ff  Cmax = 309.5 ff  G =  390  
+ABC: Path 11 --    1578 : 3    2 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =3523.4 -230.3 ps  S =  49.6 ps  Cin =  2.4 ff  Cout =   7.0 ff  Cmax = 309.5 ff  G =  286  
+ABC: Path 12 --    1580 : 4    3 sky130_fd_sc_hd__a211o_2  A =  10.01  Df =3871.3 -344.6 ps  S =  65.7 ps  Cin =  2.4 ff  Cout =   9.5 ff  Cmax = 325.0 ff  G =  390  
+ABC: Path 13 --    1646 : 3    2 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =4096.3 -260.4 ps  S =  50.7 ps  Cin =  2.4 ff  Cout =   7.0 ff  Cmax = 309.5 ff  G =  287  
+ABC: Path 14 --    1649 : 4    3 sky130_fd_sc_hd__a211o_2  A =  10.01  Df =4443.8 -343.2 ps  S =  65.5 ps  Cin =  2.4 ff  Cout =   9.6 ff  Cmax = 325.0 ff  G =  390  
+ABC: Path 15 --    1681 : 3    2 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =4668.8 -330.0 ps  S =  50.6 ps  Cin =  2.4 ff  Cout =   7.0 ff  Cmax = 309.5 ff  G =  287  
+ABC: Path 16 --    1716 : 4    4 sky130_fd_sc_hd__o211a_2  A =  10.01  Df =4814.1  -52.0 ps  S = 117.3 ps  Cin =  2.4 ff  Cout =  17.0 ff  Cmax = 268.3 ff  G =  690  
+ABC: Path 17 --    1758 : 2    1 sky130_fd_sc_hd__or2_2    A =   6.26  Df =5136.2  -61.6 ps  S =  71.6 ps  Cin =  1.5 ff  Cout =   8.4 ff  Cmax = 299.4 ff  G =  569  
+ABC: Path 18 --    1765 : 2    2 sky130_fd_sc_hd__xnor2_2  A =  16.27  Df =5347.9 -114.7 ps  S = 228.4 ps  Cin =  8.5 ff  Cout =  13.9 ff  Cmax = 121.8 ff  G =  157  
+ABC: Path 19 --    1902 : 2    3 sky130_fd_sc_hd__xor2_2   A =  16.27  Df =5661.5 -217.9 ps  S = 242.2 ps  Cin =  8.6 ff  Cout =  16.3 ff  Cmax = 130.0 ff  G =  182  
+ABC: Path 20 --    1903 : 2    1 sky130_fd_sc_hd__nand2b_2 A =   8.76  Df =5742.8 -217.6 ps  S =  52.2 ps  Cin =  3.0 ff  Cout =   4.7 ff  Cmax = 285.7 ff  G =  145  
+ABC: Path 21 --    1904 : 4    4 sky130_fd_sc_hd__o31ai_2  A =  12.51  Df =6014.0 -380.9 ps  S = 304.7 ps  Cin =  4.4 ff  Cout =  11.0 ff  Cmax =  80.6 ff  G =  240  
+ABC: Path 22 --    1930 : 4    3 sky130_fd_sc_hd__a31o_2   A =   8.76  Df =6283.4 -402.3 ps  S = 120.0 ps  Cin =  2.4 ff  Cout =  18.2 ff  Cmax = 271.9 ff  G =  746  
+ABC: Path 23 --    1938 : 4    3 sky130_fd_sc_hd__a31oi_2  A =  12.51  Df =6410.1 -326.5 ps  S = 226.9 ps  Cin =  4.4 ff  Cout =  12.1 ff  Cmax = 118.1 ff  G =  264  
+ABC: Path 24 --    1943 : 3   20 sky130_fd_sc_hd__a21oi_2  A =   8.76  Df =6921.2 -629.8 ps  S = 608.2 ps  Cin =  4.6 ff  Cout =  50.2 ff  Cmax = 128.2 ff  G = 1043  
+ABC: Path 25 --    2049 : 4    3 sky130_fd_sc_hd__o31a_2   A =  10.01  Df =7181.5 -401.4 ps  S =  68.7 ps  Cin =  2.3 ff  Cout =   8.2 ff  Cmax = 285.7 ff  G =  333  
+ABC: Path 26 --    2051 : 3    2 sky130_fd_sc_hd__a21oi_2  A =   8.76  Df =7234.5 -107.3 ps  S =  84.7 ps  Cin =  4.6 ff  Cout =   3.2 ff  Cmax = 128.2 ff  G =   65  
+ABC: Path 27 --    2060 : 4    1 sky130_fd_sc_hd__or4_2    A =   8.76  Df =7895.2 -406.4 ps  S = 106.6 ps  Cin =  1.5 ff  Cout =   4.6 ff  Cmax = 310.4 ff  G =  290  
+ABC: Path 28 --    2078 : 4    3 sky130_fd_sc_hd__nor4_2   A =  12.51  Df =8224.5 -475.3 ps  S = 259.9 ps  Cin =  4.3 ff  Cout =   6.3 ff  Cmax =  64.1 ff  G =  142  
+ABC: Path 29 --    2149 : 4    2 sky130_fd_sc_hd__and4_2   A =  10.01  Df =8503.5 -544.7 ps  S =  73.2 ps  Cin =  1.5 ff  Cout =   7.0 ff  Cmax = 300.3 ff  G =  444  
+ABC: Path 30 --    2206 : 4    1 sky130_fd_sc_hd__nand4_2  A =  12.51  Df =8577.1 -553.3 ps  S =  72.7 ps  Cin =  4.4 ff  Cout =   4.5 ff  Cmax = 200.5 ff  G =  100  
+ABC: Path 31 --    2212 : 4    5 sky130_fd_sc_hd__o211ai_2 A =  12.51  Df =8749.6  -52.2 ps  S = 243.7 ps  Cin =  4.4 ff  Cout =  15.4 ff  Cmax = 133.7 ff  G =  335  
+ABC: Path 32 --    2213 : 2   56 sky130_fd_sc_hd__nand2_2  A =   6.26  Df =9477.9 -196.1 ps  S = 948.9 ps  Cin =  4.4 ff  Cout = 189.1 ff  Cmax = 295.7 ff  G = 4127  
+ABC: Path 33 --    2445 : 4    1 sky130_fd_sc_hd__or4bb_2  A =  12.51  Df =11639.8 -413.0 ps  S =  90.0 ps  Cin =  1.5 ff  Cout =   2.4 ff  Cmax = 312.2 ff  G =  155  
+ABC: Path 34 --    2448 : 5    1 sky130_fd_sc_hd__a311o_2  A =  11.26  Df =12004.7 -625.1 ps  S =  61.7 ps  Cin =  2.3 ff  Cout =   2.4 ff  Cmax = 298.5 ff  G =  101  
+ABC: Path 35 --    2449 : 3    1 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =12207.3 -682.4 ps  S =  37.7 ps  Cin =  2.4 ff  Cout =   2.4 ff  Cmax = 309.5 ff  G =   99  
+ABC: Path 36 --    2451 : 5    3 sky130_fd_sc_hd__a32o_2   A =  11.26  Df =12503.5 -753.6 ps  S = 133.5 ps  Cin =  2.3 ff  Cout =  18.8 ff  Cmax = 264.6 ff  G =  767  
+ABC: Path 37 --    2453 : 2    1 sky130_fd_sc_hd__nand2b_2 A =   8.76  Df =12579.8 -760.2 ps  S =  50.1 ps  Cin =  3.0 ff  Cout =   4.5 ff  Cmax = 285.7 ff  G =  147  
+ABC: Path 38 --    2471 : 3    2 sky130_fd_sc_hd__o21ai_2  A =   8.76  Df =12925.7 -278.9 ps  S = 173.9 ps  Cin =  4.5 ff  Cout =  11.5 ff  Cmax = 139.2 ff  G =  242  
+ABC: Path 39 --    2475 : 3    2 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =13104.4 -233.3 ps  S =  70.9 ps  Cin =  2.4 ff  Cout =  11.5 ff  Cmax = 309.5 ff  G =  469  
+ABC: Path 40 --    2479 : 3    4 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =13267.0 -174.4 ps  S =  88.8 ps  Cin =  2.4 ff  Cout =  15.5 ff  Cmax = 309.5 ff  G =  635  
+ABC: Path 41 --    2491 : 4    2 sky130_fd_sc_hd__and4_2   A =  10.01  Df =13491.0 -184.3 ps  S =  64.5 ps  Cin =  1.5 ff  Cout =   5.0 ff  Cmax = 300.3 ff  G =  310  
+ABC: Path 42 --    2501 : 5    2 sky130_fd_sc_hd__o311a_2  A =  11.26  Df =13673.8   -9.6 ps  S =  57.9 ps  Cin =  2.4 ff  Cout =   4.0 ff  Cmax = 293.9 ff  G =  161  
+ABC: Path 43 --    2509 : 4    3 sky130_fd_sc_hd__a211o_2  A =  10.01  Df =14044.0 -221.2 ps  S =  80.7 ps  Cin =  2.4 ff  Cout =  14.3 ff  Cmax = 325.0 ff  G =  581  
+ABC: Path 44 --    2514 : 4    2 sky130_fd_sc_hd__a211o_2  A =  10.01  Df =14358.1 -395.3 ps  S =  59.2 ps  Cin =  2.4 ff  Cout =   7.1 ff  Cmax = 325.0 ff  G =  288  
+ABC: Path 45 --    2516 : 4    2 sky130_fd_sc_hd__a31o_2   A =   8.76  Df =14627.4 -482.3 ps  S =  80.3 ps  Cin =  2.4 ff  Cout =  10.9 ff  Cmax = 271.9 ff  G =  445  
+ABC: Path 46 --    2518 : 3    4 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =14878.9 -553.9 ps  S = 102.6 ps  Cin =  2.4 ff  Cout =  18.4 ff  Cmax = 309.5 ff  G =  755  
+ABC: Path 47 --    2547 : 5    4 sky130_fd_sc_hd__a41o_2   A =  11.26  Df =15138.3 -570.1 ps  S = 110.7 ps  Cin =  2.3 ff  Cout =  18.6 ff  Cmax = 325.0 ff  G =  765  
+ABC: Path 48 --    2565 : 5    3 sky130_fd_sc_hd__a221o_2  A =  11.26  Df =15560.8 -771.6 ps  S = 120.9 ps  Cin =  2.3 ff  Cout =  20.5 ff  Cmax = 299.4 ff  G =  847  
+ABC: Path 49 --    2574 : 3    5 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =15811.9 -821.4 ps  S = 119.1 ps  Cin =  2.4 ff  Cout =  21.9 ff  Cmax = 309.5 ff  G =  890  
+ABC: Path 50 --    2582 : 5    4 sky130_fd_sc_hd__a2111o_2 A =  12.51  Df =16316.3 -338.8 ps  S =  87.7 ps  Cin =  2.4 ff  Cout =  11.5 ff  Cmax = 324.1 ff  G =  457  
+ABC: Path 51 --    2686 : 4    2 sky130_fd_sc_hd__or4_2    A =   8.76  Df =16985.9 -844.6 ps  S = 114.1 ps  Cin =  1.5 ff  Cout =   6.2 ff  Cmax = 310.4 ff  G =  399  
+ABC: Path 52 --    2689 : 4    1 sky130_fd_sc_hd__and4b_2  A =  11.26  Df =17226.1 -234.8 ps  S =  50.2 ps  Cin =  1.6 ff  Cout =   2.5 ff  Cmax = 297.6 ff  G =  152  
+ABC: Path 53 --    2693 : 4    2 sky130_fd_sc_hd__a31o_2   A =   8.76  Df =17475.0 -319.1 ps  S =  60.5 ps  Cin =  2.4 ff  Cout =   7.1 ff  Cmax = 271.9 ff  G =  288  
+ABC: Path 54 --    2699 : 3    9 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =17704.1 -305.9 ps  S = 118.8 ps  Cin =  2.4 ff  Cout =  21.4 ff  Cmax = 309.5 ff  G =  860  
+ABC: Path 55 --    2700 : 2   13 sky130_fd_sc_hd__nor2_2   A =   6.26  Df =17976.1 -480.3 ps  S = 322.7 ps  Cin =  4.4 ff  Cout =  28.4 ff  Cmax = 141.9 ff  G =  622  
+ABC: Path 56 --    2930 : 3    1 sky130_fd_sc_hd__or3b_2   A =   8.76  Df =18436.2 -738.6 ps  S =  68.9 ps  Cin =  1.5 ff  Cout =   1.5 ff  Cmax = 269.2 ff  G =   95  
+ABC: Path 57 --    2931 : 4    1 sky130_fd_sc_hd__or4b_2   A =  10.01  Df =18635.4 -319.6 ps  S =  96.0 ps  Cin =  1.5 ff  Cout =   2.4 ff  Cmax = 265.5 ff  G =  159  
+ABC: Path 58 --    2933 : 5    1 sky130_fd_sc_hd__a32o_2   A =  11.26  Df =18783.8 -197.3 ps  S =  51.3 ps  Cin =  2.3 ff  Cout =   1.5 ff  Cmax = 264.6 ff  G =   62  
+ABC: Path 59 --    2934 : 2    1 sky130_fd_sc_hd__and2_2   A =   7.51  Df =19028.1 -185.2 ps  S = 180.6 ps  Cin =  1.5 ff  Cout =  33.4 ff  Cmax = 303.0 ff  G = 2288  
+ABC: Start-point = pi62 ($\ifm_buf$rdreg[0]$q [0]).  End-point = po316 ($auto$rtlil.cc:2985:MuxGate$21031).
+ABC: + print_stats -m 
+ABC: netlist                       : i/o =  384/  349  lat =    0  nd =  2382  edge =   6702  area =23773.52  delay =65.00  lev = 65
+ABC: + write_blif /tmp/yosys-abc-N6kvyt/output.blif 
+
+54.1.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__a2111o_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a2111oi_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a211o_2 cells:       30
+ABC RESULTS:   sky130_fd_sc_hd__a211oi_2 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__a21bo_2 cells:       25
+ABC RESULTS:   sky130_fd_sc_hd__a21boi_2 cells:       10
+ABC RESULTS:   sky130_fd_sc_hd__a21o_2 cells:       94
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_2 cells:       68
+ABC RESULTS:   sky130_fd_sc_hd__a221o_2 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__a22o_2 cells:       65
+ABC RESULTS:   sky130_fd_sc_hd__a22oi_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__a2bb2o_2 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__a311o_2 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__a31o_2 cells:       46
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_2 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__a32o_2 cells:       32
+ABC RESULTS:   sky130_fd_sc_hd__a32oi_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a41o_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__and2_2 cells:      114
+ABC RESULTS:   sky130_fd_sc_hd__and2b_2 cells:       37
+ABC RESULTS:   sky130_fd_sc_hd__and3_2 cells:       70
+ABC RESULTS:   sky130_fd_sc_hd__and3b_2 cells:       13
+ABC RESULTS:   sky130_fd_sc_hd__and4_2 cells:       14
+ABC RESULTS:   sky130_fd_sc_hd__and4b_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__and4bb_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__inv_2 cells:       94
+ABC RESULTS:   sky130_fd_sc_hd__mux2_1 cells:      502
+ABC RESULTS:   sky130_fd_sc_hd__mux4_2 cells:       61
+ABC RESULTS:   sky130_fd_sc_hd__nand2_2 cells:      192
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_2 cells:       27
+ABC RESULTS:   sky130_fd_sc_hd__nand3_2 cells:       21
+ABC RESULTS:   sky130_fd_sc_hd__nand3b_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__nand4_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__nor2_2 cells:      156
+ABC RESULTS:   sky130_fd_sc_hd__nor3_2 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__nor3b_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__nor4_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__nor4b_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o2111ai_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o211a_2 cells:       38
+ABC RESULTS:   sky130_fd_sc_hd__o211ai_2 cells:       14
+ABC RESULTS:   sky130_fd_sc_hd__o21a_2 cells:       44
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_2 cells:       45
+ABC RESULTS:   sky130_fd_sc_hd__o21ba_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__o21bai_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o221a_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o221ai_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o22a_2 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__o22ai_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__o2bb2a_2 cells:       13
+ABC RESULTS:   sky130_fd_sc_hd__o311a_2 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__o311ai_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o31a_2 cells:       22
+ABC RESULTS:   sky130_fd_sc_hd__o31ai_2 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__o32a_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or2_2 cells:      112
+ABC RESULTS:   sky130_fd_sc_hd__or3_2 cells:       34
+ABC RESULTS:   sky130_fd_sc_hd__or3b_2 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__or4_2 cells:       12
+ABC RESULTS:   sky130_fd_sc_hd__or4b_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__or4bb_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__xnor2_2 cells:      161
+ABC RESULTS:   sky130_fd_sc_hd__xor2_2 cells:       89
+ABC RESULTS:        internal signals:     3025
+ABC RESULTS:           input signals:      384
+ABC RESULTS:          output signals:      349
+Removing temp directory.
+
+55. Executing SETUNDEF pass (replace undef values with defined constants).
+
+56. Executing HILOMAP pass (mapping to constant drivers).
+
+57. Executing SPLITNETS pass (splitting up multi-bit signals).
+
+58. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \compute_core..
+Removed 0 unused cells and 3759 unused wires.
+<suppressed ~2 debug messages>
+
+59. Executing INSBUF pass (insert buffer cells for connected wires).
+
+60. Executing CHECK pass (checking for obvious problems).
+Checking module compute_core...
+Found and reported 0 problems.
+{
+   "creator": "Yosys 0.49+3 (git sha1 3d35f367c, clang++ 18.1.8 -fPIC -O3)",
+   "invocation": "stat -json -liberty /mnt/d/PSU/Q3/HW_AI-ML/codefest/cf07/hdl/runs/RUN_2026-05-14_09-52-45/tmp/0feb395695db49b1b4b6985733bbf5ec.lib ",
+   "modules": {
+      "\\compute_core": {
+         "num_wires":         2723,
+         "num_wire_bits":     2768,
+         "num_pub_wires":     337,
+         "num_pub_wire_bits": 382,
+         "num_ports":         10,
+         "num_port_bits":     55,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         2731,
+         "area":              31193.667200,
+         "num_cells_by_type": {
+            "sky130_fd_sc_hd__a2111o_2": 2,
+            "sky130_fd_sc_hd__a2111oi_2": 1,
+            "sky130_fd_sc_hd__a211o_2": 30,
+            "sky130_fd_sc_hd__a211oi_2": 9,
+            "sky130_fd_sc_hd__a21bo_2": 25,
+            "sky130_fd_sc_hd__a21boi_2": 10,
+            "sky130_fd_sc_hd__a21o_2": 94,
+            "sky130_fd_sc_hd__a21oi_2": 68,
+            "sky130_fd_sc_hd__a221o_2": 7,
+            "sky130_fd_sc_hd__a22o_2": 65,
+            "sky130_fd_sc_hd__a22oi_2": 3,
+            "sky130_fd_sc_hd__a2bb2o_2": 8,
+            "sky130_fd_sc_hd__a311o_2": 7,
+            "sky130_fd_sc_hd__a31o_2": 46,
+            "sky130_fd_sc_hd__a31oi_2": 7,
+            "sky130_fd_sc_hd__a32o_2": 32,
+            "sky130_fd_sc_hd__a32oi_2": 2,
+            "sky130_fd_sc_hd__a41o_2": 2,
+            "sky130_fd_sc_hd__and2_2": 114,
+            "sky130_fd_sc_hd__and2b_2": 37,
+            "sky130_fd_sc_hd__and3_2": 70,
+            "sky130_fd_sc_hd__and3b_2": 13,
+            "sky130_fd_sc_hd__and4_2": 14,
+            "sky130_fd_sc_hd__and4b_2": 3,
+            "sky130_fd_sc_hd__and4bb_2": 1,
+            "sky130_fd_sc_hd__dfxtp_2": 349,
+            "sky130_fd_sc_hd__inv_2": 94,
+            "sky130_fd_sc_hd__mux2_1": 502,
+            "sky130_fd_sc_hd__mux4_2": 61,
+            "sky130_fd_sc_hd__nand2_2": 192,
+            "sky130_fd_sc_hd__nand2b_2": 27,
+            "sky130_fd_sc_hd__nand3_2": 21,
+            "sky130_fd_sc_hd__nand3b_2": 2,
+            "sky130_fd_sc_hd__nand4_2": 5,
+            "sky130_fd_sc_hd__nor2_2": 156,
+            "sky130_fd_sc_hd__nor3_2": 9,
+            "sky130_fd_sc_hd__nor3b_2": 2,
+            "sky130_fd_sc_hd__nor4_2": 4,
+            "sky130_fd_sc_hd__nor4b_2": 1,
+            "sky130_fd_sc_hd__o2111ai_2": 1,
+            "sky130_fd_sc_hd__o211a_2": 38,
+            "sky130_fd_sc_hd__o211ai_2": 14,
+            "sky130_fd_sc_hd__o21a_2": 44,
+            "sky130_fd_sc_hd__o21ai_2": 45,
+            "sky130_fd_sc_hd__o21ba_2": 5,
+            "sky130_fd_sc_hd__o21bai_2": 2,
+            "sky130_fd_sc_hd__o221a_2": 1,
+            "sky130_fd_sc_hd__o221ai_2": 1,
+            "sky130_fd_sc_hd__o22a_2": 6,
+            "sky130_fd_sc_hd__o22ai_2": 4,
+            "sky130_fd_sc_hd__o2bb2a_2": 13,
+            "sky130_fd_sc_hd__o311a_2": 7,
+            "sky130_fd_sc_hd__o311ai_2": 1,
+            "sky130_fd_sc_hd__o31a_2": 22,
+            "sky130_fd_sc_hd__o31ai_2": 7,
+            "sky130_fd_sc_hd__o32a_2": 1,
+            "sky130_fd_sc_hd__or2_2": 112,
+            "sky130_fd_sc_hd__or3_2": 34,
+            "sky130_fd_sc_hd__or3b_2": 9,
+            "sky130_fd_sc_hd__or4_2": 12,
+            "sky130_fd_sc_hd__or4b_2": 4,
+            "sky130_fd_sc_hd__or4bb_2": 3,
+            "sky130_fd_sc_hd__xnor2_2": 161,
+            "sky130_fd_sc_hd__xor2_2": 89
+         }
+      }
+   },
+      "design": {
+         "num_wires":         2723,
+         "num_wire_bits":     2768,
+         "num_pub_wires":     337,
+         "num_pub_wire_bits": 382,
+         "num_ports":         10,
+         "num_port_bits":     55,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         2731,
+         "area":              31193.667200,
+         "num_cells_by_type": {
+            "sky130_fd_sc_hd__a2111o_2": 2,
+            "sky130_fd_sc_hd__a2111oi_2": 1,
+            "sky130_fd_sc_hd__a211o_2": 30,
+            "sky130_fd_sc_hd__a211oi_2": 9,
+            "sky130_fd_sc_hd__a21bo_2": 25,
+            "sky130_fd_sc_hd__a21boi_2": 10,
+            "sky130_fd_sc_hd__a21o_2": 94,
+            "sky130_fd_sc_hd__a21oi_2": 68,
+            "sky130_fd_sc_hd__a221o_2": 7,
+            "sky130_fd_sc_hd__a22o_2": 65,
+            "sky130_fd_sc_hd__a22oi_2": 3,
+            "sky130_fd_sc_hd__a2bb2o_2": 8,
+            "sky130_fd_sc_hd__a311o_2": 7,
+            "sky130_fd_sc_hd__a31o_2": 46,
+            "sky130_fd_sc_hd__a31oi_2": 7,
+            "sky130_fd_sc_hd__a32o_2": 32,
+            "sky130_fd_sc_hd__a32oi_2": 2,
+            "sky130_fd_sc_hd__a41o_2": 2,
+            "sky130_fd_sc_hd__and2_2": 114,
+            "sky130_fd_sc_hd__and2b_2": 37,
+            "sky130_fd_sc_hd__and3_2": 70,
+            "sky130_fd_sc_hd__and3b_2": 13,
+            "sky130_fd_sc_hd__and4_2": 14,
+            "sky130_fd_sc_hd__and4b_2": 3,
+            "sky130_fd_sc_hd__and4bb_2": 1,
+            "sky130_fd_sc_hd__dfxtp_2": 349,
+            "sky130_fd_sc_hd__inv_2": 94,
+            "sky130_fd_sc_hd__mux2_1": 502,
+            "sky130_fd_sc_hd__mux4_2": 61,
+            "sky130_fd_sc_hd__nand2_2": 192,
+            "sky130_fd_sc_hd__nand2b_2": 27,
+            "sky130_fd_sc_hd__nand3_2": 21,
+            "sky130_fd_sc_hd__nand3b_2": 2,
+            "sky130_fd_sc_hd__nand4_2": 5,
+            "sky130_fd_sc_hd__nor2_2": 156,
+            "sky130_fd_sc_hd__nor3_2": 9,
+            "sky130_fd_sc_hd__nor3b_2": 2,
+            "sky130_fd_sc_hd__nor4_2": 4,
+            "sky130_fd_sc_hd__nor4b_2": 1,
+            "sky130_fd_sc_hd__o2111ai_2": 1,
+            "sky130_fd_sc_hd__o211a_2": 38,
+            "sky130_fd_sc_hd__o211ai_2": 14,
+            "sky130_fd_sc_hd__o21a_2": 44,
+            "sky130_fd_sc_hd__o21ai_2": 45,
+            "sky130_fd_sc_hd__o21ba_2": 5,
+            "sky130_fd_sc_hd__o21bai_2": 2,
+            "sky130_fd_sc_hd__o221a_2": 1,
+            "sky130_fd_sc_hd__o221ai_2": 1,
+            "sky130_fd_sc_hd__o22a_2": 6,
+            "sky130_fd_sc_hd__o22ai_2": 4,
+            "sky130_fd_sc_hd__o2bb2a_2": 13,
+            "sky130_fd_sc_hd__o311a_2": 7,
+            "sky130_fd_sc_hd__o311ai_2": 1,
+            "sky130_fd_sc_hd__o31a_2": 22,
+            "sky130_fd_sc_hd__o31ai_2": 7,
+            "sky130_fd_sc_hd__o32a_2": 1,
+            "sky130_fd_sc_hd__or2_2": 112,
+            "sky130_fd_sc_hd__or3_2": 34,
+            "sky130_fd_sc_hd__or3b_2": 9,
+            "sky130_fd_sc_hd__or4_2": 12,
+            "sky130_fd_sc_hd__or4b_2": 4,
+            "sky130_fd_sc_hd__or4bb_2": 3,
+            "sky130_fd_sc_hd__xnor2_2": 161,
+            "sky130_fd_sc_hd__xor2_2": 89
+         }
+      }
+}
+
+61. Printing statistics.
+
+=== compute_core ===
+
+   Number of wires:               2723
+   Number of wire bits:           2768
+   Number of public wires:         337
+   Number of public wire bits:     382
+   Number of ports:                 10
+   Number of port bits:             55
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               2731
+     sky130_fd_sc_hd__a2111o_2       2
+     sky130_fd_sc_hd__a2111oi_2      1
+     sky130_fd_sc_hd__a211o_2       30
+     sky130_fd_sc_hd__a211oi_2       9
+     sky130_fd_sc_hd__a21bo_2       25
+     sky130_fd_sc_hd__a21boi_2      10
+     sky130_fd_sc_hd__a21o_2        94
+     sky130_fd_sc_hd__a21oi_2       68
+     sky130_fd_sc_hd__a221o_2        7
+     sky130_fd_sc_hd__a22o_2        65
+     sky130_fd_sc_hd__a22oi_2        3
+     sky130_fd_sc_hd__a2bb2o_2       8
+     sky130_fd_sc_hd__a311o_2        7
+     sky130_fd_sc_hd__a31o_2        46
+     sky130_fd_sc_hd__a31oi_2        7
+     sky130_fd_sc_hd__a32o_2        32
+     sky130_fd_sc_hd__a32oi_2        2
+     sky130_fd_sc_hd__a41o_2         2
+     sky130_fd_sc_hd__and2_2       114
+     sky130_fd_sc_hd__and2b_2       37
+     sky130_fd_sc_hd__and3_2        70
+     sky130_fd_sc_hd__and3b_2       13
+     sky130_fd_sc_hd__and4_2        14
+     sky130_fd_sc_hd__and4b_2        3
+     sky130_fd_sc_hd__and4bb_2       1
+     sky130_fd_sc_hd__dfxtp_2      349
+     sky130_fd_sc_hd__inv_2         94
+     sky130_fd_sc_hd__mux2_1       502
+     sky130_fd_sc_hd__mux4_2        61
+     sky130_fd_sc_hd__nand2_2      192
+     sky130_fd_sc_hd__nand2b_2      27
+     sky130_fd_sc_hd__nand3_2       21
+     sky130_fd_sc_hd__nand3b_2       2
+     sky130_fd_sc_hd__nand4_2        5
+     sky130_fd_sc_hd__nor2_2       156
+     sky130_fd_sc_hd__nor3_2         9
+     sky130_fd_sc_hd__nor3b_2        2
+     sky130_fd_sc_hd__nor4_2         4
+     sky130_fd_sc_hd__nor4b_2        1
+     sky130_fd_sc_hd__o2111ai_2      1
+     sky130_fd_sc_hd__o211a_2       38
+     sky130_fd_sc_hd__o211ai_2      14
+     sky130_fd_sc_hd__o21a_2        44
+     sky130_fd_sc_hd__o21ai_2       45
+     sky130_fd_sc_hd__o21ba_2        5
+     sky130_fd_sc_hd__o21bai_2       2
+     sky130_fd_sc_hd__o221a_2        1
+     sky130_fd_sc_hd__o221ai_2       1
+     sky130_fd_sc_hd__o22a_2         6
+     sky130_fd_sc_hd__o22ai_2        4
+     sky130_fd_sc_hd__o2bb2a_2      13
+     sky130_fd_sc_hd__o311a_2        7
+     sky130_fd_sc_hd__o311ai_2       1
+     sky130_fd_sc_hd__o31a_2        22
+     sky130_fd_sc_hd__o31ai_2        7
+     sky130_fd_sc_hd__o32a_2         1
+     sky130_fd_sc_hd__or2_2        112
+     sky130_fd_sc_hd__or3_2         34
+     sky130_fd_sc_hd__or3b_2         9
+     sky130_fd_sc_hd__or4_2         12
+     sky130_fd_sc_hd__or4b_2         4
+     sky130_fd_sc_hd__or4bb_2        3
+     sky130_fd_sc_hd__xnor2_2      161
+     sky130_fd_sc_hd__xor2_2        89
+
+   Chip area for module '\compute_core': 31193.667200
+     of which used for sequential elements: 7423.369600 (23.80%)
+
+62. Executing Verilog backend.
+Dumping module `\compute_core'.
+
+63. Executing JSON backend.
+
+End of script. Logfile hash: 9b18bd75d4, CPU: user 7.94s system 0.39s, MEM: 55.26 MB peak
+Yosys 0.49+3 (git sha1 3d35f367c, clang++ 18.1.8 -fPIC -O3)
+Time spent: 66% 2x abc (15 sec), 5% 40x opt_expr (1 sec), ...
