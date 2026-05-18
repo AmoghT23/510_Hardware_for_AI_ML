@@ -1,15 +1,15 @@
-# M3 Synthesis Plan — compute_core
+# M3 Plan — compute_core (INT8 QAT Pivot)
 
-**Option A: synthesized own project core**
+**Option A: own project core | ECE 410/510 Spring 2026**
 
-OpenROAD formal STA (nom_tt_025C_1v80) gives a worst negative setup slack of −19.653 ns against the 2.0 ns clock target (data arrival 21.319 ns, required 1.667 ns). The datapath is fully combinational between registers and must be pipelined before M3.
+CF07 synthesis produced a −19.653 ns setup violation (arrival 21.319 ns, required 1.667 ns) from the fully combinational FP16 MAC chain: `fp16_to_fp32` → 24×24-bit multiply → `clz24` → barrel-shift → `fp32_to_fp16`. Power: 367.9 mW, 97.8% combinational. SKY130A cannot close this path at 500 MHz.
 
 **Changes for M3:**
 
-1. **Pipeline the FP16 datapath.** Insert registers every ~8–10 logic levels along the `ifm_buf$rdreg` → mux/AOI → output path; ~7 stages should bring each under 2 ns.
+1. **Pivot to INT8 QAT.** Remove all FP functions (~180 lines); replace COMPUTE with `accum <= accum + $signed(w) * $signed(x)` (INT8×INT8→INT32). Estimated critical path: 4.0–6.5 ns; 7-stage pipeline targets 800 MHz–1 GHz. Accuracy drop: ~0.1–0.2% for binary classification, within the 40–50 dB SQNR floor.
 
-2. **Fix WIDTHEXPAND warnings.** Lines 82 and 255 of `synth_top.sv` have implicit width promotions that could mask truncation errors.
+2. **Unroll 9 parallel MACs.** One 3×3 tile per cycle. Target: ~13,000–18,000 µm² and ~60–90 mW per unit (vs. 31,194 µm² / 367.9 mW).
 
-3. **Reduce mux count.** The 502 `mux2_1` cells (18.4% of total) suggest redundant mux trees; sharing structures in the normalization logic should reduce area.
+3. **Fix WIDTHEXPAND warnings** (lines 82, 255) before the INT8 rewrite.
 
-4. **Keep the 2.0 ns clock target** for M3 to verify timing closure after pipelining.
+4. **Keep 2.0 ns clock target** to confirm positive setup slack after rewrite.
