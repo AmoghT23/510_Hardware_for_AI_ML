@@ -1,0 +1,23 @@
+{
+    "DESIGN_NAME": "top_ti",
+    "VERILOG_FILES": [
+        "dir::../rtl/sram_sp.sv",
+        "dir::../rtl/grad_core.sv",
+        "dir::../rtl/compute_core_ti.sv",
+        "dir::../rtl/interface_ti.sv",
+        "dir::../rtl/top_ti.sv"
+    ],
+    "CLOCK_PORT": "clk",
+    "CLOCK_PERIOD": 130.0,
+    "PDK": "sky130A",
+    "STD_CELL_LIBRARY": "sky130_fd_sc_hd",
+    "ROUTING_CORES": 4,
+    "DESIGN_REPAIR_BUFFER_INPUT_PORTS": false,
+    "DESIGN_REPAIR_BUFFER_OUTPUT_PORTS": false,
+    "FP_SIZING": "absolute",
+    "DIE_AREA": "0 0 800 800",
+    "FP_CORE_UTIL": 50,
+    "PL_TARGET_DENSITY_PCT": 60,
+    "DIODE_INSERTION_STRATEGY": 3,
+    "MAX_TRANSITION_CONSTRAINT": 1.5
+}

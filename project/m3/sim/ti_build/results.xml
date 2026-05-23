@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1779496463" />
+    <testcase name="test_bf16_forward" classname="test_forward" file="D:\PSU\Q3\HW_AI-ML\project\m3_ti\tb\test_forward.py" lineno="195" time="0.21530818939208984" sim_time_ns="1800.0" ratio_time="8360.109316241966" />
+    <testcase name="test_weight_reuse" classname="test_forward" file="D:\PSU\Q3\HW_AI-ML\project\m3_ti\tb\test_forward.py" lineno="243" time="0.06677865982055664" sim_time_ns="1210.0000000000002" ratio_time="18119.560998250567" />
+    <testcase name="test_grad_w" classname="test_backward" file="D:\PSU\Q3\HW_AI-ML\project\m3_ti\tb\test_backward.py" lineno="189" time="0.2920994758605957" sim_time_ns="8690.0" ratio_time="29750.13897028455" />
+  </testsuite>
+</testsuites>

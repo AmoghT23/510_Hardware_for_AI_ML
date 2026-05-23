@@ -1,0 +1,84 @@
+[dumpfile] "sim/dump.vcd"
+[savefile] "sim/dump.gtkw"
+[timestart] 0
+[size] 1920 900
+[pos] -1 -1
+*-25.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_top
+[treeopen] tb_top.dut
+[treeopen] tb_top.dut.u_interface
+[signals_width] 320
+@28
+tb_top.clk
+@28
+tb_top.rst_n
+@28
+-
+@28
+-REGION 1: Host Write (weight load)  ─────────────────────────────────────────
+@28
+tb_top.s_axil_awvalid
+@28
+tb_top.s_axil_awready
+@22
+tb_top.s_axil_awaddr[5:0]
+@28
+tb_top.s_axil_wvalid
+@28
+tb_top.s_axil_wready
+@200
+tb_top.s_axil_wdata[31:0]
+@28
+tb_top.s_axil_bvalid
+@28
+tb_top.s_axil_bready
+@28
+tb_top.s_axis_tvalid
+@28
+tb_top.s_axis_tready
+@28
+tb_top.s_axis_tlast
+@28
+-
+@28
+-REGION 2: Compute  ───────────────────────────────────────────────────────────
+@28
+tb_top.dut.u_interface.reg_load_weights
+@28
+tb_top.dut.u_interface.wl_active
+@22
+tb_top.dut.u_interface.wl_cnt[3:0]
+@28
+tb_top.dut.u_interface.reg_weights_loaded
+@28
+tb_top.dut.u_interface.reg_start
+@22
+tb_top.dut.u_interface.seq_state
+@22
+tb_top.dut.u_interface.seq_cnt[3:0]
+@28
+tb_top.dut.u_interface.reg_done
+@28
+-
+@28
+-REGION 3: Host Read (FP32 result)  ───────────────────────────────────────────
+@28
+tb_top.s_axil_arvalid
+@28
+tb_top.s_axil_arready
+@22
+tb_top.s_axil_araddr[5:0]
+@28
+tb_top.s_axil_rvalid
+@28
+tb_top.s_axil_rready
+@200
+tb_top.s_axil_rdata[31:0]
+@28
+-
+@28
+-Result register (FP32 dot product: expected 45.0 = 0x42340000)
+@200
+tb_top.dut.u_interface.reg_result[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

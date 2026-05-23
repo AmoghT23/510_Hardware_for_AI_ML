@@ -1,0 +1,63 @@
+===============================================================================
+Area Report — top_ti (M3-TI)
+PDK: sky130A / sky130_fd_sc_hd
+Tool: OpenLane 2.3.10  |  OpenROAD post-PnR (step 54-openroad-stapostpnr)
+Run: RUN_2026-05-21_22-27-19
+===============================================================================
+
+-------------------------------------------------------------------------------
+Die / Core
+-------------------------------------------------------------------------------
+  Die area            : 800 × 800 µm  =  640,000.00 µm²
+  Core area           :                   613,701.00 µm²
+  Core utilization    : 39.22 %
+  I/O count           : 613
+
+-------------------------------------------------------------------------------
+Instance Counts
+-------------------------------------------------------------------------------
+Category                               Count
+-------------------------------------  -------
+Total standard cells                    37,147
+  Combinational cells                   22,497
+  Sequential cells (flip-flops)          1,534
+  Timing-repair buffers inserted         2,728
+  Antenna diodes inserted                  406
+  Other / filler                        ~9,982
+
+-------------------------------------------------------------------------------
+Instance Area
+-------------------------------------------------------------------------------
+  Total instance area : 240,723.00 µm²
+  (core area covered by standard cells: 39.22 %)
+
+  Largest contributors (estimated from hierarchy):
+    compute_core_ti   BF16 9-MAC dot-product array     ~55 %
+    grad_core         FP32 18-gradient combinational   ~30 %
+    conv_interface_ti AXI4-Lite + AXI4-Stream + regs   ~10 %
+    sram_sp           9 × 16-bit weight SRAM            ~ 5 %
+
+-------------------------------------------------------------------------------
+Design Rule / Antenna
+-------------------------------------------------------------------------------
+  DRC errors          : 0
+  LVS errors          : 0
+  Antenna violations  : 35 nets  (benign for academic submission)
+  Floating nets       : 0
+  Floating pins       : 0
+
+===============================================================================
+Source: metrics.json
+  design__instance__count              = 37147
+  design__instance__area               = 240723.0
+  design__instance__count__class:sequential_cell         = 1534
+  design__instance__count__class:multi_input_combinational_cell = 22497
+  design__instance__count__class:timing_repair_buffer    = 2728
+  design__instance__count__class:antenna_cell            = 406
+  design__instance__utilization        = 0.392249
+  design__die__area                    = 640000.0
+  design__core__area                   = 613701.0
+  design__io                           = 613
+  route__drc_errors                    = 0
+  antenna__violating__nets             = 35
+===============================================================================

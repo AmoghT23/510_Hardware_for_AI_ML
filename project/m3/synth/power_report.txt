@@ -1,0 +1,43 @@
+===============================================================================
+Power Report — top_ti (M3-TI)
+PDK: sky130A / sky130_fd_sc_hd
+Tool: OpenLane 2.3.10  |  OpenROAD post-PnR (step 54-openroad-stapostpnr)
+Run: RUN_2026-05-21_22-27-19
+Corner: nom_tt_025C_1v80  (TT — Typical-Typical, 25 °C, 1.80 V)
+===============================================================================
+
+-------------------------------------------------------------------------------
+Power Summary
+-------------------------------------------------------------------------------
+Category               Power (mW)    Fraction
+---------------------  ----------    --------
+Internal (cell)           0.8556       63.7 %
+Switching (dynamic)       0.4878       36.3 %
+Leakage (static)          0.0003        0.0 %
+                          ------
+Total                     1.3437      100.0 %
+
+-------------------------------------------------------------------------------
+Notes
+-------------------------------------------------------------------------------
+  • Internal power: charging / discharging internal cell capacitances,
+    includes short-circuit current during transitions.
+  • Switching power: charging / discharging net load capacitances.
+  • Leakage power: sub-threshold and gate-oxide leakage at 25 °C, 1.80 V.
+  • Activity factor estimated by OpenROAD from netlist topology (no VCD
+    back-annotation); actual dynamic power may differ with real workload.
+  • Power is dominated by the FP32 gradient combinational array (grad_core),
+    which contains 22,497 combinational cells switching each computation cycle.
+
+-------------------------------------------------------------------------------
+Per-Rail Estimate (informational)
+-------------------------------------------------------------------------------
+  VDD = 1.80 V  →  I_avg ≈ 1.3437 mW / 1.80 V ≈ 0.75 mA  (average)
+
+===============================================================================
+Source: metrics.json
+  power__internal__total  = 0.00085563   W  →  0.8556 mW
+  power__switching__total = 0.00048780   W  →  0.4878 mW
+  power__leakage__total   = 2.7040e-07   W  →  0.000270 mW
+  power__total            = 0.001343724  W  →  1.3437 mW
+===============================================================================

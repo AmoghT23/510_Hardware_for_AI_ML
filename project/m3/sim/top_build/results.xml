@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1779336810" />
+    <testcase name="test_end_to_end_cosim" classname="test_top" file="D:\PSU\Q3\HW_AI-ML\project\m3_ti\tb\test_top.py" lineno="183" time="0.0505824089050293" sim_time_ns="1000.0" ratio_time="19769.718794483357" />
+  </testsuite>
+</testsuites>

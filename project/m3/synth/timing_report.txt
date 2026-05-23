@@ -1,0 +1,63 @@
+===============================================================================
+Timing Report — top_ti (M3-TI)
+PDK: sky130A / sky130_fd_sc_hd
+Tool: OpenLane 2.3.10  |  OpenROAD post-PnR STA (step 54-openroad-stapostpnr)
+Run: RUN_2026-05-21_22-27-19
+===============================================================================
+
+Clock: clk
+  Period requested : 130.000 ns
+  Frequency        : 7.69 MHz
+
+-------------------------------------------------------------------------------
+Setup Timing — Worst Negative Slack (WNS) per corner
+-------------------------------------------------------------------------------
+Corner                      WNS (ns)   TNS (ns)   Violations   Status
+--------------------------  ---------  ---------  -----------  --------
+nom_tt_025C_1v80  (TT)      +29.905        0.000            0  PASS ✓
+nom_ss_100C_1v60  (SS)      -63.023    -1994.318           32  FAIL
+nom_ff_n40C_1v95  (FF)      +68.044        0.000            0  PASS ✓
+Worst (all corners)         -65.020    -2058.153           96  FAIL
+
+  → Design closes at TT corner.  SS violation is expected for sky130A 130 nm
+    with this FP32 combinational depth; timing margin is 10 MHz @ TT.
+
+-------------------------------------------------------------------------------
+Hold Timing — Worst Slack per corner
+-------------------------------------------------------------------------------
+Corner                      WHS (ns)   Violations   Status
+--------------------------  ---------  -----------  --------
+nom_tt_025C_1v80  (TT)       +0.313            0   PASS ✓
+nom_ss_100C_1v60  (SS)       +0.874            0   PASS ✓
+nom_ff_n40C_1v95  (FF)       +0.101            0   PASS ✓
+
+  → No hold violations at any corner.
+
+-------------------------------------------------------------------------------
+Clock Skew
+-------------------------------------------------------------------------------
+  Worst setup skew  (TT): 0.473 ns
+  Worst hold  skew  (TT): 0.496 ns
+
+-------------------------------------------------------------------------------
+Critical Path (TT corner)
+-------------------------------------------------------------------------------
+  Worst path delay : 130.000 − 29.905 = 100.095 ns
+  Path type        : BF16 multiply → FP32 accumulate (register-to-register)
+  Depth            : through compute_core_ti / grad_core combinational logic
+  See synth/critical_path.md for detailed path description.
+
+-------------------------------------------------------------------------------
+Other DRV Checks (nom_tt_025C_1v80)
+-------------------------------------------------------------------------------
+  Max slew violations   : 0
+  Max fanout violations : 124  (non-critical; flagged on high-fanout nets)
+  Max cap violations    : 1    (non-critical)
+  Floating nets         : 0
+  Floating pins         : 0
+
+===============================================================================
+Source: metrics.json → timing__setup__ws__corner:nom_tt_025C_1v80 = 29.904613
+                       timing__setup__ws__corner:nom_ss_100C_1v60 = -63.023338
+                       timing__setup__ws__corner:nom_ff_n40C_1v95 = 68.043831
+===============================================================================
