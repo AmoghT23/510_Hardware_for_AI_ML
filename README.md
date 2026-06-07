@@ -140,6 +140,7 @@ The co-processor shares the host DDR4-2667 bus (45.8 GB/s peak), giving a co-pro
 
 ## Repository Structure
 
+```
 510_Hardware_for_AI_ML
 ├── README.md                ← you are here; top-level pointer to M4 
 ├── codefest/
@@ -166,3 +167,4 @@ The co-processor shares the host DDR4-2667 bus (45.8 GB/s peak), giving a co-pro
         ├── bench/              ← Benchmark vs M1 baseline (benchmark.md, CSV, roofline plot)
         └── report/             ← Design justification report (PDF + figures)
 
+'''
