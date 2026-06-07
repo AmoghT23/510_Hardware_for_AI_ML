@@ -140,7 +140,7 @@ The co-processor shares the host DDR4-2667 bus (45.8 GB/s peak), giving a co-pro
 
 ## Repository Structure
 
-510_Hardware_for_AI_ML/
+510_Hardware_for_AI_ML
 ├── README.md                ← you are here; top-level pointer to M4
 ├── codefest/
 │   ├── cf01/
@@ -153,16 +153,16 @@ The co-processor shares the host DDR4-2667 bus (45.8 GB/s peak), giving a co-pro
 │   ├── cf08/
 │   └── cf09/
 └── project/
-├── heilmeier.md         Project motivation and goals (Heilmeier questions)
-├── m1/                  Software baseline: profiling, roofline, interface selection
-├── m2/                  FP16 MAC core + AXI4-Stream RTL, module tests
-├── m3/                  BF16 tile + backward pass; OpenLane/sky130A attempt
-├── m3_ti/               BF16 training+inference co-processor; Cadence SAED14nm single-tile synthesis
-└── m4/                  ← Final submission (M4)
-├── README.md        File catalog — every M4 file with checklist cross-references
-├── rtl/             32×32 systolic array RTL (top.sv, pe_array.sv, compute_core_ti.sv, …)
-├── tb/              Testbenches (tb_top.sv + cocotb Python suites)
-├── sim/             Simulation outputs (final_run.log PASS, final_waveform.png)
-├── synth/           Cadence Genus synthesis results (timing, area, power)
-├── bench/           Benchmark vs M1 baseline (benchmark.md, CSV, roofline plot)
-└── report/          Design justification report (PDF + figures)
+    ├── heilmeier.md          ← Project motivation and goals (Heilmeier questions)
+    ├── m1/                   ← Software baseline: profiling, roofline, interface selection
+    ├── m2/                   ← FP16 MAC core + AXI4-Stream RTL, module tests
+    ├── m3/                   ← BF16 tile + backward pass; OpenLane/sky130A attempt
+    └── m4/                   ← BF16 training+inference co-processor; Cadence SAED14nm single-tile synthesis
+        ├── README.md           ← File catalog — every M4 file with checklist cross-references
+        ├── rtl/                ← 32×32 systolic array RTL (top.sv, pe_array.sv, compute_core_ti.sv, …)
+        ├── tb/                 ← Testbenches (tb_top.sv + cocotb Python suites)
+        ├── sim/                ← Simulation outputs (final_run.log PASS, final_waveform.png)
+        ├── synth/              ← Cadence Genus synthesis results (timing, area, power)
+        ├── bench/              ← Benchmark vs M1 baseline (benchmark.md, CSV, roofline plot)
+        └── report/             ← Design justification report (PDF + figures)
+
