@@ -1,0 +1,10 @@
+# Compiled simulation binaries (not needed for grading)
+sim/*_build/
+sim/tb_top.vvp
+sim/top_build/
+
+# Python cache
+tb/__pycache__/
+
+# Word temp files
+report/~$*.docx

@@ -1,0 +1,68 @@
+     -.--ns INFO     gpi                                ..mbed\gpi_embed.cpp:94   in _embed_init_python              Using Python 3.11.9 interpreter at C:\Users\amogh\AppData\Local\Programs\Python\Python311\python.exe
+     -.--ns INFO     gpi                                ..\gpi\GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 11.0 (devel)
+     0.00ns WARNING  gpi                                vpi_iterate returned NULL for type vpiInstance for object NULL
+     0.00ns INFO     cocotb                             Seeding Python random module with 1780599326
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from C:\Users\amogh\AppData\Local\Programs\Python\Python311\Lib\site-packages\cocotb
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_forward.test_bf16_forward (1/3)
+                                                            32x32 forward pass: load weights + 37-beat 34x34 IFM, verify all 1024 results.
+    40.00ns INFO     cocotb.top_ti                      ============================================================
+    40.00ns INFO     cocotb.top_ti                      32x32 BF16 Forward Pass
+    40.00ns INFO     cocotb.top_ti                      IFM: 37-beat 34x34 stream  |  Results: 1024xFP32 @ 0x1000-0x1FFC
+    40.00ns INFO     cocotb.top_ti                      ============================================================
+ 42110.00ns INFO     cocotb.top_ti                        PASS  T1: ramp weights x unit IFM (all 1024 tiles = 45.0)
+ 84180.00ns INFO     cocotb.top_ti                        PASS  T2: alternating-sign weights x constant-2.0 IFM
+126250.00ns INFO     cocotb.top_ti                        PASS  T3: max BF16-safe weights x unit IFM (all tiles = 1143.0)
+168320.00ns INFO     cocotb.top_ti                        PASS  T4: Laplacian kernel x ramp IFM (per-tile result varies)
+168320.00ns INFO     cocotb.top_ti                      ------------------------------------------------------------
+168320.00ns INFO     cocotb.top_ti                      PASS -- all 4 tests passed.
+168320.00ns INFO     cocotb.top_ti                      ============================================================
+168320.00ns INFO     cocotb.regression                  test_forward.test_bf16_forward passed
+168320.00ns INFO     cocotb.regression                  running test_forward.test_weight_reuse (2/3)
+                                                            32x32 weight reuse: load weights=[1..9] once, verify 4 different 34x34 IFM tiles.
+168370.00ns INFO     cocotb.top_ti                      ============================================================
+168370.00ns INFO     cocotb.top_ti                      32x32 Weight Reuse: weights=[1..9] loaded once, 4 IFM tiles
+168370.00ns INFO     cocotb.top_ti                      ============================================================
+168570.00ns INFO     cocotb.top_ti                        Weight SRAM loaded.
+210440.00ns INFO     cocotb.top_ti                        PASS  unit activations   (exp all tiles = 45.0)
+                                                                got=45.0  expected=45.0
+252310.00ns INFO     cocotb.top_ti                        PASS  double activations (exp all tiles = 90.0)
+                                                                got=90.0  expected=90.0
+294180.00ns INFO     cocotb.top_ti                        PASS  negative unit      (exp all tiles = -45.0)
+                                                                got=-45.0  expected=-45.0
+336050.00ns INFO     cocotb.top_ti                        PASS  half activations   (exp all tiles = 22.5)
+                                                                got=22.5  expected=22.5
+336050.00ns INFO     cocotb.top_ti                      ------------------------------------------------------------
+336050.00ns INFO     cocotb.top_ti                      PASS -- all 4 weight-reuse tiles correct.
+336050.00ns INFO     cocotb.top_ti                      ============================================================
+336050.00ns INFO     cocotb.regression                  test_forward.test_weight_reuse passed
+336050.00ns INFO     cocotb.regression                  running test_backward.test_grad_w (3/3)
+                                                            Phase 3 backward pass: verify dL/dW[i] = dL/dy x BF16(x[i]) for B1..B4.
+336100.00ns INFO     cocotb.top_ti                      ============================================================
+336100.00ns INFO     cocotb.top_ti                      M3-TI Phase 3: Backward Pass -- dL/dW verification
+336100.00ns INFO     cocotb.top_ti                      IFM: 37-beat 34x34 tile; grad_core reads tile-0 window
+336100.00ns INFO     cocotb.top_ti                      ============================================================
+337610.00ns INFO     cocotb.top_ti                        PASS  B1: unit IFMs, dldy=1.0 -> grad_w = ifms (all 1.0)
+337610.00ns INFO     cocotb.top_ti                              grad_w[0:3] got=[1.0, 1.0, 1.0]  expected=[1.0, 1.0, 1.0]
+339120.00ns INFO     cocotb.top_ti                        PASS  B2: ramp IFMs, dldy=2.0 -> grad_w = 2*ifms
+339120.00ns INFO     cocotb.top_ti                              grad_w[0:3] got=[2.0, 4.0, 6.0]  expected=[2.0, 4.0, 6.0]
+340630.00ns INFO     cocotb.top_ti                        PASS  B3: alternating IFMs, dldy=0.5
+340630.00ns INFO     cocotb.top_ti                              grad_w[0:3] got=[0.5, -0.5, 0.5]  expected=[0.5, -0.5, 0.5]
+342140.00ns INFO     cocotb.top_ti                        PASS  B4: Laplacian weights, ramp IFMs, dldy=-1.0
+342140.00ns INFO     cocotb.top_ti                              grad_w[0:3] got=[-10.0, -20.0, -30.0]  expected=[-10.0, -20.0, -30.0]
+342140.00ns INFO     cocotb.top_ti                      ------------------------------------------------------------
+342140.00ns INFO     cocotb.top_ti                      PASS -- all 4 backward tests passed.
+342140.00ns INFO     cocotb.top_ti                      ============================================================
+342140.00ns INFO     cocotb.regression                  test_backward.test_grad_w passed
+342140.00ns INFO     cocotb.regression                  ****************************************************************************************
+                                                        ** TEST                            STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ****************************************************************************************
+                                                        ** test_forward.test_bf16_forward   PASS      168320.00         163.79       1027.66  **
+                                                        ** test_forward.test_weight_reuse   PASS      167730.00         175.96        953.24  **
+                                                        ** test_backward.test_grad_w        PASS        6090.00          32.72        186.14  **
+                                                        ****************************************************************************************
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0               342140.00         372.49        918.51  **
+                                                        ****************************************************************************************
+FST info: dumpfile dump.vcd opened for output.

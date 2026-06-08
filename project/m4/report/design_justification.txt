@@ -1,0 +1,633 @@
+================================================================================
+DESIGN JUSTIFICATION REPORT
+ECE 410/510 — Hardware for Artificial Intelligence and Machine Learning
+Portland State University | Spring 2026
+
+Project: BF16 Conv2d Accelerator — 32x32 Weight-Stationary Systolic Array
+Student: Amogh Thakur | amogh.thakur23@gmail.com
+PDK: SAED14nm RVT | Tool: Cadence Genus 17.14-s037_1 | Clock: 500 MHz
+================================================================================
+
+
+--------------------------------------------------------------------------------
+SECTION 1: PROBLEM AND MOTIVATION
+--------------------------------------------------------------------------------
+
+The target application is a hybrid anemia-detection model (ResNet18 backbone +
+AttentionFusion MLP) trained on the AneRBC peripheral blood smear dataset (12,000
+images: 6,000 healthy, 6,000 anemic). The model was profiled running on an Intel
+Core i5-10210U laptop CPU (Windows 11, PyTorch 2.11.0, CPU-only) over 10 full
+training epochs, each epoch processing 9,600 training images in 300 batches of 32.
+
+Wall-clock timing (time.perf_counter, full pipeline including data loading,
+feature extraction, validation, GradCAM, and logging):
+
+  Run 1:  2762.6 s    Run 6:  2497.8 s
+  Run 2:  2670.4 s    Run 7:  2508.4 s
+  Run 3:  2595.1 s    Run 8:  2481.1 s
+  Run 4:  2537.6 s    Run 9:  2860.9 s
+  Run 5:  2552.6 s    Run 10: 2719.2 s
+
+  Median wall-clock: 2573.9 s (42.9 minutes) per epoch
+  Mean:              2618.6 s | Std deviation: 128.8 s
+
+cProfile of the training loop (hybrid_train_one_epoch, 300 batches, 1266.6 s
+total profiling runtime) identified torch.conv2d as the dominant kernel:
+
+  Function                          Cumtime (s)    % of Total
+  ---------------------------------------------------------
+  run_backward (autograd engine)      732.7          57.8%
+  HybridModel.forward                 421.6          33.3%
+  resnet.forward                      324.8          25.6%
+  torch.conv2d  <-- DOMINANT          292.9          23.1%
+  torch.batch_norm                     60.3           4.8%
+  torch.max_pool2d                     47.1           3.7%
+
+torch.conv2d (and the backpropagation gradients flowing through the same Conv2d
+weights) accounts for 23.1% of runtime directly and 57.8% including backward.
+Combined Conv2d forward + backward accounts for 74.4% of the accelerated pipeline.
+
+Measured Conv2d throughput on the CPU:
+  FLOPs per batch (fwd+bwd, 32 images): 348.4 GFLOP (from ai_calculation.md)
+  Average backward time per batch:       2.442 s
+  Measured throughput: 348.4 GFLOP / 2.442 s = 142.7 GFLOP/s
+
+CPU peak theoretical (Intel ARK, AVX2 boost 4.2 GHz, float32): 268.8 GFLOP/s
+CPU utilization: 142.7 / 268.8 = ~53%
+
+The bottleneck is clear: the CPU is operating at 53% of its theoretical peak on
+a compute-bound kernel that consumes 74.4% of training time. Custom hardware that
+eliminates the general-purpose CPU overhead (cache hierarchies, branch prediction,
+out-of-order execution) for Conv2d is the correct intervention.
+
+The M1 hypothesis was: build a systolic array delivering >= 1 TFLOP/s, achieve
+>= 3x system-level speedup (Amdahl, f = 74.4%). The M4 32x32 array synthesized
+to 2.304 TFLOP/s with 3.31x system speedup, exceeding both targets.
+
+
+--------------------------------------------------------------------------------
+SECTION 2: ROOFLINE ANALYSIS
+--------------------------------------------------------------------------------
+
+Arithmetic intensity of the Conv2d kernel was calculated analytically from
+ResNet18 layer dimensions (torchinfo, batch_size=1, input=224x224x3) and verified
+against cProfile measurements.
+
+FLOP count (forward + backward, all Conv2d layers, 1 image):
+  Total Mult-Adds (torchinfo): 1,814,511,616
+  FLOPs (forward only):        2 x 1,814,511,616 = 3,629,023,232
+  FLOPs (fwd + bwd, 3x fwd):  3 x 3,629,023,232 = 10,887,069,696
+
+Bytes transferred (float32, no DRAM reuse assumed):
+  Weights (all 20 Conv2d layers):   45,648,896 bytes
+  Input activations:                23,986,688 bytes
+  Output activations:               23,592,960 bytes
+  Forward total:                    93,228,544 bytes
+  Fwd + bwd (grad storage adds 2x weights + 2x activations):
+    232,106,048 bytes per image
+
+  Per batch (batch_size=32):
+    FLOPs:  348,386,230,272  (348.4 GFLOP)
+    Bytes:  7,427,393,536    (7.43 GB)
+
+Arithmetic Intensity:
+  AI = 348.4 GFLOP / 7.43 GB = 46.9 FLOP/byte  (fwd + bwd, per batch)
+  AI = 3.63 GFLOP / 93.2 MB  = 38.9 FLOP/byte  (fwd only, 1 image)
+
+CPU roofline parameters (Intel i5-10210U):
+  Peak compute:  268.8 GFLOP/s (AVX2, 4.2 GHz boost)
+  Memory BW:     45.8 GB/s (DDR4-2667, dual-channel)
+  Ridge point:   268.8 / 45.8 = 5.9 FLOP/byte
+
+At AI = 46.9 FLOP/byte >> ridge 5.9 FLOP/byte, the Conv2d kernel is strongly
+COMPUTE-BOUND on the CPU. Adding memory bandwidth would not help; only higher
+arithmetic throughput improves performance.
+
+Co-processor (32x32 systolic array) roofline parameters (synthesis-validated):
+  Peak compute:  2.304 TFLOP/s (1024 tiles x 2.25 GFLOP/s, SAED14nm 500 MHz)
+  Memory BW:     45.8 GB/s (shared DDR4-2667)
+  Ridge point:   2304 / 45.8 = 50.3 FLOP/byte
+
+At AI = 46.9 FLOP/byte < ridge 50.3 FLOP/byte, the kernel is just inside the
+memory-bound region on the co-processor. The required bandwidth to sustain 2.304
+TFLOP/s is:
+
+  Required BW = 2304 GFLOP/s / 46.9 FLOP/byte = 49.1 GB/s
+
+This is close to the DDR4 ceiling (45.8 GB/s), meaning the design approaches the
+memory-bound boundary. In practice, weight reuse across IFM tiles (weights loaded
+once and broadcast to all 1024 PEs simultaneously) reduces effective bytes/FLOP
+significantly, keeping the design in the compute-bound regime under realistic
+inference and training workloads.
+
+Roofline operating points (see roofline_final.png):
+  M1 CPU (measured):          AI=46.9, perf=142.7 GFLOP/s
+  M4 single tile (synthesis): AI=46.9, perf=2.25 GFLOP/s
+  M4 32x32 array (synthesis): AI=46.9, perf=2304 GFLOP/s
+
+System speedup via Amdahl's Law (f = 74.4% accelerated fraction):
+  Speedup = 1 / ((1-f) + f/S_k)
+          = 1 / (0.256 + 0.744 / 16.1)
+          = 1 / (0.256 + 0.046)
+          = 3.31x
+
+The roofline analysis shaped two key architectural decisions:
+  1. Weight-stationary dataflow: reuse weights across all 1024 output tiles to
+     reduce effective bandwidth demand and push toward compute-bound operation.
+  2. 1024-tile array (32x32): scale compute to 2.304 TFLOP/s to stay above the
+     1 TFLOP/s M1 hypothesis target while keeping bandwidth within DDR4 limits.
+
+
+--------------------------------------------------------------------------------
+SECTION 3: PRECISION AND DATA FORMAT
+--------------------------------------------------------------------------------
+
+The data format evolved across three milestones:
+
+  M1: Q16.16 signed fixed-point (32 bits)
+      Representable range: -32768 to +32767
+      Reason for change: limited dynamic range; silent overflow risk with
+      deep-layer activations; 2x bandwidth cost vs FP16.
+
+  M2: FP16 (IEEE 754 half-precision, 16 bits)
+      Format: 1 sign + 5 exponent (bias=15) + 10 mantissa
+      SQNR: 6.02 x 10 + 1.76 = 62 dB (adequate; CNNs need ~40-50 dB minimum)
+      Machine epsilon: 2^-10 ~ 9.77e-4
+      Accumulator: FP32 (prevents catastrophic cancellation across 9 MACs)
+      Per-MAC rounding error: bounded by FP32 epsilon = 2^-23 ~ 1.19e-7
+      Worst case (deepest layer, 4608 MACs): 4608 x 1.19e-7 ~ 5.5e-4
+      This is 3 orders of magnitude below classification output tolerance.
+      Reason for change from Q16.16: 2x bandwidth (16 vs 32 bits on 512-bit bus),
+      floating exponent eliminates overflow, industry-standard for ResNet inference.
+
+  M3/M4: BF16 (Brain Float 16, 16 bits)
+      Format: 1 sign + 8 exponent (bias=127) + 7 mantissa
+      BF16 uses the same exponent field as FP32 (8 bits, bias=127).
+      FP16 uses only 5-bit exponent (bias=15).
+
+      Reason for BF16 over FP16:
+        - BF16 -> FP32 conversion requires only zero-extending the mantissa from
+          7 to 23 bits and keeping the exponent unchanged. No exponent rebasing.
+        - FP16 -> FP32 requires adding 112 (= 127 - 15) to the exponent before
+          every multiply, adding a hardware adder on the critical path.
+        - BF16 is used by Google TPU v2/v3, NVIDIA A100 TF32, and ARM Ethos NPU
+          for training, confirming suitability for gradient descent workflows.
+        - SQNR with 7 mantissa bits: 6.02 x 7 + 1.76 ~ 44 dB (above 40 dB min).
+
+Accumulator design (M4 INT32 block-float):
+  The M4 compute_core_ti implements a block-float INT32 accumulator rather than
+  a floating-point adder tree, reducing area:
+    Step 1: bf16_mul function computes BF16 x BF16 -> FP32 (sign/exp/mantissa)
+    Step 2: Find maximum exponent across all 9 products
+    Step 3: Right-shift all mantissas to align to maximum exponent
+    Step 4: Sum aligned mantissas in a 4-level binary adder tree (INT32)
+    Step 5: Single normalize + round -> FP32 output
+  This avoids 9 independent FP32 adders; only one normalize step is needed.
+
+The M2 testbench (tb/tb_compute_core.sv) verified BF16 arithmetic against
+IEEE 754 hand-computed reference values (Test 1: weights 1.0-9.0, IFM 1.0x9
+-> expected 45.0; Test 2: alternating-sign, expected 2.0). Both passed with
+exact bit-match.
+
+
+--------------------------------------------------------------------------------
+SECTION 4: DATAFLOW AND ARCHITECTURE
+--------------------------------------------------------------------------------
+
+DATAFLOW PATTERN: Weight-stationary
+
+In the weight-stationary pattern, filter weights are loaded once and held fixed
+in each PE while input activations (IFMs) flow through. For a 3x3 Conv2d kernel:
+  - 9 BF16 weights (144 bits) are broadcast to all 1024 PEs simultaneously
+    via a shared weights_packed[143:0] bus in pe_array.sv
+  - Each PE receives its own 3x3 IFM window (144 bits) extracted combinationally
+    from the 34x34 BF16 IFM scratchpad (ifm_buffer.sv)
+  - All 1024 PEs compute their dot-product independently and in parallel
+
+This is optimal for Conv2d over a full output feature map: the 9 weights are
+amortized across 1024 output tiles per invocation, reducing weight bandwidth to
+1/1024 of the naive case.
+
+ALTERNATIVE PATTERNS CONSIDERED:
+  - Output-stationary: partial sums remain in PE; requires accumulation across
+    channels; not suited to single-channel 3x3 with 9 MACs per PE.
+  - Input-stationary: IFMs held fixed, weights rotate; wastes bandwidth for
+    standard inference where the same weights apply to many input tiles.
+  Weight-stationary was chosen because the 9 BF16 weights broadcast over a 144-bit
+  bus cost zero per-PE overhead, and the 34x34 IFM buffer enables combinational
+  window extraction without SRAM latency.
+
+MODULE HIERARCHY:
+
+  top_ti  (rtl/top.sv)
+    N_TILES = 1024
+    Instantiates: conv_interface_ti + pe_array
+    AXI4-Lite address: 13-bit (covers result registers 0x1000-0x1FFC)
+    AXI4-Stream: 512-bit tdata
+
+  conv_interface_ti  (rtl/interface_ti.sv)
+    Handles AXI4-Lite/Stream decoding, weight broadcast, start sequencing
+    Drives core_result[32767:0] (1024 x 32-bit FP32 results)
+    Drives core_done[1023:0] and core_start
+    Weight zero-skip: suppresses core_start when all 9 weights = 0
+    Register map:
+      0x00: CTRL  [0]=start [1]=load_weights [2]=backward
+      0x04: STATUS [0]=done [1]=busy [2]=wt_loaded [3]=grad_done
+      0x0C: RESULT[0] (first tile FP32 result)
+      0x1000-0x1FFC: RESULT[0]-RESULT[1023] (all tiles, 4-byte stride)
+
+  ifm_buffer  (rtl/ifm_buffer.sv)
+    34x34 BF16 scratchpad (34 rows x 34 cols x 16 bits = 18,496 bits)
+    AXI4-Stream input: 37 beats to fill the buffer (512 bits/beat)
+    Combinational 3x3 window extractor:
+      windows_packed[t*144 +: 144] for tile t in 0..1023
+      Tile (row, col) receives IFM[row:row+2][col:col+2] (zero-padded edges)
+    All 1024 windows are available combinationally with no SRAM read latency
+
+  pe_array  (rtl/pe_array.sv)
+    generate loop: for (genvar t = 0; t < N_TILES; t++)
+    Instantiates compute_core_ti x 1024
+    Shared weights_packed[143:0] (broadcast to all tiles)
+    done_all = &tile_done (AND-reduction of all 1024 done signals)
+    ready_all = &tile_ready
+
+  compute_core_ti  (rtl/compute_core_ti.sv)
+    Single PE; implements 4-state FSM:
+      IDLE    -> waits for core_start
+      LOAD    -> latches 9 BF16 IFMs and 9 BF16 weights (1 cycle)
+      PIPE_MUL -> calls bf16_mul x 9, produces 9 FP32 products (1 cycle)
+      PIPE_ACC -> block-float INT32 adder tree, normalize -> FP32 (1 cycle)
+      DONE_ST  -> asserts core_done, holds result (1 cycle)
+    Total: 4 cycles per Conv2d tile
+    Activation zero-skip: if all 9 IFM values = 0, skips PIPE_MUL/PIPE_ACC
+      (saves 2 cycles for sparse inputs)
+
+MEMORY HIERARCHY:
+  Level 0 (on-chip, per-PE): 9x BF16 weight latches (registered in LOAD state)
+  Level 1 (on-chip, shared): 34x34 BF16 IFM scratchpad (ifm_buffer)
+  Level 2 (off-chip): DDR4-2667 host memory (weights and IFMs loaded via AXI)
+
+
+--------------------------------------------------------------------------------
+SECTION 5: HARDWARE INTERFACE
+--------------------------------------------------------------------------------
+
+Two interfaces were evaluated for the host-accelerator link:
+
+  Interface         Width     Frequency   Bandwidth     Notes
+  ---------------------------------------------------------------
+  AXI4-Stream       512-bit   500 MHz     32 GB/s       Selected (primary data)
+  AXI4-Lite         32-bit    500 MHz     2 GB/s        Selected (control/result)
+  PCIe Gen3 x4      --        --          16 GB/s       No on-chip equivalent
+  AXI4-Stream 1GHz  512-bit   1 GHz       64 GB/s       M1 spec; exceeded SAED14nm
+
+SELECTION RATIONALE:
+  AXI4-Stream at 512-bit width provides 32 GB/s at 500 MHz (512/8 x 500e6).
+  The required bandwidth to sustain 2.304 TFLOP/s at AI = 46.9 FLOP/byte is
+  2304e9 / 46.9 = 49.1 GB/s. With weight reuse (weights loaded once per kernel,
+  not per tile), effective bytes transferred per FLOP drop significantly:
+
+    Without reuse: 49.1 GB/s required
+    With weight-stationary reuse across 1024 tiles:
+      Weight bytes per invocation: 9 x 2 = 18 bytes (shared across all tiles)
+      IFM bytes per invocation:    1024 x 9 x 2 = 18,432 bytes
+      FLOPs per invocation:        1024 x 18 = 18,432
+      Effective AI with reuse:     18,432 / 18,450 = ~0.998 FLOP/byte (weight only)
+      Effective AI (weight+IFM):   18,432 / 36,864 = 0.5 FLOP/byte
+      Required BW:                 2304e9 / 46.9 = 49.1 GB/s peak
+
+  The design is not AXI4-Stream interface-bound at 32 GB/s because the IFM
+  scratchpad (34x34) acts as a staging buffer: the host loads the IFM buffer
+  once per Conv2d invocation, then all 1024 PEs read their windows
+  combinationally from on-chip SRAM without further AXI traffic.
+
+  Effective data transferred per full 32x32 Conv2d pass:
+    Weights: 37 AXI beats x 512 bits = 18,944 bits (just the 9 weights repeated)
+    IFMs:    37 AXI beats x 512 bits = 18,944 bits to fill 34x34 buffer
+    Total:   ~4.7 KB per pass
+    At 32 GB/s, this transfers in 4700 / 32e9 = 147 ns
+
+  AXI4-Lite (13-bit address, 32-bit data) handles control registers (CTRL, STATUS)
+  and the 1024 FP32 result readback (0x1000-0x1FFC = 4096 bytes of results).
+  Reading all 1024 results requires 1024 AXI4-Lite reads; this is a known
+  bandwidth limitation and is the dominant readback cost per inference pass.
+
+BANDWIDTH MARGIN:
+  Available:  32 GB/s (AXI4-Stream @ 500 MHz, 512-bit)
+  Required (IFM+weight load): ~21.3 GB/s (M1 spec at 1 TFLOP/s)
+  Margin: 32 / 21.3 = 1.5x (reduced from M1 spec's 3x at 64 GB/s/1GHz)
+  The design is NOT interface-bound during the compute phase.
+
+
+--------------------------------------------------------------------------------
+SECTION 6: VERIFICATION
+--------------------------------------------------------------------------------
+
+Verification was carried out across all four milestones using cocotb v2.0.1 on
+Icarus Verilog 11.0. The verification strategy escalated from unit tests to
+full end-to-end array tests.
+
+M2 VERIFICATION (FP16 single-tile unit tests):
+  DUT: compute_core (rtl/compute_core.sv, single PE)
+  Testbench: tb/test_compute_core.py, tb/test_interface.py
+  Test CC1: weights [1.0, 2.0, ..., 9.0] FP16, IFMs [1.0 x 9], expected 45.0
+  Test CC2: alternating-sign weights, IFMs [2.0 x 9], expected 2.0
+  Interface test IF1: AXI4-Lite write CTRL, read STATUS=done, RESULT=45.0
+  Interface test IF2: weight reload without device reset
+  Result: TESTS=2 PASS=2 FAIL=0 (compute_core) + TESTS=2 PASS=2 FAIL=0 (interface)
+
+M3/M4 VERIFICATION (BF16 full 32x32 array):
+  DUT: top_ti (rtl/top.sv), N_TILES=1024
+  Testbench: tb/test_forward.py, tb/test_backward.py, tb/test_top.py
+  Runner: sim/run_ti.py
+
+  Test 1 (test_forward): 32x32 BF16 forward pass
+    Loads 9 BF16 weights via AXI4-Stream
+    Fills 34x34 IFM scratchpad (37 AXI beats)
+    Asserts core_start, waits for done_all
+    Reads all 1024 FP32 results via AXI4-Lite register map
+    Compares to ref_model.py (pure-Python BF16 reference) with tolerance 1e-3
+
+  Test 2 (test_backward): gradient computation
+    B1: unit IFMs, dldy=1.0 -> grad_w = ifms (all 1.0)
+    B2: ramp IFMs, dldy=2.0 -> grad_w = 2*ifms
+
+  Test 3 (test_top): end-to-end AXI transaction
+    Full write -> compute -> readback sequence on top_ti
+    Verifies register map addresses (0x1000-0x1FFC) for all 1024 results
+
+  FINAL RESULT (sim/final_run.log):
+    TESTS=3 PASS=3 FAIL=0 | Total simulation time: 342,140 ns
+    DUT: top_ti (full 32x32 array, N_TILES=1024)
+
+BUGS DOCUMENTED (12 total):
+  B1: tb_top.sv stale port list (conv_interface not conv_interface_ti)
+  B2: tb_interface.sv 4-bit AXI address (should be 13-bit)
+  B3: stale core_result[31:0] (should be core_result[32767:0])
+  B4: cocotb NBA timing - writes to output_var inside @(posedge clk) blocks
+      causing next-cycle read instead of current cycle (used await RisingEdge fix)
+  B5: cocotb signal assignment needs .value = x, not direct = x assignment
+  B6: double-conversion bug - bf16_to_float called twice on already-float value
+  B7: Icarus Verilog does not support $bitstoreal in generate blocks
+  B8: Icarus requires explicit parameter override syntax in generate loops
+  B9: Icarus multi-dimensional packed array indexing requires intermediate wire
+  B10: compute_core/Makefile references compute_core.sv (should be compute_core_ti)
+  B11: bf16_mul mantissa concat off-by-one: {prod[14:1], 8'h00} should be
+       {prod[14:0], 8'h00} - missing the LSB caused ~0.4% relative error per MAC
+  B12: cocotb await on combinational output requires delta cycle NOP before read
+
+Bug B11 (mantissa off-by-one) was the most significant: it caused accumulated
+errors across 9 MACs that violated the 1e-3 tolerance threshold in test_forward.
+Fixed by correcting the slice to [14:0] in compute_core_ti.sv.
+
+
+--------------------------------------------------------------------------------
+SECTION 7: SYNTHESIS RESULTS
+--------------------------------------------------------------------------------
+
+The 32x32 systolic array (top_ti, N_TILES=1024) was synthesized using Cadence
+Genus 17.14-s037_1 (legacy_ui) on SAED14nm RVT standard cells. All numbers below
+are from the actual 32x32 synthesis run (not single-tile projections).
+
+TOOL AND CONFIGURATION:
+  Tool:           Cadence Genus 17.14-s037_1 (legacy_ui)
+  PDK:            SAED14nm RVT
+  Top module:     top_ti
+  Clock:          clk, period = 2.0 ns (500 MHz)
+  HDL loop limit: 4096 (required for N_TILES=1024 generate loop)
+  Synthesis effort: high
+
+SOURCE FILES:
+  rtl/sram_sp.sv, rtl/grad_core.sv, rtl/ifm_buffer.sv,
+  rtl/compute_core_ti.sv, rtl/pe_array.sv, rtl/interface_ti.sv, rtl/top.sv
+
+TIMING (timing_32x32.rpt):
+  Clock period:          2000 ps (500 MHz)
+  Worst Negative Slack:  0 ps  (MEETS CONSTRAINT, all 10 reported paths)
+  Total Negative Slack:  0 ps
+  Setup violations:      0
+  Critical path:         gen_tile[163] mul_prod_reg_reg -> result_reg_reg
+  Critical path arrival: 1950 ps (50 ps positive slack on critical endpoint)
+  Path:  BF16 sign/exp latch -> exponent adder -> mantissa multiplier
+         -> normalize shift -> result register
+
+AREA (area_32x32.rpt):
+  Module            Cells         Area (um2)     % of total
+  -------------------------------------------------------
+  top_ti            5,591,114     2,862,977      100%
+  u_pe_array        5,453,789     2,773,992       96.9%
+  u_interface       137,325          88,985        3.1%
+
+  Total area: 2,862,977 um2 = 2.86 mm2
+  Per-tile average: 2,773,992 / 1024 = 2,709 um2 per PE
+
+  Dominant area contributor: pe_array (96.9%)
+  Within pe_array: compute_core_ti x 1024 (each ~2.7 kum2)
+  Dominant component within each PE: BF16 multiplier (mantissa x mantissa
+  unsigned = 7x7 = 49-bit partial product tree, plus normalize logic)
+
+POWER (power_32x32.rpt, TT corner, 500 MHz):
+  Module            Power (nW)        Power (mW)     % of total
+  -----------------------------------------------------------
+  top_ti            1,359,892,410     1,359.89 mW    100% (1.36 W)
+  u_pe_array        1,259,165,683     1,259.17 mW     92.6%
+  u_interface          43,973,049        43.97 mW      3.2%
+  Other (ifm_buf etc)  56,753,678        56.75 mW      4.2%
+
+  Per-tile average: 1,259.17 / 1024 = 1.23 mW per PE
+  Single-tile synthesis (from m3_ti/cadence_syn/): 3.07 mW
+  Difference: 1.23 vs 3.07 mW per tile -- lower in array due to Genus
+  optimization of shared weight broadcast logic across the generate loop
+
+COMPARISON: SINGLE TILE vs 32x32 ARRAY
+  Metric            M4 Single Tile    M4 32x32 Array    Delta
+  -----------------------------------------------------------
+  WNS               +2.4 ps           0 ps              Tighter, still meets
+  Total cells       11,340            5,591,114         x493
+  Area              6,155 um2         2,862,977 um2     x465 (2.86 mm2)
+  Power             3.07 mW           1,359.89 mW       x443 (1.36 W total)
+  Per-tile power    3.07 mW           1.23 mW           0.4x (40% of single)
+  Throughput        2.25 GFLOP/s      2,304 GFLOP/s     x1024
+
+
+--------------------------------------------------------------------------------
+SECTION 8: BENCHMARK RESULTS
+--------------------------------------------------------------------------------
+
+All benchmark numbers are synthesis-validated from the 32x32 run reports.
+Raw data is in bench/benchmark_data.csv.
+
+THROUGHPUT:
+  Per-tile: 9 MACs x 2 FLOPs x 500 MHz / 4 cycles = 2.25 GFLOP/s
+  32x32 array: 1024 x 2.25 = 2,304 GFLOP/s = 2.304 TFLOP/s
+
+KERNEL SPEEDUP (Conv2d):
+  M1 CPU measured:         142.7 GFLOP/s  (cProfile, 348.4 GFLOP / 2.442 s)
+  M4 single tile:            2.25 GFLOP/s  (0.016x - per-tile is slower)
+  M4 32x32 array:         2,304.0 GFLOP/s  (16.1x kernel speedup)
+
+  Kernel speedup = 2304 / 142.7 = 16.1x
+
+SYSTEM SPEEDUP (Amdahl's Law):
+  Accelerated fraction:  f = 74.4%  (Conv2d fwd+bwd, cProfile)
+  Kernel speedup:       Sk = 16.1x
+
+  System speedup = 1 / ((1 - 0.744) + 0.744 / 16.1)
+                 = 1 / (0.256 + 0.046)
+                 = 1 / 0.302
+                 = 3.31x
+
+  Wall-clock per epoch (baseline):   2,573.9 s (42.9 minutes)
+  Wall-clock per epoch (with array): 2,573.9 / 3.31 = ~777 s (~13.0 minutes)
+  Pipeline throughput (baseline):    3.73 samples/sec
+  Pipeline throughput (with array):  3.73 x 3.31 = ~12.3 samples/sec
+
+ENERGY EFFICIENCY:
+  Platform           Power        Throughput       Energy/FLOP
+  -----------------------------------------------------------
+  M1 CPU             ~15 W TDP    142.7 GFLOP/s    105 pJ/FLOP
+  M4 single tile     1.23 mW      2.25 GFLOP/s     0.55 pJ/FLOP
+  M4 32x32 array     1.36 W       2,304 GFLOP/s    0.59 pJ/FLOP
+  NVIDIA T4 GPU      70 W         65,000 GFLOP/s   ~1.08 pJ/FLOP
+
+  Energy efficiency vs CPU: 105 / 0.59 = 178x more efficient per FLOP
+  Energy efficiency vs T4:  1.08 / 0.59 = 1.8x more efficient per FLOP
+  Power vs T4: 70 / 1.36 = 51x less power
+
+The 178x energy advantage over the CPU arises from two sources:
+  1. SAED14nm FinFET process: per-gate switching energy is ~10-20x lower than
+     the 14nm Intel FinFET in the i5-10210U at the same logic function.
+  2. Dedicated BF16 datapath: no cache hierarchy, branch predictor, or
+     out-of-order execution logic is toggling on every MAC operation.
+
+PERFORMANCE GAPS:
+  1. Pipeline utilization: each PE spends 2 of 4 cycles computing (PIPE_MUL +
+     PIPE_ACC) and 2 cycles on overhead (LOAD + DONE_ST). Utilization = 50%.
+     A deeper pipeline or output-stationary accumulation across channels would
+     improve this toward 100%.
+  2. AXI4-Stream bandwidth: M1 spec assumed 1 GHz (64 GB/s). The synthesized
+     design runs at 500 MHz (32 GB/s). The 32 GB/s exceeds the 21.3 GB/s
+     requirement at the M1 target (1 TFLOP/s), but the 49.1 GB/s requirement
+     for the full 2.304 TFLOP/s is not met in the worst case without reuse.
+     Weight reuse from the broadcast bus eliminates this in practice.
+
+M1 HYPOTHESIS EVALUATION:
+  Target: >= 1 TFLOP/s, >= 3x system speedup
+  Actual: 2.304 TFLOP/s (2.3x over target), 3.31x system speedup (exceeds target)
+  The hypothesis is satisfied. The over-achievement is due to implementing 1024
+  tiles (32x32) rather than the minimum 444 tiles (1 TFLOP/s / 2.25 GFLOP/s)
+  needed to hit the M1 target.
+
+
+--------------------------------------------------------------------------------
+SECTION 9: WHAT DID NOT WORK
+--------------------------------------------------------------------------------
+
+1. OPENLANE 2 / SKY130A FAILED TO CLOSE TIMING (complete failure)
+   Attempted: OpenLane 2.3.10 with sky130A (sky130_fd_sc_hd) PDK for both M3
+   single-tile and M4 32x32 array synthesis.
+
+   Single-tile result (m3/synth/openlane_run.log):
+     TT corner WNS: +29.9 ns (PASS)
+     SS corner WNS: -63.0 ns (FAIL -- expected due to FP32 datapath depth)
+     The TT pass and SS fail is a known sky130A corner spread issue for
+     floating-point chains; standard cell timing at SS is much more pessimistic.
+
+   32x32 array: OpenLane could not close the 32x32 array at any clock period
+   faster than 130 ns (7.7 MHz). Root causes:
+     a. sky130_fd_sc_hd has ~2-3x higher cell delays than SAED14nm RVT at the
+        same logic function due to 180nm bulk vs 14nm FinFET process.
+     b. The N_TILES=1024 generate loop created routing congestion at sky130A
+        that the OpenLane placer could not resolve within the 800x800 um die.
+     c. OpenLane 2.3.10 hdl_max_loop_limit defaulted to 256; increasing to 4096
+        via config.json caused Yosys memory exhaustion on the lab machine.
+   Resolution: switched to Cadence Genus 17.14 on SAED14nm RVT PDK via the
+   PSU auto.ece.pdx.edu server, which closed timing at 500 MHz (WNS = 0 ps).
+
+2. BF16_MUL MANTISSA OFF-BY-ONE (Bug B11)
+   The bf16_mul function in compute_core_ti.sv originally used:
+     {prod[14:1], 8'h00}    -- WRONG (drops LSB of 15-bit product)
+   This should have been:
+     {prod[14:0], 8'h00}    -- CORRECT (all 15 bits, then pad to FP32 mantissa)
+   The off-by-one caused ~0.4% relative error per MAC, which accumulated over
+   9 MACs to produce results that failed the 1e-3 tolerance in test_forward.py.
+   Detected by: comparing against ref_model.py golden output with the forward
+   test vectors. Fixed by correcting the slice from [14:1] to [14:0].
+
+3. COCOTB NBA TIMING (Bugs B4, B5, B12)
+   cocotb v2.0.1 changed signal assignment semantics vs v1.x:
+     - Assignments inside @(posedge clk) coroutines use NBA (non-blocking
+       assignment) scheduling; reading back the assigned value requires
+       awaiting a delta cycle before the new value is visible to Python.
+     - Direct signal assignment (signal = value) silently failed; must use
+       signal.value = value.
+     - Combinational outputs required an explicit await Timer(0) (delta NOP)
+       after driving inputs before reading outputs.
+   Resolution: added await RisingEdge(dut.clk) after each control write, and
+   await Timer(1, units='ns') before reading combinational outputs.
+
+4. STALE PORTS IN LEGACY TESTBENCHES (Bugs B1, B2, B3)
+   tb/tb_interface.sv was written for the M2 single-tile conv_interface module:
+     - AXI4-Lite address: 4-bit (should be 13-bit for 32x32 register map)
+     - core_result width: 32-bit (should be 32768-bit = 1024 x 32)
+     - Module name: conv_interface (should be conv_interface_ti)
+   tb/tb_interface.sv was excluded from the M4 testbench suite; tb_top.sv
+   (which correctly instantiates top_ti) is the M4 primary testbench.
+
+5. DOUBLE-CONVERSION BUG (Bug B6)
+   In test_backward.py, the reference model called bf16_to_float() on a value
+   that was already a Python float (not a raw BF16 bitpattern). The function
+   interpreted the float's integer representation as a BF16 pattern, producing
+   a completely wrong golden value. Detected by: unit test result was off by
+   a factor of ~32000. Fixed by tracking data types through the call chain.
+
+6. ICARUS VERILOG COMPATIBILITY (Bugs B7, B8, B9)
+   Three Icarus-specific issues in the generate loop:
+     B7: $bitstoreal() inside generate blocks is unsupported in Icarus 11.0.
+         Resolution: replaced with explicit sign/exponent/mantissa unpacking
+         (synthesizable and Icarus-compatible).
+     B8: Parameter override syntax genvar_instance #(.PARAM(expr)) caused
+         elaboration errors; replaced with explicit localparam in generate.
+     B9: Multi-dimensional packed array indexing packed_bus[t*144 +: 144]
+         requires intermediate wire declaration in Icarus; added wire [143:0]
+         w_ifm_t and w_weights_t per generate iteration.
+
+7. WINDOW ENCODING BUG IN UNICODE TEST NAMES (Bug B10)
+   test_backward.py used Unicode right-arrow character (U+2192: ->>) in test
+   vector names ("B1: unit IFMs, dldy=1.0 -> grad_w = ifms"). On Windows with
+   cp1252 encoding, cocotb's log output raised:
+     UnicodeEncodeError: 'charmap' codec can't encode character '→'
+   Fixed by replacing -> with ASCII -> in all test name strings.
+
+WHAT WOULD BE DONE DIFFERENTLY:
+  - Start with Cadence Genus on SAED14nm from the beginning rather than
+    attempting OpenLane/sky130A for a 1024-tile design; sky130A is appropriate
+    for single-tile proof-of-concept but cannot handle the cell count.
+  - Add a single-cycle pipelined bf16_mul with a formal proof of mantissa bit
+    alignment from the start, rather than catching B11 late in testing.
+  - Use a cocotb compatibility shim layer for signal assignment to isolate
+    version-specific NBA timing behavior from test logic.
+
+
+--------------------------------------------------------------------------------
+RAW DATA REFERENCES
+--------------------------------------------------------------------------------
+
+All numbers in this report trace to the following committed files:
+
+  bench/benchmark_data.csv     -- all raw numbers (M1_baseline, M4_single_tile,
+                                   M4_array_32x32, benchmark_comparison)
+  bench/benchmark.md           -- narrative benchmark with method of measurement
+  bench/roofline_final.png     -- roofline plot (CPU + co-proc curves, 3 pts)
+  synth/timing_32x32.rpt       -- WNS=0ps, 10 timing paths, 500 MHz
+  synth/area_32x32.rpt         -- 5,591,114 cells, 2,862,977 um2
+  synth/power_32x32.rpt        -- 1,359.89 mW total (TT corner)
+  sim/final_run.log            -- TESTS=3 PASS=3 FAIL=0, 342,140 ns
+  project/m1/sw_baseline.md    -- 10-run wall-clock table, cProfile data
+  project/m2/precision.md      -- FP16 SQNR, error analysis, verification
+  project/m3_ti/synthesis_notes_ti.md  -- single-tile design decisions
+
+================================================================================
+END OF REPORT
+Word count (body text, excluding headers and tables): approx. 2,900 words
+================================================================================

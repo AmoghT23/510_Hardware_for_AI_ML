@@ -1,0 +1,90 @@
+category,metric,value,unit,source
+M1_baseline,platform,Intel Core i5-10210U,,sw_baseline.md
+M1_baseline,clock_base,1.6,GHz,Intel ARK
+M1_baseline,clock_boost,4.2,GHz,Intel ARK
+M1_baseline,cpu_peak_theoretical,268.8,GFLOP/s,Intel ARK AVX2
+M1_baseline,wall_clock_run1,2762.6,s,sw_baseline.md
+M1_baseline,wall_clock_run2,2670.4,s,sw_baseline.md
+M1_baseline,wall_clock_run3,2595.1,s,sw_baseline.md
+M1_baseline,wall_clock_run4,2537.6,s,sw_baseline.md
+M1_baseline,wall_clock_run5,2552.6,s,sw_baseline.md
+M1_baseline,wall_clock_run6,2497.8,s,sw_baseline.md
+M1_baseline,wall_clock_run7,2508.4,s,sw_baseline.md
+M1_baseline,wall_clock_run8,2481.1,s,sw_baseline.md
+M1_baseline,wall_clock_run9,2860.9,s,sw_baseline.md
+M1_baseline,wall_clock_run10,2719.2,s,sw_baseline.md
+M1_baseline,wall_clock_median,2573.9,s,sw_baseline.md
+M1_baseline,wall_clock_mean,2618.6,s,sw_baseline.md
+M1_baseline,throughput_full_pipeline,3.73,samples/sec,9600/2573.9
+M1_baseline,throughput_training_only,7.58,samples/sec,tqdm batch timing
+M1_baseline,throughput_conv2d_kernel,142.7,GFLOP/s,cProfile 348.4GFLOP/2.442s
+M1_baseline,cpu_utilization,53,%,142.7/268.8
+M1_baseline,arithmetic_intensity,46.9,FLOP/byte,ai_calculation.md
+M1_baseline,peak_rss_median,2165.5,MB,psutil
+M1_baseline,cpu_power_tdp,15,W,Intel i5-10210U spec
+M1_baseline,energy_per_flop,105,pJ/FLOP,15W/142.7GFLOP/s
+M1_baseline,conv2d_runtime_fraction,74.4,%,cProfile fwd+bwd
+M1_baseline,flops_per_batch,348.4,GFLOP,ai_calculation.md
+M1_baseline,val_accuracy_hybrid,89.92,%,run_01_output.ipynb
+M1_baseline,val_accuracy_cnn,92.37,%,run_01_output.ipynb
+M4_single_tile,pdk,SAED14nm,,m3_ti/cadence_syn/
+M4_single_tile,tool,Cadence Genus 17.14-s037_1,,Linux auto.ece.pdx.edu
+M4_single_tile,clock_frequency,500,MHz,m3_ti/cadence_syn/timing.rpt
+M4_single_tile,clock_period,2000,ps,m3_ti/cadence_syn/timing.rpt
+M4_single_tile,wns,2.4,ps,m3_ti/cadence_syn/qor.rpt
+M4_single_tile,tns,0.0,ps,m3_ti/cadence_syn/qor.rpt
+M4_single_tile,setup_violations,0,,m3_ti/cadence_syn/qor.rpt
+M4_single_tile,cell_count_total,11340,,m3_ti/cadence_syn/area.rpt
+M4_single_tile,cell_count_combinational,9778,,m3_ti/cadence_syn/area.rpt
+M4_single_tile,cell_count_sequential,1562,,m3_ti/cadence_syn/area.rpt
+M4_single_tile,area_total,6154.639,um2,m3_ti/cadence_syn/area.rpt
+M4_single_tile,power_total,3067057,nW,m3_ti/cadence_syn/power.rpt
+M4_single_tile,power_total_mw,3.067,mW,m3_ti/cadence_syn/power.rpt
+M4_single_tile,forward_latency_cycles,4,,RTL FSM (LOAD+PIPE_MUL+PIPE_ACC+DONE_ST)
+M4_single_tile,backward_latency_cycles,4,,RTL FSM (COMPUTE_W+COMPUTE_X+DONE_ST)
+M4_single_tile,macs_per_tile,9,,3x3x1 kernel
+M4_single_tile,flops_per_tile,18,,9 mult + 9 add
+M4_single_tile,throughput,2.25,GFLOP/s,9MACs*2FLOPs*500MHz/4cycles
+M4_single_tile,energy_per_flop,0.55,pJ/FLOP,1.23mW/2.25GFLOP/s
+M4_array_32x32,pdk,SAED14nm,,synth/area_report.txt / synth/timing_report.txt / synth/power_report.txt
+M4_array_32x32,tool,Cadence Genus 17.14-s037_1,,Linux auto.ece.pdx.edu
+M4_array_32x32,top_module,top_ti,,rtl/top.sv
+M4_array_32x32,n_tiles,1024,,pe_array N_TILES=1024 (32x32)
+M4_array_32x32,clock_frequency,500,MHz,synth/timing_report.txt
+M4_array_32x32,clock_period,2000,ps,synth/timing_report.txt
+M4_array_32x32,wns,0,ps,synth/timing_report.txt (meets constraint)
+M4_array_32x32,tns,0.0,ps,synth/timing_report.txt
+M4_array_32x32,setup_violations,0,,synth/timing_report.txt
+M4_array_32x32,cell_count_total,5591114,,synth/area_report.txt
+M4_array_32x32,cell_count_pe_array,5453789,,synth/area_report.txt
+M4_array_32x32,cell_count_interface,137325,,synth/area_report.txt
+M4_array_32x32,area_total_um2,2862977,um2,synth/area_report.txt
+M4_array_32x32,area_total_mm2,2.863,mm2,synth/area_report.txt
+M4_array_32x32,area_pe_array_um2,2773992,um2,synth/area_report.txt
+M4_array_32x32,area_per_tile_um2,2709,um2,synth/area_report.txt (avg)
+M4_array_32x32,power_total_nw,1359892411,nW,synth/power_report.txt
+M4_array_32x32,power_total_mw,1359.89,mW,synth/power_report.txt
+M4_array_32x32,power_total_w,1.36,W,synth/power_report.txt
+M4_array_32x32,power_pe_array_mw,1259.17,mW,synth/power_report.txt
+M4_array_32x32,power_interface_mw,43.97,mW,synth/power_report.txt
+M4_array_32x32,power_per_tile_mw,1.23,mW,synth/power_report.txt (1259.17/1024)
+M4_array_32x32,arithmetic_intensity,46.9,FLOP/byte,same kernel as M1
+M4_array_32x32,throughput_gflops,2304,GFLOP/s,1024*2.25GFLOP/s
+M4_array_32x32,throughput_tflops,2.304,TFLOP/s,1024*2.25GFLOP/s
+M4_array_32x32,energy_per_flop,0.59,pJ/FLOP,1359.89mW/2304GFLOP/s
+benchmark_comparison,m1_conv2d_throughput,142.7,GFLOP/s,cProfile measured
+benchmark_comparison,m4_single_tile_throughput,2.25,GFLOP/s,synthesis per-tile
+benchmark_comparison,m4_array_throughput,2304,GFLOP/s,synthesis-validated (1024 tiles)
+benchmark_comparison,kernel_speedup_single_tile,0.016,x,2.25/142.7
+benchmark_comparison,kernel_speedup_32x32_array,16.1,x,2304/142.7
+benchmark_comparison,amdahl_accelerated_fraction,74.4,%,cProfile Conv2d fwd+bwd
+benchmark_comparison,system_speedup_32x32,3.31,x,Amdahl 1/(0.256+0.744/16.1)
+benchmark_comparison,wall_clock_baseline,2573.9,s,sw_baseline.md
+benchmark_comparison,wall_clock_with_array,777,s,2573.9/3.31
+benchmark_comparison,pipeline_throughput_baseline,3.73,samples/sec,baseline
+benchmark_comparison,pipeline_throughput_with_array,12.3,samples/sec,3.73*3.31
+benchmark_comparison,energy_per_flop_cpu,105,pJ/FLOP,15W/142.7GFLOP/s
+benchmark_comparison,energy_per_flop_array,0.59,pJ/FLOP,synth/power_report.txt
+benchmark_comparison,energy_efficiency_vs_cpu,178,x,105pJ/0.59pJ
+benchmark_comparison,power_vs_t4_gpu,51,x,70W/1.36W
+benchmark_comparison,energy_per_flop_vs_t4,1.83,x,1.08pJ/0.59pJ (array better)

@@ -1,0 +1,26 @@
+{
+    "tool": "Cadence Genus",
+    "tool_version": "17.14-s037_1",
+    "pdk": "SAED14nm",
+    "process_node": "14nm FinFET",
+    "design_name": "top_ti",
+    "rtl_sources": [
+        "rtl/sram_sp.sv",
+        "rtl/grad_core.sv",
+        "rtl/ifm_buffer.sv",
+        "rtl/compute_core_ti.sv",
+        "rtl/pe_array.sv",
+        "rtl/interface_ti.sv",
+        "rtl/top.sv"
+    ],
+    "clock_port": "clk",
+    "clock_period_ps": 2000,
+    "clock_frequency_mhz": 500,
+    "corner": "TT",
+    "temperature_c": 25,
+    "supply_voltage_v": 0.8,
+    "reset_port": "rst_n",
+    "reset_active": "low",
+    "synthesis_effort": "high",
+    "note": "Cadence Genus synthesis run on Linux server (SAED14nm PDK). sky130A/OpenLane was attempted first but could not close timing at 500 MHz — see openlane_run.log for that attempt. Final synthesis results are from Cadence Genus on SAED14nm."
+}
